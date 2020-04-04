@@ -32,7 +32,8 @@ class ListingController extends Controller
             'business_name' => 'required',
             'city' => 'required',
             'state' => 'required|max:2',
-            'description' => 'required'
+            'description' => 'required',
+            'avatar' => 'required'
         ]);
 
         $listing = $request->user()->listing()->create($request->all());

@@ -1,7 +1,9 @@
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Croppa from 'vue-croppa';
 
 /** Import styling */
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vue-croppa/dist/vue-croppa.css';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -20,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(Croppa)
 
 /**
  * The following block of code may be used to automatically register your

@@ -45,6 +45,17 @@
                                 {{ this.formErrors.description[0] }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <b-form-file
+                                v-model="avatar"
+                                placeholder="Choose a file or drop it here..."
+                                drop-placeholder="Drop file here..."
+                                :class="{ 'is-invalid': formErrors.avatar }"
+                            ></b-form-file>
+                            <div class="invalid-feedback" v-if="formErrors.avatar">
+                                {{ this.formErrors.avatar[0] }}
+                            </div>
+                        </div>
                         <button class="btn btn-sm btn-secondary" @click.prevent="submit">Submit</button>
                     </b-card-text>
                 </b-card>
@@ -67,13 +78,22 @@
         data () {
             return {
                 formData: {},
+                avatar: [],
                 formErrors: {},
-                formSuccess: false
+                formSuccess: false,
             }
         },
         methods: {
             submit () {
-                axios.post('/listings', this.formData).then((response) => {
+                let data = new FormData();
+                data.append('avatar', this.avatar);
+                data.append('name', this.formData.name)
+                data.append('business_name', this.formData.business_name)
+                data.append('city', this.formData.city)
+                data.append('state', this.formData.state)
+                data.append('description', this.formData.description)
+
+                axios.post('/listings', data).then((response) => {
                     this.formData = {}
                     this.formSuccess = true
                     setTimeout(() => { 
