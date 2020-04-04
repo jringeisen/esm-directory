@@ -2,7 +2,7 @@
     <div class="pt-5">
         <div class="row justify-content-center">
             <div class="col-md-10 pb-3">
-                <b-form-input v-model="search" placeholder="Search for photographer....."></b-form-input>
+                <b-form-input v-model="search" placeholder="Search by name, location, or keywords...."></b-form-input>
             </div>
         </div>
         <div v-for="(listing, index) in filterListings()" :key="index" class="row justify-content-center pb-3">
@@ -13,8 +13,10 @@
                             <b-avatar variant="secondary" src="https://placekitten.com/300/300" size="5rem"></b-avatar>
                         </b-col>
                         <b-col md="10">
-                            <b-card-body :title="listing.name">
-                                <b-card-text size="10rem">
+                            <b-card-body>
+                                <b-card-title>{{ listing.business_name }}</b-card-title>
+                                <b-card-sub-title><i class="fas fa-map-marker-alt"></i> {{ listing.city + ', ' + listing.state }}</b-card-sub-title>
+                                <b-card-text>
                                     {{ listing.description }}
                                 </b-card-text>
                             </b-card-body>
@@ -40,22 +42,18 @@
 
 <script>
 export default {
+    props: {
+        listings: {
+            required: true
+        }
+    },
     data () {
         return {
-            listings: {},
             cardHovered: false,
             search: ''
         }
     },
-    created () {
-        this.getListings()
-    },
     methods: {
-        getListings () {
-            axios.get('/listings').then((response) => {
-                this.listings = response.data
-            })
-        },
         filterListings () {
             let data = this.listings || []
 

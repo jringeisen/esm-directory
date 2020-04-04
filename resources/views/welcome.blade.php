@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://kit.fontawesome.com/6229d48325.js" crossorigin="anonymous"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,7 +40,7 @@
                 </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <directory-content></directory-content>
+            <directory-content :listings="{{ $listings }}"></directory-content>
         </div>
     </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $listings = Listing::all();
+    return view('welcome', compact('listings'));
 });
 
 Auth::routes();
@@ -22,3 +24,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/listings', 'ListingController@index')->name('listings.index');
+Route::post('/listings', 'ListingController@store')->name('listings.store');
