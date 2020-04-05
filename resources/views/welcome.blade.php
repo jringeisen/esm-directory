@@ -20,6 +20,18 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <style>
+            .card {
+                cursor: pointer;
+                font-size: 12px;
+            }
+
+            .card:hover {
+                border-color: #6c757d !important;
+                border-width: 1.2px;
+            }
+        </style>
     </head>
     <body>
         <div id="app" class="container flex-center position-ref full-height">

@@ -15,12 +15,14 @@ class CreateListingsTable extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('business_name');
             $table->string('city');
             $table->string('state');
             $table->text('description');
+            $table->string('avatar');
+            $table->float('starting_package', 12, 2);
             $table->timestamps();
         });
     }

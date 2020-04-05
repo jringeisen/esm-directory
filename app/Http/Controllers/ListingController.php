@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use App\Http\Requests\ListingRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -12,11 +14,10 @@ class ListingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listings = Listing::all();
-
-        return response()->json($listings);
+        $listings = $request->user()->listings()->get();
+        return view('listings', compact('listings'));
     }
 
     /**
@@ -25,42 +26,24 @@ class ListingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ListingRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'business_name' => 'required',
-            'city' => 'required',
-            'state' => 'required|max:2',
-            'description' => 'required',
-            'avatar' => 'required'
+        $avatar = $request->file('avatar');
+        $filename = $request->user()->id . '_' . time() . '.' . $avatar->getClientOriginalExtension();
+
+        Storage::disk('s3')->put('/avatars/' . $filename, file_get_contents($avatar), 'public');
+
+        $listing = $request->user()->listing()->create([
+            'name' => $request->name,
+            'business_name' => $request->business_name,
+            'city' => $request->city,
+            'state' => $request->state,
+            'description' => $request->description,
+            'avatar' => Storage::disk('s3')->url('avatars/' . $filename),
+            'starting_package' => $request->starting_package
         ]);
 
-        $listing = $request->user()->listing()->create($request->all());
-
         return response()->json($listing);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Listing $listing)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Listing $listing)
-    {
-        //
     }
 
     /**

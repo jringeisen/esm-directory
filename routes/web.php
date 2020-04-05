@@ -21,7 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/listings', 'ListingController@index')->name('listings.index');
-Route::post('/listings', 'ListingController@store')->name('listings.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/listings', 'ListingController@index')->name('listings.index');
+    Route::post('/listings', 'ListingController@store')->name('listings.store');
+});
