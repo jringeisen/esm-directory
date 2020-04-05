@@ -13,7 +13,7 @@
                 <b-navbar-nav class="ml-auto">
                         <b-nav-item v-if="!name" href="/login">Login</b-nav-item>
                         <b-nav-item v-if="!name" href="/register">Register</b-nav-item>
-                        
+
                         <b-nav-item-dropdown right v-if="name">
                             <template v-slot:button-content>
                                 {{ name }}

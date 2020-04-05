@@ -20,21 +20,40 @@
                         <td width="40%" class="align-middle">{{ listing.description | truncate(100) }}</td>
                         <td class="align-middle">{{ listing.starting_package | currency }}</td>
                         <td class="text-right align-middle">
-                            <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                            <b-button v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)" class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></b-button>
+                            <b-button v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></b-button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <edit-listing-modal :listing="listing" />
+        <delete-listing-modal :listing="listing" />
     </div>
 </template>
 
 <script>
+import EditListingModal from '../modals/EditListingModal.vue'
+import DeleteListingModal from '../modals/DeleteListingModal.vue'
+
 export default {
     props: {
         listings: {
             require: true
+        }
+    },
+    components: {
+        EditListingModal,
+        DeleteListingModal
+    },
+    data () {
+        return {
+            listing: {}
+        }
+    },
+    methods: {
+        setId (listing) {
+            this.listing = listing
         }
     }
 }
