@@ -25,8 +25,13 @@
                         <td width="40%" class="align-middle">{{ listing.description | truncate(100) }}</td>
                         <td class="align-middle">{{ listing.starting_package | currency }}</td>
                         <td class="text-right align-middle">
-                            <b-button v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)" class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></b-button>
-                            <b-button v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></b-button>
+                            <b-dropdown id="dropdown-1" no-caret dropright variant="white" class="m-md-2">
+                                <template v-slot:button-content>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </template>
+                                <b-dropdown-item v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)">Edit</b-dropdown-item>
+                                <b-dropdown-item v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)">Delete</b-dropdown-item>
+                            </b-dropdown>
                         </td>
                     </tr>
                 </tbody>

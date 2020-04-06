@@ -2178,14 +2178,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      listings: {},
+      listings: [],
       search: ''
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getListings();
   },
-  methods: {
+  computed: {
     filterListings: function filterListings() {
       var _this = this;
 
@@ -2196,6 +2196,15 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       return data;
+    }
+  },
+  methods: {
+    getListings: function getListings() {
+      var _this2 = this;
+
+      axios.get('/').then(function (response) {
+        _this2.listings = response.data;
+      });
     }
   }
 });
@@ -2213,6 +2222,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modals_EditListingModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/EditListingModal.vue */ "./resources/js/modals/EditListingModal.vue");
 /* harmony import */ var _modals_DeleteListingModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/DeleteListingModal.vue */ "./resources/js/modals/DeleteListingModal.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65714,7 +65728,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._l(_vm.filterListings(), function(listing, index) {
+      _vm._l(_vm.filterListings, function(listing, index) {
         return _c(
           "div",
           { key: index, staticClass: "row justify-content-center pb-3" },
@@ -65794,7 +65808,12 @@ var render = function() {
                                 _c("b-card-text", [
                                   _vm._v(
                                     "\n                                " +
-                                      _vm._s(listing.description) +
+                                      _vm._s(
+                                        _vm._f("truncate")(
+                                          listing.description,
+                                          400
+                                        )
+                                      ) +
                                       "\n                            "
                                   )
                                 ])
@@ -65911,47 +65930,78 @@ var render = function() {
                       { staticClass: "text-right align-middle" },
                       [
                         _c(
-                          "b-button",
+                          "b-dropdown",
                           {
-                            directives: [
-                              {
-                                name: "b-modal",
-                                rawName: "v-b-modal",
-                                value: "edit-" + listing.id,
-                                expression: "'edit-'+listing.id"
-                              }
-                            ],
-                            staticClass: "btn btn-sm btn-secondary",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.setId(listing)
-                              }
-                            }
+                            staticClass: "m-md-2",
+                            attrs: {
+                              id: "dropdown-1",
+                              "no-caret": "",
+                              dropright: "",
+                              variant: "white"
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "button-content",
+                                  fn: function() {
+                                    return [
+                                      _c("i", {
+                                        staticClass: "fas fa-ellipsis-v"
+                                      })
+                                    ]
+                                  },
+                                  proxy: true
+                                }
+                              ],
+                              null,
+                              true
+                            )
                           },
-                          [_c("i", { staticClass: "fas fa-edit" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-button",
-                          {
-                            directives: [
+                          [
+                            _vm._v(" "),
+                            _c(
+                              "b-dropdown-item",
                               {
-                                name: "b-modal",
-                                rawName: "v-b-modal",
-                                value: "delete-" + listing.id,
-                                expression: "'delete-'+listing.id"
-                              }
-                            ],
-                            staticClass: "btn btn-sm btn-danger",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.setId(listing)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fas fa-trash" })]
+                                directives: [
+                                  {
+                                    name: "b-modal",
+                                    rawName: "v-b-modal",
+                                    value: "edit-" + listing.id,
+                                    expression: "'edit-'+listing.id"
+                                  }
+                                ],
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.setId(listing)
+                                  }
+                                }
+                              },
+                              [_vm._v("Edit")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-dropdown-item",
+                              {
+                                directives: [
+                                  {
+                                    name: "b-modal",
+                                    rawName: "v-b-modal",
+                                    value: "delete-" + listing.id,
+                                    expression: "'delete-'+listing.id"
+                                  }
+                                ],
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.setId(listing)
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ],
+                          1
                         )
                       ],
                       1

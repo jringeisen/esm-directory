@@ -17,13 +17,11 @@ class ListingController extends Controller
      */
     public function index(Request $request)
     {
-        $listings = $request->user()->listings()->get();
-
         if ($request->ajax()) {
-            return response()->json($listings);
+            return response()->json($request->user()->listings()->get());
         }
 
-        return view('listings', compact('listings'));
+        return view('listings');
     }
 
     /**

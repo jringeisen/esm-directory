@@ -52,7 +52,7 @@
                 </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <directory-page :listings="{{ $listings }}"></directory-page>
+            <directory-page></directory-page>
         </div>
     </body>
 </html>

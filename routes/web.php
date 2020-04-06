@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Listing;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $listings = Listing::all();
-    return view('welcome', compact('listings'));
+Route::get('/', function (Request $request) {
+    if ($request->ajax()) {
+        return response()->json(Listing::all());
+    }
+
+    return view('welcome');
 });
 
 Auth::routes();

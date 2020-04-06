@@ -5,7 +5,7 @@
                 <b-form-input v-model="search" placeholder="Search by name, location, or keywords...."></b-form-input>
             </div>
         </div>
-        <div v-for="(listing, index) in filterListings()" :key="index" class="row justify-content-center pb-3">
+        <div v-for="(listing, index) in filterListings" :key="index" class="row justify-content-center pb-3">
             <div class="col-md-10">
                 <b-card no-body class="overflow-hidden shadow card">
                     <b-row no-gutters class="d-flex align-items-center">
@@ -17,7 +17,7 @@
                                 <b-card-title>{{ listing.business_name }} <small class="badge badge-secondary float-right">Starting Package: ${{ listing.starting_package }}</small></b-card-title>
                                 <b-card-sub-title><i class="fas fa-map-marker-alt"></i> {{ listing.city + ', ' + listing.state }}</b-card-sub-title>
                                 <b-card-text>
-                                    {{ listing.description }}
+                                    {{ listing.description | truncate(400) }}
                                 </b-card-text>
                             </b-card-body>
                         </b-col>
@@ -32,24 +32,31 @@
 export default {
     data () {
         return {
-            listings: {},
+            listings: [],
             search: ''
         }
     },
-    mounted () {
+    created () {
         this.getListings()
     },
-    methods: {
+    computed: {
         filterListings () {
             let data = this.listings || []
 
-            data = data.filter(row => {
+            data = data.filter((row) => {
                 return Object.keys(row).some((key) => {
                     return String(row[key]).toLowerCase().indexOf(this.search.toLowerCase()) > -1
                 })
             })
 
             return data
+        }
+    },
+    methods: {
+        getListings () {
+            axios.get('/').then((response) => {
+                this.listings = response.data
+            })
         }
     }
 }
