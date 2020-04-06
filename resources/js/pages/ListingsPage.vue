@@ -29,6 +29,7 @@
                                 <template v-slot:button-content>
                                     <i class="fas fa-ellipsis-v"></i>
                                 </template>
+                                <b-dropdown-item v-b-modal="'view-'+listing.id" @click.prevent="setId(listing)">View</b-dropdown-item>
                                 <b-dropdown-item v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)">Edit</b-dropdown-item>
                                 <b-dropdown-item v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)">Delete</b-dropdown-item>
                             </b-dropdown>
@@ -37,17 +38,20 @@
                 </tbody>
             </table>
         </div>
+        <view-listing-modal :listing="listing" />
         <edit-listing-modal :listing="listing" />
         <delete-listing-modal :listing="listing" />
     </div>
 </template>
 
 <script>
+import ViewListingModal from '../modals/ViewListingModal.vue'
 import EditListingModal from '../modals/EditListingModal.vue'
 import DeleteListingModal from '../modals/DeleteListingModal.vue'
 
 export default {
     components: {
+        ViewListingModal,
         EditListingModal,
         DeleteListingModal
     },

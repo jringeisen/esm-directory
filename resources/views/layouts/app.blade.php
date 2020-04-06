@@ -21,7 +21,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="font-family:garamond;">
     <div id="app">
         <top-navigation 
             name="{{ Auth::user() ? Auth::user()->name : '' }}" 
