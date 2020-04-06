@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <listings-page :listings="{{ $listings }}"></listings-page>
+    <listings-page></listings-page>
 </div>
 @endsection

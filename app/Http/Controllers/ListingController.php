@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ListingRequest;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,11 @@ class ListingController extends Controller
     public function index(Request $request)
     {
         $listings = $request->user()->listings()->get();
+
+        if ($request->ajax()) {
+            return response()->json($listings);
+        }
+
         return view('listings', compact('listings'));
     }
 
@@ -33,7 +39,7 @@ class ListingController extends Controller
 
         Storage::disk('s3')->put('/avatars/' . $filename, file_get_contents($avatar), 'public');
 
-        $listing = $request->user()->listing()->create([
+        $listing = $request->user()->listings()->create([
             'name' => $request->name,
             'business_name' => $request->business_name,
             'city' => $request->city,
@@ -55,7 +61,9 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
-        //
+        $listing->update($request->all());
+
+        return response()->json($listing);
     }
 
     /**
@@ -66,6 +74,12 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
-        //
+        $dir = Str::after($listing->avatar, '.com');
+
+        if (Storage::disk('s3')->exists($dir)) {
+            Storage::disk('s3')->delete($dir);
+        }
+
+        $listing->delete();
     }
 }

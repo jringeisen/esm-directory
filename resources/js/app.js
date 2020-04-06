@@ -2,6 +2,8 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Croppa from 'vue-croppa';
 import Vue2Filters from 'vue2-filters'
 
+
+
 /** Import styling */
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-croppa/dist/vue-croppa.css';

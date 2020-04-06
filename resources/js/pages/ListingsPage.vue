@@ -1,7 +1,12 @@
 <template>
     <div class="card shadow">
         <div class="card-body">
-            <table class="table table-hover">
+            <div class="text-center" v-if="!listings.length">
+                <h5 class="card-title">You don't have any listings</h5>
+                <p class="card-text">To get started click the button below and create your first listing.</p>
+                <a href="/home" class="btn btn-secondary">Create Listings</a>
+            </div>
+            <table class="table table-hover" v-if="listings.length">
                 <thead>
                     <tr>
                         <th>Avatar</th>
@@ -37,21 +42,29 @@ import EditListingModal from '../modals/EditListingModal.vue'
 import DeleteListingModal from '../modals/DeleteListingModal.vue'
 
 export default {
-    props: {
-        listings: {
-            require: true
-        }
-    },
     components: {
         EditListingModal,
         DeleteListingModal
     },
     data () {
         return {
+            listings: {},
             listing: {}
         }
     },
+    created () {
+        this.getListings()
+
+        this.$root.$on('updateListings', () => {
+            this.getListings()
+        })
+    },
     methods: {
+        getListings () {
+            axios.get('/listings').then((response) => {
+                this.listings = response.data
+            })
+        },
         setId (listing) {
             this.listing = listing
         }

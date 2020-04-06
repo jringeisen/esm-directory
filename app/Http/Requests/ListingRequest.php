@@ -29,7 +29,7 @@ class ListingRequest extends FormRequest
             'city' => 'required',
             'state' => 'required|max:2',
             'description' => 'required',
-            'avatar' => 'required|image',
+            'avatar' => 'required|image|max:1000',
             'starting_package' => 'required'
         ];
     }

@@ -2,6 +2,6 @@
 
 @section('content')
 <div>
-    <home-content></home-content>
+    <create-listing-page></create-listing-page>
 </div>
 @endsection

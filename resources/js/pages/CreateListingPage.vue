@@ -56,6 +56,7 @@
                             <div class="form-group">
                                 <b-form-file
                                     v-model="avatar"
+                                    @change="formErrors.avatar = ''"
                                     placeholder="Choose a file or drop it here..."
                                     drop-placeholder="Drop file here..."
                                     :class="{ 'is-invalid': formErrors.avatar }"

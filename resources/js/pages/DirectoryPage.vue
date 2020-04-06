@@ -30,16 +30,14 @@
 
 <script>
 export default {
-    props: {
-        listings: {
-            required: true
-        }
-    },
     data () {
         return {
-            cardHovered: false,
+            listings: {},
             search: ''
         }
+    },
+    mounted () {
+        this.getListings()
     },
     methods: {
         filterListings () {
