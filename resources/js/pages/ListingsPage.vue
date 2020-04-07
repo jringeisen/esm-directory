@@ -4,7 +4,7 @@
             <div class="text-center" v-if="!listings.length">
                 <h5 class="card-title">You don't have any listings</h5>
                 <p class="card-text">To get started click the button below and create your first listing.</p>
-                <a href="/home" class="btn btn-secondary">Create Listings</a>
+                <button class="btn btn-secondary" v-b-modal="'create-listing'">Create Listings</button>
             </div>
             <table class="table table-hover" v-if="listings.length">
                 <thead>
@@ -38,6 +38,7 @@
                 </tbody>
             </table>
         </div>
+        <create-listing-modal />
         <view-listing-modal :listing="listing" :packages="packages" />
         <edit-listing-modal :listing="listing" />
         <delete-listing-modal :listing="listing" />
@@ -45,12 +46,14 @@
 </template>
 
 <script>
+import CreateListingModal from '../modals/CreateListingModal.vue'
 import ViewListingModal from '../modals/ViewListingModal.vue'
 import EditListingModal from '../modals/EditListingModal.vue'
 import DeleteListingModal from '../modals/DeleteListingModal.vue'
 
 export default {
     components: {
+        CreateListingModal,
         ViewListingModal,
         EditListingModal,
         DeleteListingModal
