@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Listing;
+use App\Models\Package;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -39,8 +40,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = [
+        'listings', 'packages'
+    ];
+
     public function listings()
     {
         return $this->hasMany(Listing::class);
+    }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
     }
 }

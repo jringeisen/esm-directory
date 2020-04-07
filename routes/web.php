@@ -26,9 +26,16 @@ Route::get('/', function (Request $request) {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/listings', 'ListingController@index')->name('listings.index');
     Route::post('/listings', 'ListingController@store')->name('listings.store');
     Route::put('/listings/{listing}', 'ListingController@update')->name('listings.update');
     Route::delete('/listings/{listing}', 'ListingController@destroy')->name('listings.destroy');
+
+    Route::get('/packages/create', 'PackageController@create')->name('packages.create');
+    Route::post('/packages', 'PackageController@store')->name('packages.store');
 });

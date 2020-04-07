@@ -38,7 +38,7 @@
                 </tbody>
             </table>
         </div>
-        <view-listing-modal :listing="listing" />
+        <view-listing-modal :listing="listing" :packages="packages" />
         <edit-listing-modal :listing="listing" />
         <delete-listing-modal :listing="listing" />
     </div>
@@ -57,21 +57,25 @@ export default {
     },
     data () {
         return {
+            user: {},
             listings: {},
+            packages: {},
             listing: {}
         }
     },
     created () {
-        this.getListings()
+        this.getUser()
 
         this.$root.$on('updateListings', () => {
-            this.getListings()
+            this.getUser()
         })
     },
     methods: {
-        getListings () {
+        getUser () {
             axios.get('/listings').then((response) => {
-                this.listings = response.data
+                this.user = response.data
+                this.listings = this.user.listings
+                this.packages = this.user.packages
             })
         },
         setId (listing) {
