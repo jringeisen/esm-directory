@@ -8,7 +8,7 @@
             </div>
             <div v-if="listings.length">
                 <div class="d-flex justify-content-end pb-3">
-                    <button class="btn btn-secondary" v-b-modal="'create-listing'">Create Listing</button>
+                    <button class="btn btn-sm btn-secondary" v-b-modal="'create-listing'">Create Listing</button>
                 </div>
                 <table class="table table-hover">
                     <thead>

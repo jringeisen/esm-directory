@@ -2131,12 +2131,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       formData: {},
       formErrors: {},
-      formSuccess: false,
       isLoading: false
     };
   },
@@ -2155,14 +2160,15 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.isLoading = false;
         _this.formData = {};
-        _this.formSuccess = true;
-        setTimeout(function () {
-          _this.formSuccess = false;
-        }, 3000);
+
+        _this.hideModal();
       })["catch"](function (error) {
         _this.isLoading = false;
         _this.formErrors = error.response.data.errors;
       });
+    },
+    hideModal: function hideModal() {
+      this.$refs['create-package-modal'].hide();
     }
   }
 });
@@ -65764,147 +65770,183 @@ var render = function() {
   return _c(
     "b-modal",
     {
-      attrs: { id: "create-package", title: "Create Package" },
-      on: { ok: _vm.submit }
+      ref: "create-package-modal",
+      attrs: { id: "create-package", title: "Create Package" }
     },
     [
-      _vm.formSuccess
-        ? _c("transition", { attrs: { name: "fade" } }, [
-            _c("div", { staticClass: "alert alert-success" }, [
-              _vm._v("Your package has been created successfully!")
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.name,
-              expression: "formData.name"
-            }
-          ],
-          staticClass: "form-control form-control-sm",
-          class: { "is-invalid": _vm.formErrors.name },
-          attrs: {
-            type: "text",
-            placeholder: "Enter your name.",
-            required: ""
-          },
-          domProps: { value: _vm.formData.name },
-          on: {
-            keyup: function($event) {
-              _vm.formErrors.name = ""
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _c("form", [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.name,
+                expression: "formData.name"
               }
-              _vm.$set(_vm.formData, "name", $event.target.value)
+            ],
+            staticClass: "form-control form-control-sm",
+            class: { "is-invalid": _vm.formErrors.name },
+            attrs: {
+              type: "text",
+              placeholder: "Enter your name.",
+              required: ""
+            },
+            domProps: { value: _vm.formData.name },
+            on: {
+              keyup: function($event) {
+                _vm.formErrors.name = ""
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "name", $event.target.value)
+              }
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _vm.formErrors.name
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(this.formErrors.name[0]) +
+                    "\n            "
+                )
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
-        _vm.formErrors.name
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n            " +
-                  _vm._s(this.formErrors.name[0]) +
-                  "\n        "
-              )
-            ])
-          : _vm._e()
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "amount" } }, [_vm._v("Amount")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.amount,
+                expression: "formData.amount"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            class: { "is-invalid": _vm.formErrors.amount },
+            attrs: {
+              type: "number",
+              placeholder: "Enter package amount.",
+              required: ""
+            },
+            domProps: { value: _vm.formData.amount },
+            on: {
+              keyup: function($event) {
+                _vm.formErrors.amount = ""
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "amount", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.formErrors.amount
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(this.formErrors.amount[0]) +
+                    "\n            "
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "description" } }, [
+            _vm._v("Description")
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.description,
+                expression: "formData.description"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            class: { "is-invalid": _vm.formErrors.description },
+            attrs: { rows: "4", placeholder: "Description", required: "" },
+            domProps: { value: _vm.formData.description },
+            on: {
+              keyup: function($event) {
+                _vm.formErrors.description = ""
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "description", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.formErrors.description
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(this.formErrors.description[0]) +
+                    "\n            "
+                )
+              ])
+            : _vm._e()
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "amount" } }, [_vm._v("Amount")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.amount,
-              expression: "formData.amount"
+      _c("div", { attrs: { slot: "modal-footer" }, slot: "modal-footer" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.hideModal($event)
+              }
             }
-          ],
-          staticClass: "form-control form-control-sm",
-          class: { "is-invalid": _vm.formErrors.amount },
-          attrs: {
-            type: "number",
-            placeholder: "Enter package amount.",
-            required: ""
           },
-          domProps: { value: _vm.formData.amount },
-          on: {
-            keyup: function($event) {
-              _vm.formErrors.amount = ""
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary",
+            attrs: { disabled: _vm.isLoading },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
               }
-              _vm.$set(_vm.formData, "amount", $event.target.value)
             }
-          }
-        }),
-        _vm._v(" "),
-        _vm.formErrors.amount
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n            " +
-                  _vm._s(this.formErrors.amount[0]) +
-                  "\n        "
-              )
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.description,
-              expression: "formData.description"
-            }
+          },
+          [
+            _vm.isLoading
+              ? _c("b-spinner", { attrs: { small: "", type: "grow" } })
+              : _vm._e(),
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.isLoading ? "Loading..." : "Submit") +
+                "\n        "
+            )
           ],
-          staticClass: "form-control form-control-sm",
-          class: { "is-invalid": _vm.formErrors.description },
-          attrs: { rows: "4", placeholder: "Description", required: "" },
-          domProps: { value: _vm.formData.description },
-          on: {
-            keyup: function($event) {
-              _vm.formErrors.description = ""
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.formData, "description", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _vm.formErrors.description
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n            " +
-                  _vm._s(this.formErrors.description[0]) +
-                  "\n        "
-              )
-            ])
-          : _vm._e()
+          1
+        )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -66785,7 +66827,7 @@ var render = function() {
                         expression: "'create-listing'"
                       }
                     ],
-                    staticClass: "btn btn-secondary"
+                    staticClass: "btn btn-sm btn-secondary"
                   },
                   [_vm._v("Create Listing")]
                 )
