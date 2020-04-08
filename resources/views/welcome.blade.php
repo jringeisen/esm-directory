@@ -44,7 +44,7 @@
 
                 <b-navbar-nav class="ml-auto">
                     @auth
-                        <b-nav-item href="{{ url('/home') }}">Home</b-nav-item>
+                        <b-nav-item href="{{ url('/listings') }}">Home</b-nav-item>
                     @else
                         <b-nav-item href="{{ url('login') }}">Login</b-nav-item>
                         <b-nav-item href="{{ url('register') }}">Register</b-nav-item>

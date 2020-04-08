@@ -14,7 +14,7 @@ export default {
     methods: {
         submit () {
             axios.delete(`/listings/${this.listing.id}`).then((response) => {
-                this.$root.$emit('updateListings')
+                this.$root.$emit('updateUser')
             })
         }
     }

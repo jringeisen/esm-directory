@@ -30,7 +30,6 @@ Route::middleware(['auth'])->group(function () {
         return response()->json($request->user());
     });
 
-    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/listings', 'ListingController@index')->name('listings.index');
     Route::post('/listings', 'ListingController@store')->name('listings.store');
     Route::put('/listings/{listing}', 'ListingController@update')->name('listings.update');
