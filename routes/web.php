@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/listings/{listing}', 'ListingController@update')->name('listings.update');
     Route::delete('/listings/{listing}', 'ListingController@destroy')->name('listings.destroy');
 
-    Route::get('/packages/create', 'PackageController@create')->name('packages.create');
+    Route::get('/packages', 'PackageController@index')->name('packages.index');
     Route::post('/packages', 'PackageController@store')->name('packages.store');
+
+    Route::get('/galleries', 'GalleryController@index')->name('galleries.index');
 });

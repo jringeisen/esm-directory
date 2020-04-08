@@ -21,7 +21,7 @@ class ListingController extends Controller
             return response()->json($request->user());
         }
 
-        return view('listings');
+        return view('authenticated.listings.index');
     }
 
     /**
