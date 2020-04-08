@@ -15,28 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {
-    if ($request->ajax()) {
-        return response()->json(Listing::all());
-    }
+//Guest Routes
+Route::get('/', 'DirectoryController@index');
 
-    return view('welcome');
-});
-
+//Auth Routes
 Auth::routes();
 
+//Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/user', function (Request $request) {
         return response()->json($request->user());
     });
 
-    Route::get('/listings', 'ListingController@index')->name('listings.index');
-    Route::post('/listings', 'ListingController@store')->name('listings.store');
-    Route::put('/listings/{listing}', 'ListingController@update')->name('listings.update');
-    Route::delete('/listings/{listing}', 'ListingController@destroy')->name('listings.destroy');
-
-    Route::get('/packages', 'PackageController@index')->name('packages.index');
-    Route::post('/packages', 'PackageController@store')->name('packages.store');
-
-    Route::get('/galleries', 'GalleryController@index')->name('galleries.index');
+    Route::apiResource('/listings', 'ListingController');
+    Route::apiResource('/packages', 'PackageController');
+    Route::apiResource('/galleries', 'GalleryController');
 });
