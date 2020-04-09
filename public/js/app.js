@@ -2190,18 +2190,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     listing: {
       required: true
     }
   },
+  data: function data() {
+    return {
+      isLoading: false
+    };
+  },
   methods: {
     submit: function submit() {
       var _this = this;
 
+      this.isLoading = true;
       axios["delete"]("/listings/".concat(this.listing.id)).then(function (response) {
         _this.$root.$emit('updateUser');
+
+        _this.isLoading = false;
+
+        _this.hideModal();
+
+        _this.toast('success', 'Success!', 'Your listing was deleted successfully!');
+      });
+    },
+    hideModal: function hideModal(id) {
+      this.$refs['delete-' + id + '-modal'].hide();
+    },
+    toast: function toast(variant, title, body) {
+      this.$bvToast.toast(body, {
+        title: title,
+        variant: variant,
+        solid: true
       });
     }
   }
@@ -2247,6 +2276,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     listing: {
@@ -2256,7 +2292,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       listings: {},
-      formData: {}
+      formData: {},
+      isLoading: false
     };
   },
   methods: {
@@ -2264,10 +2301,25 @@ __webpack_require__.r(__webpack_exports__);
       this.formData = this.listing;
     },
     submit: function submit() {
+      var _this = this;
+
+      this.isLoading = true;
       axios.put("/listings/".concat(this.listing.id), this.formData).then(function (response) {
-        console.log('success');
-      })["catch"](function (error) {
-        console.log('error');
+        _this.isLoading = false;
+
+        _this.hideModal();
+
+        _this.toast('success', 'Success!', 'Your listing was deleted successfully!');
+      });
+    },
+    hideModal: function hideModal(id) {
+      this.$refs['edit-' + id + '-modal'].hide();
+    },
+    toast: function toast(variant, title, body) {
+      this.$bvToast.toast(body, {
+        title: title,
+        variant: variant,
+        solid: true
       });
     }
   }
@@ -65977,12 +66029,53 @@ var render = function() {
   return _c(
     "b-modal",
     {
-      attrs: { id: "delete-" + _vm.listing.id, title: "Delete Listing" },
-      on: { ok: _vm.submit }
+      ref: "delete-" + _vm.listing.id + "-modal",
+      attrs: { id: "delete-" + _vm.listing.id, title: "Delete Listing" }
     },
     [
       _c("div", { staticClass: "alert alert-danger" }, [
         _vm._v("Are you sure you want to delete this listing?")
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { slot: "modal-footer" }, slot: "modal-footer" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.hideModal(_vm.listing.id)
+              }
+            }
+          },
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary",
+            attrs: { disabled: _vm.isLoading },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
+            _vm.isLoading
+              ? _c("b-spinner", { attrs: { small: "", type: "grow" } })
+              : _vm._e(),
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.isLoading ? "Loading..." : "Submit") +
+                "\n        "
+            )
+          ],
+          1
+        )
       ])
     ]
   )
@@ -66012,6 +66105,7 @@ var render = function() {
   return _c(
     "b-modal",
     {
+      ref: "edit-" + _vm.listing.id + "-modal",
       attrs: { id: "edit-" + _vm.listing.id, title: "Edit Listing" },
       on: { shown: _vm.shown, ok: _vm.submit }
     },
@@ -66174,6 +66268,47 @@ var render = function() {
             }
           }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { slot: "modal-footer" }, slot: "modal-footer" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.hideModal(_vm.listing.id)
+              }
+            }
+          },
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary",
+            attrs: { disabled: _vm.isLoading },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
+            _vm.isLoading
+              ? _c("b-spinner", { attrs: { small: "", type: "grow" } })
+              : _vm._e(),
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.isLoading ? "Loading..." : "Submit") +
+                "\n        "
+            )
+          ],
+          1
+        )
       ])
     ]
   )
@@ -66203,7 +66338,12 @@ var render = function() {
   return _c(
     "b-modal",
     {
-      attrs: { id: "view-" + _vm.listing.id, title: "View Listing", size: "lg" }
+      attrs: {
+        id: "view-" + _vm.listing.id,
+        title: "View Listing",
+        size: "lg",
+        "hide-footer": "true"
+      }
     },
     [
       _c(

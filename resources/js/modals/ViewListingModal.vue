@@ -1,5 +1,5 @@
 <template>
-    <b-modal :id="'view-'+listing.id" title="View Listing" size="lg">
+    <b-modal :id="'view-'+listing.id" title="View Listing" size="lg" hide-footer="true">
         <div class="d-flex flex-column align-items-center">
             <b-avatar :src="listing.avatar" variant="secondary" size="6rem"></b-avatar>
             <h3 class="p-3">{{ listing.business_name }}</h3>
