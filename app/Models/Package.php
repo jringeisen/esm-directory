@@ -12,8 +12,8 @@ class Package extends Model
         'description'
     ];
 
-    public function user()
+    public function listing()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Listing::class);
     }
 }

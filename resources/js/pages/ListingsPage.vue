@@ -33,9 +33,10 @@
                                     <template v-slot:button-content>
                                         <i class="fas fa-ellipsis-v"></i>
                                     </template>
-                                    <b-dropdown-item v-b-modal="'view-'+listing.id" @click.prevent="setId(listing)">View</b-dropdown-item>
-                                    <b-dropdown-item v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)">Edit</b-dropdown-item>
-                                    <b-dropdown-item v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)">Delete</b-dropdown-item>
+                                    <b-dropdown-item v-b-modal="'create-package'" @click.prevent="setId(listing)">Add Package</b-dropdown-item>
+                                    <b-dropdown-item v-b-modal="'view-'+listing.id" @click.prevent="setId(listing)">View Listing</b-dropdown-item>
+                                    <b-dropdown-item v-b-modal="'edit-'+listing.id" @click.prevent="setId(listing)">Edit Listing</b-dropdown-item>
+                                    <b-dropdown-item v-b-modal="'delete-'+listing.id" @click.prevent="setId(listing)">Delete Listing</b-dropdown-item>
                                 </b-dropdown>
                             </td>
                         </tr>
@@ -44,6 +45,7 @@
             </div>
         </div>
         <create-listing-modal />
+        <create-package-modal :listing="listing" />
         <view-listing-modal :listing="listing" :packages="packages" />
         <edit-listing-modal :listing="listing" />
         <delete-listing-modal :listing="listing" />
@@ -52,6 +54,7 @@
 
 <script>
 import CreateListingModal from '../modals/CreateListingModal.vue'
+import CreatePackageModal from '../modals/CreatePackageModal.vue'
 import ViewListingModal from '../modals/ViewListingModal.vue'
 import EditListingModal from '../modals/EditListingModal.vue'
 import DeleteListingModal from '../modals/DeleteListingModal.vue'
@@ -59,6 +62,7 @@ import DeleteListingModal from '../modals/DeleteListingModal.vue'
 export default {
     components: {
         CreateListingModal,
+        CreatePackageModal,
         ViewListingModal,
         EditListingModal,
         DeleteListingModal
@@ -67,7 +71,7 @@ export default {
         return {
             user: {},
             listings: {},
-            packages: {},
+            packages: [],
             listing: {}
         }
     },
@@ -83,11 +87,11 @@ export default {
             axios.get('/listings').then((response) => {
                 this.user = response.data
                 this.listings = this.user.listings
-                this.packages = this.user.packages
             })
         },
         setId (listing) {
             this.listing = listing
+            this.packages = listing.packages
         }
     }
 }

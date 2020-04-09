@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Package;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -14,7 +15,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        return view('authenticated.packages.index');
+        //
     }
 
     /**
@@ -30,8 +31,10 @@ class PackageController extends Controller
             'amount' => 'required',
             'description' => 'required'
         ]);
-        
-        $package = $request->user()->packages()->create(
+
+        $listing = Listing::find($request->listing_id);
+
+        $package = $listing->packages()->create(
             $request->only(['name', 'amount', 'description'])
         );
 

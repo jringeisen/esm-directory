@@ -35,6 +35,11 @@
 
 <script>
 export default {
+    props: {
+        listing: {
+            required: true
+        }
+    },
     data () {
         return {
             formData: {},
@@ -47,10 +52,7 @@ export default {
             event.preventDefault()
             this.isLoading = true
 
-            let data = new FormData();
-            data.append('name', this.formData.name || '')
-            data.append('amount', this.formData.amount || '')
-            data.append('description', this.formData.description || '')
+            var data = Object.assign({listing_id: this.listing.id}, this.formData)
 
             axios.post('/packages', data).then((response) => {
                 this.$root.$emit('updateUser')

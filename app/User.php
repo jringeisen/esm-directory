@@ -41,16 +41,11 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'listings', 'packages'
+        'listings'
     ];
 
     public function listings()
     {
         return $this->hasMany(Listing::class);
-    }
-
-    public function packages()
-    {
-        return $this->hasMany(Package::class);
     }
 }

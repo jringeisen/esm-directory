@@ -17,8 +17,17 @@ class Listing extends Model
         'starting_package'
     ];
 
+    protected $with = [
+        'packages'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
     }
 }

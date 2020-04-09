@@ -8,7 +8,6 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav v-if="name">
                     <b-nav-item :class="{'active': route === 'listings'}" href="/listings">Listings</b-nav-item>
-                    <b-nav-item :class="{'active': route === 'packages'}" href="/packages">Packages</b-nav-item>
                     <b-nav-item :class="{'active': route === 'galleries'}" href="/galleries">Galleries</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
