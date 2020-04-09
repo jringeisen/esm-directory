@@ -2385,6 +2385,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     listing: {
@@ -2407,6 +2416,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modals_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/ViewListingModal.vue */ "./resources/js/modals/ViewListingModal.vue");
 //
 //
 //
@@ -2437,10 +2447,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ViewListingModal: _modals_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       listings: [],
+      listing: [],
       search: ''
     };
   },
@@ -2467,6 +2483,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/').then(function (response) {
         _this2.listings = response.data;
       });
+    },
+    setId: function setId(listing) {
+      this.listing = listing;
     }
   }
 });
@@ -66342,7 +66361,7 @@ var render = function() {
         id: "view-" + _vm.listing.id,
         title: "View Listing",
         size: "lg",
-        "hide-footer": "true"
+        "hide-footer": true
       }
     },
     [
@@ -66381,38 +66400,70 @@ var render = function() {
             _c(
               "div",
               { staticClass: "list-group" },
-              _vm._l(_vm.packages, function(item, index) {
-                return _c(
-                  "a",
-                  {
-                    key: index,
-                    staticClass: "list-group-item list-group-item-action",
-                    attrs: { href: "#" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "d-flex w-100 justify-content-between" },
-                      [
-                        _c("h5", { staticClass: "mb-1" }, [
-                          _vm._v(_vm._s(item.name))
-                        ]),
-                        _vm._v(" "),
-                        _c("small", [
-                          _c("span", { staticClass: "badge badge-success" }, [
-                            _vm._v(_vm._s(_vm._f("currency")(item.amount)))
-                          ])
+              [
+                !_vm.packages.length
+                  ? _c("div", [
+                      _c("div", { staticClass: "card text-center" }, [
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("I have not added my packages yet.")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "If you would like to know my prices please push the button below to email me."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: {
+                                href:
+                                  "mailto:support@essentialstudiomanager.com"
+                              }
+                            },
+                            [_vm._v("Email Photographer")]
+                          )
                         ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "mb-1" }, [
-                      _vm._v(_vm._s(item.description))
+                      ])
                     ])
-                  ]
-                )
-              }),
-              0
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.packages, function(item, index) {
+                  return _c(
+                    "a",
+                    {
+                      key: index,
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "#" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex w-100 justify-content-between" },
+                        [
+                          _c("h5", { staticClass: "mb-1" }, [
+                            _vm._v(_vm._s(item.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("small", [
+                            _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v(_vm._s(_vm._f("currency")(item.amount)))
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "mb-1" }, [
+                        _vm._v(_vm._s(item.description))
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
             )
           ]),
           _vm._v(" "),
@@ -66599,8 +66650,22 @@ var render = function() {
                 _c(
                   "b-card",
                   {
+                    directives: [
+                      {
+                        name: "b-modal",
+                        rawName: "v-b-modal",
+                        value: "view-" + listing.id,
+                        expression: "'view-'+listing.id"
+                      }
+                    ],
                     staticClass: "overflow-hidden shadow card",
-                    attrs: { "no-body": "" }
+                    attrs: { "no-body": "" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.setId(listing)
+                      }
+                    }
                   },
                   [
                     _c(
@@ -66693,6 +66758,10 @@ var render = function() {
             )
           ]
         )
+      }),
+      _vm._v(" "),
+      _c("view-listing-modal", {
+        attrs: { listing: _vm.listing, packages: [] }
       })
     ],
     2

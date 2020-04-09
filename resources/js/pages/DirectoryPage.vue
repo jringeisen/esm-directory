@@ -7,7 +7,7 @@
         </div>
         <div v-for="(listing, index) in filterListings" :key="index" class="row justify-content-center pb-3">
             <div class="col-md-10">
-                <b-card no-body class="overflow-hidden shadow card">
+                <b-card no-body class="overflow-hidden shadow card" v-b-modal="'view-'+listing.id" @click.prevent="setId(listing)">
                     <b-row no-gutters class="d-flex align-items-center">
                         <b-col md="2" class="d-flex justify-content-center">
                             <b-avatar variant="secondary" :src="listing.avatar" size="5rem"></b-avatar>
@@ -25,14 +25,20 @@
                 </b-card>
             </div>
         </div>
+        <view-listing-modal :listing="listing" :packages="[]" />
     </div>
 </template>
 
 <script>
+import ViewListingModal from '../modals/ViewListingModal.vue'
 export default {
+    components: {
+        ViewListingModal
+    },
     data () {
         return {
             listings: [],
+            listing: [],
             search: ''
         }
     },
@@ -57,6 +63,9 @@ export default {
             axios.get('/').then((response) => {
                 this.listings = response.data
             })
+        },
+        setId (listing) {
+            this.listing = listing
         }
     }
 }
