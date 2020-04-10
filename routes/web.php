@@ -23,11 +23,8 @@ Auth::routes();
 
 //Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return response()->json($request->user());
-    });
+    Route::get('/user', 'UserController');
 
     Route::apiResource('/listings', 'ListingController');
     Route::apiResource('/packages', 'PackageController');
-    Route::apiResource('/galleries', 'GalleryController');
 });

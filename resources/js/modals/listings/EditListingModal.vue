@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import ToastMixin from '../../mixins/ToastMixin.js'
 export default {
+    mixins: [ToastMixin],
     props: {
         listing: {
             required: true
@@ -62,13 +64,6 @@ export default {
         },
         hideModal (id) {
             this.$refs['edit-'+id+'-modal' ].hide()
-        },
-        toast (variant, title, body) {
-            this.$bvToast.toast(body, {
-                title: title,
-                variant: variant,
-                solid: true
-            })
         }
     }
 }

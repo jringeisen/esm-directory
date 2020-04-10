@@ -53,11 +53,11 @@
 </template>
 
 <script>
-import CreateListingModal from '../modals/CreateListingModal.vue'
-import CreatePackageModal from '../modals/CreatePackageModal.vue'
-import ViewListingModal from '../modals/ViewListingModal.vue'
-import EditListingModal from '../modals/EditListingModal.vue'
-import DeleteListingModal from '../modals/DeleteListingModal.vue'
+import CreateListingModal from '../modals/listings/CreateListingModal.vue'
+import CreatePackageModal from '../modals/packages/CreatePackageModal.vue'
+import ViewListingModal from '../modals/listings/ViewListingModal.vue'
+import EditListingModal from '../modals/listings/EditListingModal.vue'
+import DeleteListingModal from '../modals/listings/DeleteListingModal.vue'
 
 export default {
     components: {

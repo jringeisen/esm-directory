@@ -4,6 +4,14 @@
             <div class="col-md-10 pb-3">
                 <b-form-input v-model="search" placeholder="Search by name, location, or keywords...."></b-form-input>
             </div>
+            <div class="col-md-10">
+                <div class="card text-center" v-if="!filterListings.length">
+                    <div class="card-body">
+                        <h5 class="card-title">The search term '{{ search }}' returned no results!</h5>
+                        <p class="card-text">You can search by city, state, business name, or general keywords. If no results are returned you may need to change up your search.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div v-for="(listing, index) in filterListings" :key="index" class="row justify-content-center pb-3">
             <div class="col-md-10">
@@ -25,12 +33,12 @@
                 </b-card>
             </div>
         </div>
-        <view-listing-modal :listing="listing" :packages="[]" />
+        <view-listing-modal :listing="listing" :packages="packages" />
     </div>
 </template>
 
 <script>
-import ViewListingModal from '../modals/ViewListingModal.vue'
+import ViewListingModal from '../modals/listings/ViewListingModal.vue'
 export default {
     components: {
         ViewListingModal
@@ -39,6 +47,7 @@ export default {
         return {
             listings: [],
             listing: [],
+            packages: [],
             search: ''
         }
     },
@@ -66,6 +75,7 @@ export default {
         },
         setId (listing) {
             this.listing = listing
+            this.packages = listing.packages
         }
     }
 }

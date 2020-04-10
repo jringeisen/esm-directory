@@ -1,5 +1,4 @@
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import Croppa from 'vue-croppa';
+import { BootstrapVue } from 'bootstrap-vue'
 import Vue2Filters from 'vue2-filters'
 
 
@@ -15,7 +14,6 @@ import 'vue-croppa/dist/vue-croppa.css';
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 
@@ -24,8 +22,6 @@ window.Vue = require('vue');
  */
 
 Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
-Vue.use(Croppa)
 Vue.use(Vue2Filters)
 
 /**

@@ -70,7 +70,9 @@
 </template>
 
 <script>
+import ToastMixin from '../../mixins/ToastMixin.js'
 export default {
+    mixins: [ToastMixin],
     data () {
         return {
             formData: {},
@@ -107,13 +109,6 @@ export default {
         },
         hideModal () {
             this.$refs['create-listing-modal'].hide()
-        },
-        toast (variant, title, body) {
-            this.$bvToast.toast(body, {
-                title: title,
-                variant: variant,
-                solid: true
-            })
         }
     }
 }
