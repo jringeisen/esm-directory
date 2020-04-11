@@ -7,7 +7,7 @@ use Tests\TestCase;
 use App\Models\Listing;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DirectoryPageTest extends TestCase
+class DirectoryTest extends TestCase
 {
     use RefreshDatabase;
     
