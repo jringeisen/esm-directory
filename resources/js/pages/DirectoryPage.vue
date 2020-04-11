@@ -15,7 +15,7 @@
         </div>
         <div v-for="(listing, index) in filterListings" :key="index" class="row justify-content-center pb-3">
             <div class="col-md-10">
-                <b-card no-body class="overflow-hidden shadow card" v-b-modal="'view-'+listing.id" @click.prevent="setId(listing)">
+                <b-card no-body class="overflow-hidden shadow card" v-b-modal="'view-'+listing.id" @click.prevent="setModalData(listing)">
                     <b-row no-gutters class="d-flex align-items-center">
                         <b-col md="2" class="d-flex justify-content-center">
                             <b-avatar variant="secondary" :src="listing.avatar" size="5rem"></b-avatar>
@@ -39,7 +39,9 @@
 
 <script>
 import ViewListingModal from '../modals/listings/ViewListingModal.vue'
+import SetModalData from '../mixins/SetModalData.js'
 export default {
+    mixins: [SetModalData],
     components: {
         ViewListingModal
     },
@@ -72,10 +74,6 @@ export default {
             axios.get('/').then((response) => {
                 this.listings = response.data
             })
-        },
-        setId (listing) {
-            this.listing = listing
-            this.packages = listing.packages
         }
     }
 }

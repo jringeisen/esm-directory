@@ -17,10 +17,6 @@ class ListingController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            return response()->json($request->user());
-        }
-
         return view('authenticated.listings.index');
     }
 

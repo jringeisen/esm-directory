@@ -1,5 +1,6 @@
 <template>
-    <b-modal :id="'view-'+listing.id" title="View Listing" size="lg" :hide-footer="true">
+<div>
+    <b-modal :id="'view-'+listing.id" title="View Listing" size="lg" :hide-footer="true" no-stacking>
         <div class="d-flex flex-column align-items-center">
             <b-avatar :src="listing.avatar" variant="secondary" size="6rem"></b-avatar>
             <h3 class="p-3">{{ listing.business_name }}</h3>
@@ -17,13 +18,15 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="list-group-item list-group-item-action" v-for="(item, index) in packages" :key="index">
+                    <div class="list-group-item" v-for="(item, index) in packages" :key="index">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ item.name }}</h5>
                         <small><span class="badge badge-success">{{ item.amount | currency }}</span></small>
                         </div>
                         <p class="mb-1">{{ item.description }}</p>
-                    </a>
+                        <button v-if="user" class="btn btn-sm btn-secondary" v-b-modal="'edit-package-'+item.id" @click.prevent="setModalData(item)"><i class="fa fa-edit"></i> Edit</button>
+                        <button v-if="user" class="btn btn-sm btn-danger" v-b-modal="'delete-package-'+item.id" @click.prevent="setModalData(item)"><i class="fa fa-trash"></i> Delete</button>
+                    </div>
                 </div>
             </b-tab>
             <b-tab title="Gallery">
@@ -54,9 +57,14 @@
             </b-tab>
         </b-tabs>
     </b-modal>
+    <edit-package-modal :item="item" />
+    <delete-package-modal :item="item" />
+</div>
 </template>
 
 <script>
+import EditPackageModal from '../packages/EditPackageModal.vue'
+import DeletePackageModal from '../packages/DeletePackageModal.vue'
 export default {
     props: {
         listing: {
@@ -64,6 +72,23 @@ export default {
         },
         packages: {
             required: true
+        },
+        user: {
+            required: false
+        }
+    },
+    components: {
+        EditPackageModal,
+        DeletePackageModal
+    },
+    data () {
+        return {
+            item: []
+        }
+    },
+    methods: {
+        setModalData (item) {
+            this.item = item
         }
     }
 }
