@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Listing;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -122,16 +123,97 @@ class ListingTest extends TestCase
         $this->authUser();
 
         $data = [
-            'name' => 'Name',
-            'business_name' => 'Business Name',
-            'city' => 'City',
-            'state' => 'FL',
-            'description' => 'Description',
+            'name' => $this->faker->name,
+            'business_name' => $this->faker->company,
+            'city' => $this->faker->city,
+            'state' => $this->faker->stateAbbr,
+            'description' => $this->faker->sentence,
             'avatar' => UploadedFile::fake()->image('photo1.jpg'),
-            'starting_package' => 'Starting Package'
+            'starting_package' => $this->faker->randomFloat(2, 100, 1000)
         ];
 
-        $response = $this->postJson('/listings', $data)
+        $this->postJson('/listings', $data)
+            ->assertOk()
+            ->assertJson([
+                'name' => $data['name'],
+                'business_name' => $data['business_name'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+                'description' => $data['description']
+            ]);
+
+        $this->assertDatabaseHas('listings', [
+            'name' => $data['name'],
+            'business_name' => $data['business_name'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'description' => $data['description']
+        ]);
+    }
+
+    /**
+     * Authenticated user can update a listing.
+     *
+     * @return void
+     */
+    public function testAuthenticatedUserCanUpdateListing()
+    {
+        $user = $this->authUser();
+        
+        $listing = factory(Listing::class)->create(['user_id' => $user->id]);
+
+        $this->assertDatabaseHas('listings', [
+            'name' => $listing->name,
+            'business_name' => $listing->business_name,
+            'city' => $listing->city,
+            'state' => $listing->state,
+            'description' => $listing->description
+        ]);
+
+        $data = [
+            'name' => $this->faker->name,
+            'business_name' => $this->faker->company,
+        ];
+
+        $this->putJson('/listings/' . $listing->id, $data)
+            ->assertOk()
+            ->assertJson([
+                'name' => $data['name'],
+                'business_name' => $data['business_name'],
+            ]);
+
+        $this->assertDatabaseHas('listings', [
+            'name' => $data['name'],
+            'business_name' => $data['business_name']
+        ]);
+    }
+
+    /**
+     * Authenticated user can delete a listing.
+     *
+     * @return void
+     */
+    public function testAuthenticatedUserCanDeleteAListing()
+    {
+        $user = $this->authUser();
+        
+        $listing = factory(Listing::class)->create(['user_id' => $user->id]);
+
+        $this->assertDatabaseHas('listings', [
+            'user_id' => $user->id,
+            'name' => $listing->name,
+            'business_name' => $listing->business_name,
+            'city' => $listing->city,
+            'state' => $listing->state,
+            'description' => $listing->description
+        ]);
+
+        $this->deleteJson('/listings/' . $listing->id)
             ->assertOk();
+
+        $this->assertDatabaseMissing('listings', [
+            'name' => $listing->name,
+            'business_name' => $listing->business_name
+        ]);
     }
 }
