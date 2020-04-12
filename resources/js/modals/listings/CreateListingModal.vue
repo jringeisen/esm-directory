@@ -1,115 +1,198 @@
 <template>
-    <b-modal 
-        id="create-listing" 
-        ref="create-listing-modal" 
-        title="Create Listing">
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" @keyup="formErrors.name = ''" class="form-control" :class="{ 'is-invalid': formErrors.name }" placeholder="Enter your name." v-model="formData.name" required>
-                <div class="invalid-feedback" v-if="formErrors.name">
-                    {{ this.formErrors.name[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="business_name">Business Name</label>
-                <input type="text" @keyup="formErrors.business_name = ''" class="form-control" :class="{ 'is-invalid': formErrors.business_name }" placeholder="Enter your business name." v-model="formData.business_name" required>
-                <div class="invalid-feedback" v-if="formErrors.business_name">
-                    {{ this.formErrors.business_name[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" @keyup="formErrors.city = ''" class="form-control" :class="{ 'is-invalid': formErrors.city }" placeholder="Enter your city." v-model="formData.city" required>
-                <div class="invalid-feedback" v-if="formErrors.city">
-                    {{ this.formErrors.city[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="state">State</label>
-                <input type="text" @keyup="formErrors.state = ''" class="form-control" :class="{ 'is-invalid': formErrors.state }" placeholder="Enter your state." v-model="formData.state" required>
-                <div class="invalid-feedback" v-if="formErrors.state">
-                    {{ this.formErrors.state[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="starting_package">Starting Package Price</label>
-                <input type="number" @keyup="formErrors.starting_package = ''" class="form-control" :class="{ 'is-invalid': formErrors.starting_package }" placeholder="Enter your starting package price." v-model="formData.starting_package" required>
-                <div class="invalid-feedback" v-if="formErrors.starting_package">
-                    {{ this.formErrors.starting_package[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" @keyup="formErrors.description = ''" rows="4" :class="{ 'is-invalid': formErrors.description }" placeholder="Description" v-model="formData.description" required></textarea>
-                <div class="invalid-feedback" v-if="formErrors.description">
-                    {{ this.formErrors.description[0] }}
-                </div>
-            </div>
-            <div class="form-group">
-                <b-form-file
-                    v-model="avatar"
-                    @change="formErrors.avatar = ''"
-                    placeholder="Choose an avatar image..."
-                    drop-placeholder="Drop file here..."
-                    :class="{ 'is-invalid': formErrors.avatar }"
-                ></b-form-file>
-                <div class="invalid-feedback" v-if="formErrors.avatar">
-                    {{ this.formErrors.avatar[0] }}
-                </div>
-            </div>
-        </form>
-        <div slot="modal-footer">
-            <button class="btn btn-outline-secondary" @click.prevent="hideModal">Cancel</button>
-            <button class="btn btn-secondary" :disabled="isLoading" @click.prevent="submit">
-                <b-spinner v-if="isLoading" small type="grow"></b-spinner>
-                {{ isLoading ? 'Loading...' : 'Submit'}}
-            </button>
+  <b-modal 
+    id="create-listing" 
+    ref="create-listing-modal" 
+    title="Create Listing"
+  >
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          v-model="formData.name"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': formErrors.name }"
+          placeholder="Enter your name."
+          required
+          @keyup="formErrors.name = ''"
+        >
+        <div
+          v-if="formErrors.name"
+          class="invalid-feedback"
+        >
+          {{ formErrors.name[0] }}
         </div>
-    </b-modal>
+      </div>
+      <div class="form-group">
+        <label for="business_name">Business Name</label>
+        <input
+          v-model="formData.business_name"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': formErrors.business_name }"
+          placeholder="Enter your business name."
+          required
+          @keyup="formErrors.business_name = ''"
+        >
+        <div
+          v-if="formErrors.business_name"
+          class="invalid-feedback"
+        >
+          {{ formErrors.business_name[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          v-model="formData.city"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': formErrors.city }"
+          placeholder="Enter your city."
+          required
+          @keyup="formErrors.city = ''"
+        >
+        <div
+          v-if="formErrors.city"
+          class="invalid-feedback"
+        >
+          {{ formErrors.city[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <input
+          v-model="formData.state"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': formErrors.state }"
+          placeholder="Enter your state."
+          required
+          @keyup="formErrors.state = ''"
+        >
+        <div
+          v-if="formErrors.state"
+          class="invalid-feedback"
+        >
+          {{ formErrors.state[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="starting_package">Starting Package Price</label>
+        <input
+          v-model="formData.starting_package"
+          type="number"
+          class="form-control"
+          :class="{ 'is-invalid': formErrors.starting_package }"
+          placeholder="Enter your starting package price."
+          required
+          @keyup="formErrors.starting_package = ''"
+        >
+        <div
+          v-if="formErrors.starting_package"
+          class="invalid-feedback"
+        >
+          {{ formErrors.starting_package[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          v-model="formData.description"
+          class="form-control"
+          rows="4"
+          :class="{ 'is-invalid': formErrors.description }"
+          placeholder="Description"
+          required
+          @keyup="formErrors.description = ''"
+        />
+        <div
+          v-if="formErrors.description"
+          class="invalid-feedback"
+        >
+          {{ formErrors.description[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        <b-form-file
+          v-model="avatar"
+          placeholder="Choose an avatar image..."
+          drop-placeholder="Drop file here..."
+          :class="{ 'is-invalid': formErrors.avatar }"
+          @change="formErrors.avatar = ''"
+        />
+        <div
+          v-if="formErrors.avatar"
+          class="invalid-feedback"
+        >
+          {{ formErrors.avatar[0] }}
+        </div>
+      </div>
+    </form>
+    <div slot="modal-footer">
+      <button
+        class="btn btn-outline-secondary"
+        @click.prevent="hideModal"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn-secondary"
+        :disabled="isLoading"
+        @click.prevent="submit"
+      >
+        <b-spinner
+          v-if="isLoading"
+          small
+          type="grow"
+        />
+        {{ isLoading ? 'Loading...' : 'Submit' }}
+      </button>
+    </div>
+  </b-modal>
 </template>
 
 <script>
 import ToastMixin from '../../mixins/ToastMixin.js'
 export default {
-    mixins: [ToastMixin],
-    data () {
-        return {
-            formData: {},
-            avatar: [],
-            formErrors: {},
-            isLoading: false
-        }
-    },
-    methods: {
-        submit (event) {
-            event.preventDefault()
-            this.isLoading = true
-
-            let data = new FormData();
-            data.append('avatar', this.avatar || '');
-            data.append('name', this.formData.name || '')
-            data.append('business_name', this.formData.business_name || '')
-            data.append('city', this.formData.city || '')
-            data.append('state', this.formData.state || '')
-            data.append('description', this.formData.description || '')
-            data.append('starting_package', this.formData.starting_package || '')
-
-            axios.post('/listings', data).then((response) => {
-                this.isLoading = false
-                this.formData = {}
-                this.avatar = []
-                this.$root.$emit('updateUser')
-                this.hideModal()
-                this.toast('success', 'Success!', 'Your listing was created successfully!')
-            }).catch((error) => {
-                this.isLoading = false
-                this.formErrors = error.response.data.errors
-            })
-        },
-        hideModal () {
-            this.$refs['create-listing-modal'].hide()
-        }
+  mixins: [ToastMixin],
+  data () {
+    return {
+      formData: {},
+      avatar: [],
+      formErrors: {},
+      isLoading: false
     }
+  },
+  methods: {
+    submit (event) {
+      event.preventDefault()
+      this.isLoading = true
+
+      let data = new FormData();
+      data.append('avatar', this.avatar || '');
+      data.append('name', this.formData.name || '')
+      data.append('business_name', this.formData.business_name || '')
+      data.append('city', this.formData.city || '')
+      data.append('state', this.formData.state || '')
+      data.append('description', this.formData.description || '')
+      data.append('starting_package', this.formData.starting_package || '')
+
+      axios.post('/listings', data).then((response) => {
+        this.isLoading = false
+        this.formData = {}
+        this.avatar = []
+        this.$root.$emit('updateUser')
+        this.hideModal()
+        this.toast('success', 'Success!', 'Your listing was created successfully!')
+      }).catch((error) => {
+        this.isLoading = false
+        this.formErrors = error.response.data.errors
+      })
+    },
+    hideModal () {
+      this.$refs['create-listing-modal'].hide()
+    }
+  }
 }
 </script>

@@ -5,7 +5,6 @@ import Vue2Filters from 'vue2-filters'
 
 /** Import styling */
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'vue-croppa/dist/vue-croppa.css';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -42,5 +41,5 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  */
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 });

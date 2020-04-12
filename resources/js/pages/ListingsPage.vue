@@ -1,55 +1,118 @@
 <template>
-    <div class="card shadow">
-        <div class="card-body">
-            <div class="text-center" v-if="!listings.length">
-                <h5 class="card-title">You don't have any listings</h5>
-                <p class="card-text">To get started click the button below and create your first listing.</p>
-                <button class="btn btn-secondary" v-b-modal="'create-listing'">Create Listing</button>
-            </div>
-            <div v-if="listings.length">
-                <div class="d-flex justify-content-end pb-3">
-                    <button class="btn btn-sm btn-secondary" v-b-modal="'create-listing'">Create Listing</button>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Avatar</th>
-                            <th>Business Name</th>
-                            <th>Location</th>
-                            <th>Description</th>
-                            <th>Starting Price</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(listing, index) in listings" :key="index">
-                            <td class="align-middle"><b-avatar :src="listing.avatar"></b-avatar></td>
-                            <td class="align-middle">{{ listing.business_name }}</td>
-                            <td class="align-middle">{{ listing.city + ', ' + listing.state }}</td>
-                            <td width="40%" class="align-middle">{{ listing.description | truncate(100) }}</td>
-                            <td class="align-middle">{{ listing.starting_package | currency }}</td>
-                            <td class="text-right align-middle">
-                                <b-dropdown id="dropdown-1" no-caret dropright variant="white" class="m-md-2">
-                                    <template v-slot:button-content>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </template>
-                                    <b-dropdown-item v-b-modal="'create-package'" @click.prevent="setModalData(listing)">Add Package</b-dropdown-item>
-                                    <b-dropdown-item v-b-modal="'view-'+listing.id" @click.prevent="setModalData(listing)">View Listing</b-dropdown-item>
-                                    <b-dropdown-item v-b-modal="'edit-'+listing.id" @click.prevent="setModalData(listing)">Edit Listing</b-dropdown-item>
-                                    <b-dropdown-item v-b-modal="'delete-'+listing.id" @click.prevent="setModalData(listing)">Delete Listing</b-dropdown-item>
-                                </b-dropdown>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+  <div class="card shadow">
+    <div class="card-body">
+      <div
+        v-if="!listings.length"
+        class="text-center"
+      >
+        <h5 class="card-title">
+          You don't have any listings
+        </h5>
+        <p class="card-text">
+          To get started click the button below and create your first listing.
+        </p>
+        <button
+          v-b-modal="'create-listing'"
+          class="btn btn-secondary"
+        >
+          Create Listing
+        </button>
+      </div>
+      <div v-if="listings.length">
+        <div class="d-flex justify-content-end pb-3">
+          <button
+            v-b-modal="'create-listing'"
+            class="btn btn-sm btn-secondary"
+          >
+            Create Listing
+          </button>
         </div>
-        <create-listing-modal />
-        <create-package-modal :listing="listing" />
-        <view-listing-modal :listing="listing" :packages="packages" :user="user" />
-        <edit-listing-modal :listing="listing" />
-        <delete-listing-modal :listing="listing" />
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Business Name</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Starting Price</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(item, index) in listings"
+              :key="index"
+            >
+              <td class="align-middle">
+                <b-avatar :src="item.avatar" />
+              </td>
+              <td class="align-middle">
+                {{ item.business_name }}
+              </td>
+              <td class="align-middle">
+                {{ item.city + ', ' + item.state }}
+              </td>
+              <td
+                width="40%"
+                class="align-middle"
+              >
+                {{ item.description | truncate(100) }}
+              </td>
+              <td class="align-middle">
+                {{ item.starting_package | currency }}
+              </td>
+              <td class="text-right align-middle">
+                <b-dropdown
+                  id="dropdown-1"
+                  no-caret
+                  dropright
+                  variant="white"
+                  class="m-md-2"
+                >
+                  <template #button-content>
+                    <i class="fas fa-ellipsis-v" />
+                  </template>
+                  <b-dropdown-item
+                    v-b-modal="'create-package'"
+                    @click.prevent="setModalData(item)"
+                  >
+                    Add Package
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    v-b-modal="'view-'+item.id"
+                    @click.prevent="setModalData(item)"
+                  >
+                    View Listing
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    v-b-modal="'edit-'+item.id"
+                    @click.prevent="setModalData(item)"
+                  >
+                    Edit Listing
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    v-b-modal="'delete-'+item.id"
+                    @click.prevent="setModalData(item)"
+                  >
+                    Delete Listing
+                  </b-dropdown-item>
+                </b-dropdown>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <create-listing-modal />
+    <create-package-modal :listing="listing" />
+    <view-listing-modal
+      :listing="listing"
+      :packages="packages"
+      :user="user"
+    />
+    <edit-listing-modal :listing="listing" />
+    <delete-listing-modal :listing="listing" />
+  </div>
 </template>
 
 <script>
@@ -60,37 +123,36 @@ import EditListingModal from '../modals/listings/EditListingModal.vue'
 import DeleteListingModal from '../modals/listings/DeleteListingModal.vue'
 import SetModalData from '../mixins/SetModalData.js'
 export default {
-    mixins: [SetModalData],
-    components: {
-        CreateListingModal,
-        CreatePackageModal,
-        ViewListingModal,
-        EditListingModal,
-        DeleteListingModal
-    },
-    data () {
-        return {
-            user: [],
-            listings: [],
-            packages: [],
-            listing: {}
-        }
-    },
-    created () {
-        this.getUser()
-
-        this.$root.$on('updateUser', () => {
-            this.getUser()
-        })
-    },
-    methods: {
-        getUser () {
-            axios.get('/user').then((response) => {
-                this.user = response.data
-                this.listings = this.user.listings
-            })
-        }
+  components: {
+    CreateListingModal,
+    CreatePackageModal,
+    ViewListingModal,
+    EditListingModal,
+    DeleteListingModal
+  },
+  mixins: [SetModalData],
+  data () {
+    return {
+      user: {},
+      listings: [],
+      packages: [],
+      listing: {}
     }
+  },
+  created () {
+    this.getUser()
+
+    this.$root.$on('updateUser', () => {
+      this.getUser()
+    })
+  },
+  methods: {
+    getUser () {
+      axios.get('/user').then((response) => {
+        this.user = response.data
+        this.listings = this.user.listings
+      })
+    }
+  }
 }
 </script>
-
