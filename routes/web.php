@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Guest Routes
+Route::get('/landing', function () {
+    return view('guest.landing');
+});
+
 Route::get('/', 'DirectoryController@index');
 
 //Auth Routes
