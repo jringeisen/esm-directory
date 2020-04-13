@@ -11,27 +11,66 @@
         "lint": "npm rum lint:es",
         "lint:fix": "npm rum lint:es-fix",
         "lint:es": "eslint --ext .js,.vue resources/js/**",
-        "lint:es-fix": "eslint --fix --ext .js,.vue resources/js/**"
+        "lint:es-fix": "eslint --fix --ext .js,.vue resources/js/**",
+        "test": "cross-env NODE_ENV=coverage mocha-webpack --webpack-config webpack.base.conf.js --require resources/js/test/setup.js resources/js/test/**/*.spec.js resources/js/**/*.vue",
+        "cover": "cross-env NODE_ENV=coverage nyc --reporter=lcov --reporter=text npm run test"
     },
     "devDependencies": {
+        "@vue/test-utils": "^1.0.0-beta.33",
         "axios": "^0.19",
+        "babel-plugin-istanbul": "^6.0.0",
         "bootstrap": "^4.4.1",
         "cross-env": "^7.0",
         "eslint": "^6.8.0",
         "eslint-plugin-vue": "^7.0.0-alpha.0",
+        "expect": "^25.3.0",
+        "istanbul-instrumenter-loader": "^1.2.0",
         "jquery": "^3.2",
+        "jsdom": "^16.2.2",
+        "jsdom-global": "^3.0.2",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
+        "mocha": "^5.0.0",
+        "mocha-webpack": "^2.0.0-beta.0",
+        "nyc": "^10.0.1",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
         "vue": "^2.6.11",
-        "vue-template-compiler": "^2.6.10"
+        "vue-loader": "^15.9.1",
+        "vue-template-compiler": "^2.6.11",
+        "webpack-node-externals": "^1.7.2"
     },
     "dependencies": {
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.1.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-plugin-transform-vue-jsx": "^3.7.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-vue-app": "^2.0.0",
         "bootstrap-vue": "^2.9.0",
+        "css-loader": "^3.5.2",
         "vue-router": "^3.1.6",
-        "vue2-filters": "^0.10.0"
+        "vue-style-loader": "^4.1.2",
+        "vue2-filters": "^0.10.0",
+        "webpack": "^4.42.1"
+    },
+    "nyc": {
+        "include": [
+            "resources/js/**/*.(js|vue)"
+        ],
+        "extension": [
+            ".js",
+            ".vue"
+        ],
+        "lines": 10,
+        "statements": 10,
+        "functions": 10,
+        "branches": 5,
+        "instrument": false,
+        "sourceMap": false,
+        "all": true,
+        "check-coverage": true
     }
 }

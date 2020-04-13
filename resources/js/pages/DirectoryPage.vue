@@ -72,6 +72,7 @@
 <script>
 import ViewListingModal from '../modals/listings/ViewListingModal.vue'
 import SetModalData from '../mixins/SetModalData.js'
+import axios from 'axios'
 export default {
   components: {
     ViewListingModal
@@ -105,6 +106,8 @@ export default {
     getListings () {
       axios.get('/').then((response) => {
         this.listings = response.data
+      }).catch((error) => {
+        console.log(error)
       })
     }
   }
