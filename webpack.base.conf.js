@@ -8,34 +8,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|ts)/,
+        test: /\.(js)$/,
         include: path.resolve('resources/js'), // instrument only testing sources with Istanbul, after ts-loader runs
-        exclude: /node_modules/,
+        exclude: [
+          path.resolve(`node_modules`),
+          path.resolve(`resources/js/test`),
+        ],
         loader: 'istanbul-instrumenter-loader',
-        query: {
+        options: {
           esModules: true
         }
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.ts$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'ts-loader'
       }
     ]
   },

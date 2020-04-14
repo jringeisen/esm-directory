@@ -3,6 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-10 pb-3">
         <b-form-input
+          id="search"
           v-model="search"
           placeholder="Search by name, location, or keywords...."
         />
@@ -10,7 +11,7 @@
       <div class="col-md-10">
         <div
           v-if="!filterListings.length"
-          class="card text-center"
+          class="card text-center no-results"
         >
           <div class="card-body">
             <h5 class="card-title">
@@ -23,43 +24,47 @@
         </div>
       </div>
     </div>
-    <div
-      v-for="(item, index) in filterListings"
-      :key="index"
-      class="row justify-content-center pb-3"
-    >
-      <div class="col-md-10">
-        <b-card
-          v-b-modal="'view-'+item.id"
-          no-body
-          class="overflow-hidden shadow card"
-          @click.prevent="setModalData(item)"
-        >
-          <b-row
-            no-gutters
-            class="d-flex align-items-center"
+    <div 
+      class="row justify-content-center listings"
+      v-if="filterListings.length">
+      <div
+        v-for="(item, index) in filterListings"
+        :key="index"
+        class="pb-3"
+      >
+        <div class="col-md-10">
+          <b-card
+            v-b-modal="'view-'+item.id"
+            no-body
+            class="overflow-hidden shadow card"
+            @click.prevent="setModalData(item)"
           >
-            <b-col
-              md="2"
-              class="d-flex justify-content-center"
+            <b-row
+              no-gutters
+              class="d-flex align-items-center"
             >
-              <b-avatar
-                variant="secondary"
-                :src="item.avatar"
-                size="5rem"
-              />
-            </b-col>
-            <b-col md="10">
-              <b-card-body>
-                <b-card-title>{{ item.business_name }} <small class="badge badge-secondary float-right">Starting Package: ${{ item.starting_package }}</small></b-card-title>
-                <b-card-sub-title><i class="fas fa-map-marker-alt" /> {{ item.city + ', ' + item.state }}</b-card-sub-title>
-                <b-card-text>
-                  {{ item.description | truncate(400) }}
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
+              <b-col
+                md="2"
+                class="d-flex justify-content-center"
+              >
+                <b-avatar
+                  variant="secondary"
+                  :src="item.avatar"
+                  size="5rem"
+                />
+              </b-col>
+              <b-col md="10">
+                <b-card-body>
+                  <b-card-title>{{ item.business_name }} <small class="badge badge-secondary float-right">Starting Package: ${{ item.starting_package }}</small></b-card-title>
+                  <b-card-sub-title><i class="fas fa-map-marker-alt" /> {{ item.city + ', ' + item.state }}</b-card-sub-title>
+                  <b-card-text>
+                    {{ item.description | truncate(400) }}
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </div>
       </div>
     </div>
     <view-listing-modal
