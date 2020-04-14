@@ -25,12 +25,12 @@
       </div>
     </div>
     <div 
-      class="row justify-content-center listings"
+      class="listings"
       v-if="filterListings.length">
       <div
         v-for="(item, index) in filterListings"
         :key="index"
-        class="pb-3"
+        class="row justify-content-center pb-3"
       >
         <div class="col-md-10">
           <b-card
@@ -55,7 +55,7 @@
               </b-col>
               <b-col md="10">
                 <b-card-body>
-                  <b-card-title>{{ item.business_name }} <small class="badge badge-secondary float-right">Starting Package: ${{ item.starting_package }}</small></b-card-title>
+                  <b-card-title><h4>{{ item.business_name }}</h4> <small class="badge badge-secondary float-right">Starting Package: ${{ item.starting_package }}</small></b-card-title>
                   <b-card-sub-title><i class="fas fa-map-marker-alt" /> {{ item.city + ', ' + item.state }}</b-card-sub-title>
                   <b-card-text>
                     {{ item.description | truncate(400) }}
