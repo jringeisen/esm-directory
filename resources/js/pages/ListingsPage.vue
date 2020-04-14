@@ -12,6 +12,7 @@
           To get started click the button below and create your first listing.
         </p>
         <button
+          id="createListingButton"
           v-b-modal="'create-listing'"
           class="btn btn-secondary"
         >
@@ -122,6 +123,7 @@ import ViewListingModal from '../modals/listings/ViewListingModal.vue'
 import EditListingModal from '../modals/listings/EditListingModal.vue'
 import DeleteListingModal from '../modals/listings/DeleteListingModal.vue'
 import SetModalData from '../mixins/SetModalData.js'
+import axios from 'axios'
 export default {
   components: {
     CreateListingModal,
@@ -151,6 +153,8 @@ export default {
       axios.get('/user').then((response) => {
         this.user = response.data
         this.listings = this.user.listings
+      }).catch((error) => {
+        console.log(error)
       })
     }
   }

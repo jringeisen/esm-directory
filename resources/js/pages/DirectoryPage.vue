@@ -26,7 +26,8 @@
     </div>
     <div 
       class="listings"
-      v-if="filterListings.length">
+      v-if="filterListings.length"
+    >
       <div
         v-for="(item, index) in filterListings"
         :key="index"
