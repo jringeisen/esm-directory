@@ -1,9 +1,3 @@
-<style scoped>
-.action-link {
-  cursor: pointer;
-}
-</style>
-
 <template>
   <div>
     <div class="card card-default">
@@ -11,11 +5,13 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <span>OAuth Clients</span>
 
-          <a
-            class="action-link"
-            tabindex="-1"
-            @click.prevent="showCreateClientForm"
-          >Create New Client</a>
+          <b-button
+            variant="secondary"
+            size="sm"
+            @click.prevent="$root.$emit('bv::show::modal', 'modal-create-client')"
+          >
+            Create New Client
+          </b-button>
         </div>
       </div>
 
@@ -63,20 +59,25 @@
               </td>
 
               <!-- Edit Button -->
-              <td style="vertical-align: middle;">
-                <a
-                  class="action-link"
-                  tabindex="-1"
+              <td
+                class="float-right"
+                style="vertical-align: middle;"
+              >
+                <b-button
+                  variant="secondary"
+                  size="sm"
                   @click.prevent="edit(client)"
-                >Edit</a>
-              </td>
+                >
+                  Edit
+                </b-button>
 
-              <!-- Delete Button -->
-              <td style="vertical-align: middle;">
-                <a
-                  class="action-link text-danger"
+                <b-button
+                  variant="danger"
+                  size="sm"
                   @click="destroy(client)"
-                >Delete</a>
+                >
+                  Delete
+                </b-button>
               </td>
             </tr>
           </tbody>
@@ -136,13 +137,6 @@ export default {
       axios.get("/oauth/clients").then(response => {
         this.clients = response.data;
       });
-    },
-
-    /**
-     * Show the form for creating new clients.
-     */
-    showCreateClientForm() {
-      this.$root.$emit("bv::show::modal", "modal-create-client");
     },
 
     /**

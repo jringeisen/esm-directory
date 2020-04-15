@@ -2110,14 +2110,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2166,13 +2158,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/oauth/clients").then(function (response) {
         _this2.clients = response.data;
       });
-    },
-
-    /**
-     * Show the form for creating new clients.
-     */
-    showCreateClientForm: function showCreateClientForm() {
-      this.$root.$emit("bv::show::modal", "modal-create-client");
     },
 
     /**
@@ -44125,25 +44110,6 @@ exports.push([module.i, "\n.action-link[data-v-e8623aae] {\ncursor: pointer;\n}\
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.action-link[data-v-a3f72778] {\n  cursor: pointer;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportPersonalAccessTokens.vue?vue&type=style&index=0&id=2908061c&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportPersonalAccessTokens.vue?vue&type=style&index=0&id=2908061c&scoped=true&lang=css& ***!
@@ -65047,36 +65013,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportPersonalAccessTokens.vue?vue&type=style&index=0&id=2908061c&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportPersonalAccessTokens.vue?vue&type=style&index=0&id=2908061c&scoped=true&lang=css& ***!
@@ -65813,10 +65749,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -65846,20 +65782,23 @@ var render = function() {
               _c("span", [_vm._v("OAuth Clients")]),
               _vm._v(" "),
               _c(
-                "a",
+                "b-button",
                 {
-                  staticClass: "action-link",
-                  attrs: { tabindex: "-1" },
+                  attrs: { variant: "secondary", size: "sm" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.showCreateClientForm($event)
+                      return _vm.$root.$emit(
+                        "bv::show::modal",
+                        "modal-create-client"
+                      )
                     }
                   }
                 },
                 [_vm._v("Create New Client")]
               )
-            ]
+            ],
+            1
           )
         ]),
         _vm._v(" "),
@@ -65912,13 +65851,15 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "td",
-                        { staticStyle: { "vertical-align": "middle" } },
+                        {
+                          staticClass: "float-right",
+                          staticStyle: { "vertical-align": "middle" }
+                        },
                         [
                           _c(
-                            "a",
+                            "b-button",
                             {
-                              staticClass: "action-link",
-                              attrs: { tabindex: "-1" },
+                              attrs: { variant: "secondary", size: "sm" },
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
@@ -65927,18 +65868,12 @@ var render = function() {
                               }
                             },
                             [_vm._v("Edit")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticStyle: { "vertical-align": "middle" } },
-                        [
+                          ),
+                          _vm._v(" "),
                           _c(
-                            "a",
+                            "b-button",
                             {
-                              staticClass: "action-link text-danger",
+                              attrs: { variant: "danger", size: "sm" },
                               on: {
                                 click: function($event) {
                                   return _vm.destroy(client)
@@ -65947,7 +65882,8 @@ var render = function() {
                             },
                             [_vm._v("Delete")]
                           )
-                        ]
+                        ],
+                        1
                       )
                     ])
                   }),
@@ -82126,11 +82062,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PassportClients.vue?vue&type=template&id=a3f72778&scoped=true& */ "./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true&");
+/* harmony import */ var _PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PassportClients.vue?vue&type=template&id=a3f72778& */ "./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&");
 /* harmony import */ var _PassportClients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PassportClients.vue?vue&type=script&lang=js& */ "./resources/js/components/passport/PassportClients.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& */ "./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -82138,13 +82072,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _PassportClients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "a3f72778",
+  null,
   null
   
 )
@@ -82170,35 +82104,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&":
-/*!***********************************************************************************************************************!*\
-  !*** ./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=style&index=0&id=a3f72778&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_style_index_0_id_a3f72778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PassportClients.vue?vue&type=template&id=a3f72778&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PassportClients.vue?vue&type=template&id=a3f72778& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/PassportClients.vue?vue&type=template&id=a3f72778&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PassportClients_vue_vue_type_template_id_a3f72778___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
