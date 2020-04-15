@@ -29,6 +29,10 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/user', 'UserController');
 
+    Route::get('/passport/clients', function () {
+        return view('authenticated.passport.index');
+    });
+
     Route::apiResource('/listings', 'ListingController');
     Route::apiResource('/packages', 'PackageController');
 });

@@ -46,6 +46,12 @@
               {{ name }}
             </template>
             <b-dropdown-item
+              href="/passport/clients"
+            >
+              Passport Clients
+            </b-dropdown-item>
+            <b-dropdown-divider />
+            <b-dropdown-item
               href="#"
               @click.prevent="logout"
             >
