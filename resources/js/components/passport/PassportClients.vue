@@ -16,7 +16,6 @@
       </div>
 
       <div class="card-body">
-        <!-- Current Clients -->
         <p
           class="mb-0"
           v-if="clients.length === 0"
@@ -43,22 +42,18 @@
               v-for="client in clients"
               :key="client.id"
             >
-              <!-- ID -->
               <td style="vertical-align: middle;">
                 {{ client.id }}
               </td>
 
-              <!-- Name -->
               <td style="vertical-align: middle;">
                 {{ client.name }}
               </td>
 
-              <!-- Secret -->
               <td style="vertical-align: middle;">
                 <code>{{ client.secret }}</code>
               </td>
 
-              <!-- Edit Button -->
               <td
                 class="float-right"
                 style="vertical-align: middle;"
@@ -97,6 +92,7 @@ export default {
     CreateClientModal,
     EditClientModal
   },
+
   data() {
     return {
       clientObject: {},
@@ -104,32 +100,15 @@ export default {
     };
   },
 
-  /**
-   * Prepare the component (Vue 1.x).
-   */
-  ready() {
-    this.prepareComponent();
-  },
-
-  /**
-   * Prepare the component (Vue 2.x).
-   */
   mounted() {
     this.$root.$on('getClients', (() => {
       this.getClients()
     })),
 
-    this.prepareComponent()
+    this.getClients();
   },
 
   methods: {
-    /**
-     * Prepare the component.
-     */
-    prepareComponent() {
-      this.getClients();
-    },
-
     /**
      * Get all of the OAuth clients for the user.
      */

@@ -154,7 +154,7 @@ export default {
   },
   methods: {
     getUser () {
-      axios.get('/user').then((response) => {
+      axios.get('/api/user').then((response) => {
         this.user = response.data
         this.listings = this.user.listings
       }).catch((error) => {

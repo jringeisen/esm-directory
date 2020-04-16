@@ -27,12 +27,19 @@ Auth::routes();
 
 //Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/user', 'UserController');
-
     Route::get('/passport/clients', function () {
-        return view('authenticated.passport.index');
+        return view('authenticated.passport.clients_index');
     });
 
-    Route::apiResource('/listings', 'ListingController');
+    Route::get('/passport/authorized_clients', function () {
+        return view('authenticated.passport.authorized_index');
+    });
+
+    Route::get('/passport/access_tokens', function () {
+        return view('authenticated.passport.access_tokens_index');
+    });
+
+    Route::get('/listings', 'ListingController@index');
+
     Route::apiResource('/packages', 'PackageController');
 });

@@ -50,6 +50,16 @@
             >
               Passport Clients
             </b-dropdown-item>
+            <b-dropdown-item
+              href="/passport/authorized_clients"
+            >
+              Passport Authorized
+            </b-dropdown-item>
+            <b-dropdown-item
+              href="/passport/access_tokens"
+            >
+              Passport Access Tokens
+            </b-dropdown-item>
             <b-dropdown-divider />
             <b-dropdown-item
               href="#"

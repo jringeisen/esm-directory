@@ -48,7 +48,7 @@ export default {
   methods: {
     submit () {
       this.isLoading = true
-      axios.delete(`/listings/${this.listing.id}`).then((response) => {
+      axios.delete(`/api/listings/${this.listing.id}`).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
         this.hideModal()

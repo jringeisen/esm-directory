@@ -1,12 +1,6 @@
-<style scoped>
-    .action-link {
-    cursor: pointer;
-    }
-</style>
-
 <template>
   <div>
-    <div v-if="tokens.length > 0">
+    <div>
       <div class="card card-default">
         <div class="card-header">
           Authorized Applications
@@ -37,7 +31,7 @@
                 <!-- Revoke Button -->
                 <td style="vertical-align: middle;">
                   <a
-                    class="action-link text-danger"
+                    class="text-danger"
                     @click="revoke(token)"
                   >Revoke</a>
                 </td>
@@ -62,27 +56,13 @@ export default {
   },
 
   /**
-   * Prepare the component (Vue 1.x).
-   */
-  ready() {
-    this.prepareComponent();
-  },
-
-  /**
    * Prepare the component (Vue 2.x).
    */
   mounted() {
-    this.prepareComponent();
+    this.getTokens()
   },
 
   methods: {
-    /**
-     * Prepare the component (Vue 2.x).
-     */
-    prepareComponent() {
-      this.getTokens();
-    },
-
     /**
      * Get all of the authorized tokens for the user.
      */

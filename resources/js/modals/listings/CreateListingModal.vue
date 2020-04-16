@@ -178,7 +178,7 @@ export default {
       data.append('description', this.formData.description || '')
       data.append('starting_package', this.formData.starting_package || '')
 
-      axios.post('/listings', data).then((response) => {
+      axios.post('/api/listings', data).then((response) => {
         this.isLoading = false
         this.formData = {}
         this.avatar = []
