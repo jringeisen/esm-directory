@@ -45,7 +45,7 @@
                         <a class="nav-link scroll" href="#home">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li>
-                        <a class="nav-link scroll" href="#features">DIRECTORY</a>
+                        <a class="nav-link scroll" href="/directory">DIRECTORY</a>
                     </li>
                     <li>
                         <a class="nav-link" href="/login">LOGIN</a>
@@ -60,7 +60,7 @@
             Let us help you find that perfect photographer!</h1>
             <div class="row col-md-12 justify-content-center mt-5">
             <div class="col-lg-3 col-md-4 col-sm-6 pb-3">
-                <a href="/" class="btn btn-block btn-light shadow">START SEARCH</a>
+                <a href="/directory" class="btn btn-block btn-light shadow">START SEARCH</a>
             </div>
             </div>
         </div>

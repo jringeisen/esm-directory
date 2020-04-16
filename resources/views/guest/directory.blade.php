@@ -22,12 +22,12 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <style>
-            .card {
+            .listings .card {
                 cursor: pointer;
                 font-size: 12px;
             }
 
-            .card:hover {
+            .listings .card:hover {
                 border-color: #6c757d !important;
                 border-width: 1.2px;
             }

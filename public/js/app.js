@@ -2558,6 +2558,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_ToastMixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -2579,6 +2598,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('avatar', this.avatar || '');
       data.append('name', this.formData.name || '');
       data.append('business_name', this.formData.business_name || '');
+      data.append('category', this.formData.category || '');
       data.append('city', this.formData.city || '');
       data.append('state', this.formData.state || '');
       data.append('description', this.formData.description || '');
@@ -2599,7 +2619,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     hideModal: function hideModal() {
-      this.$refs['create-listing-modal'].hide();
+      this.$root.$emit('bv::hide::modal', 'create-listing');
     }
   }
 });
@@ -2616,7 +2636,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_ToastMixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/ToastMixin.js */ "./resources/js/mixins/ToastMixin.js");
-//
 //
 //
 //
@@ -2672,13 +2691,13 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.isLoading = false;
 
-        _this.hideModal();
+        _this.hideModal(_this.listing.id);
 
         _this.toast('success', 'Success!', 'Your listing was deleted successfully!');
       });
     },
     hideModal: function hideModal(id) {
-      this.$refs['delete-' + id + '-modal'].hide();
+      this.$root.$emit('bv::hide::modal', 'delete-' + id);
     }
   }
 });
@@ -3125,7 +3144,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = Object.assign({
         listing_id: this.listing.id
       }, this.formData);
-      axios.post('/packages', data).then(function (response) {
+      axios.post('/api/packages', data).then(function (response) {
         _this.$root.$emit('updateUser');
 
         _this.isLoading = false;
@@ -3208,7 +3227,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.isLoading = true;
-      axios["delete"]("/packages/".concat(this.item.id)).then(function (response) {
+      axios["delete"]("/api/packages/".concat(this.item.id)).then(function (response) {
         _this.$root.$emit('updateUser');
 
         _this.isLoading = false;
@@ -3343,7 +3362,7 @@ __webpack_require__.r(__webpack_exports__);
 
       event.preventDefault();
       this.isLoading = true;
-      axios.put("/packages/".concat(this.item.id), this.item).then(function (response) {
+      axios.put("/api/packages/".concat(this.item.id), this.item).then(function (response) {
         _this.$root.$emit('updateUser');
 
         _this.isLoading = false;
@@ -3866,6 +3885,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3876,23 +3908,35 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_SetModalData_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
+      isLoading: false,
       listings: [],
       listing: {},
       packages: [],
-      search: ''
+      search: '',
+      status: ''
     };
   },
   computed: {
     filterListings: function filterListings() {
       var _this = this;
 
-      var data = this.listings || [];
-      data = data.filter(function (row) {
-        return Object.keys(row).some(function (key) {
-          return String(row[key]).toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
+      if (this.search) {
+        var data = this.listings || [];
+        data = data.filter(function (row) {
+          return Object.keys(row).some(function (key) {
+            return String(row[key]).toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
+          });
         });
-      });
-      return data;
+
+        if (data.length > 50) {
+          this.status = "Your search has returned more than 50 records. Try narrowing down your search more to narrow down your results.";
+          return [];
+        }
+
+        return data;
+      } else {
+        return [];
+      }
     }
   },
   created: function created() {
@@ -3902,7 +3946,7 @@ __webpack_require__.r(__webpack_exports__);
     getListings: function getListings() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/directory').then(function (response) {
         _this2.listings = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3922,12 +3966,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modals_listings_CreateListingModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/listings/CreateListingModal.vue */ "./resources/js/modals/listings/CreateListingModal.vue");
-/* harmony import */ var _modals_packages_CreatePackageModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/packages/CreatePackageModal.vue */ "./resources/js/modals/packages/CreatePackageModal.vue");
-/* harmony import */ var _modals_listings_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/listings/ViewListingModal.vue */ "./resources/js/modals/listings/ViewListingModal.vue");
-/* harmony import */ var _modals_listings_EditListingModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/listings/EditListingModal.vue */ "./resources/js/modals/listings/EditListingModal.vue");
-/* harmony import */ var _modals_listings_DeleteListingModal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/listings/DeleteListingModal.vue */ "./resources/js/modals/listings/DeleteListingModal.vue");
-/* harmony import */ var _mixins_SetModalData_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/SetModalData.js */ "./resources/js/mixins/SetModalData.js");
+/* harmony import */ var _modals_listings_CreateListingModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/listings/CreateListingModal */ "./resources/js/modals/listings/CreateListingModal.vue");
+/* harmony import */ var _modals_packages_CreatePackageModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/packages/CreatePackageModal */ "./resources/js/modals/packages/CreatePackageModal.vue");
+/* harmony import */ var _modals_listings_ViewListingModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/listings/ViewListingModal */ "./resources/js/modals/listings/ViewListingModal.vue");
+/* harmony import */ var _modals_listings_EditListingModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/listings/EditListingModal */ "./resources/js/modals/listings/EditListingModal.vue");
+/* harmony import */ var _modals_listings_DeleteListingModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/listings/DeleteListingModal */ "./resources/js/modals/listings/DeleteListingModal.vue");
+/* harmony import */ var _mixins_SetModalData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/SetModalData */ "./resources/js/mixins/SetModalData.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 //
@@ -4061,13 +4105,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CreateListingModal: _modals_listings_CreateListingModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CreatePackageModal: _modals_packages_CreatePackageModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ViewListingModal: _modals_listings_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EditListingModal: _modals_listings_EditListingModal_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    DeleteListingModal: _modals_listings_DeleteListingModal_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    CreateListingModal: _modals_listings_CreateListingModal__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CreatePackageModal: _modals_packages_CreatePackageModal__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ViewListingModal: _modals_listings_ViewListingModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EditListingModal: _modals_listings_EditListingModal__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DeleteListingModal: _modals_listings_DeleteListingModal__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  mixins: [_mixins_SetModalData_js__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  mixins: [_mixins_SetModalData__WEBPACK_IMPORTED_MODULE_5__["default"]],
   data: function data() {
     return {
       user: {},
@@ -65991,15 +66035,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "b-modal",
-    {
-      ref: "create-listing-modal",
-      attrs: { id: "create-listing", title: "Create Listing" }
-    },
+    { attrs: { id: "create-listing", title: "Create Listing" } },
     [
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-          _vm._v(" "),
+          _vm._v("\n      Name\n      "),
           _c("input", {
             directives: [
               {
@@ -66009,7 +66049,7 @@ var render = function() {
                 expression: "formData.name"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.name },
             attrs: {
               type: "text",
@@ -66040,10 +66080,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "business_name" } }, [
-            _vm._v("Business Name")
-          ]),
-          _vm._v(" "),
+          _vm._v("\n      Business Name\n      "),
           _c("input", {
             directives: [
               {
@@ -66053,7 +66090,7 @@ var render = function() {
                 expression: "formData.business_name"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.business_name },
             attrs: {
               type: "text",
@@ -66086,8 +66123,48 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "city" } }, [_vm._v("City")]),
+          _vm._v("\n      Category\n      "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.category,
+                expression: "formData.category"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            class: { "is-invalid": _vm.formErrors.category },
+            attrs: {
+              type: "text",
+              placeholder: "Enter a listing category",
+              required: ""
+            },
+            domProps: { value: _vm.formData.category },
+            on: {
+              keyup: function($event) {
+                _vm.formErrors.category = ""
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "category", $event.target.value)
+              }
+            }
+          }),
           _vm._v(" "),
+          _vm.formErrors.category
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n        " + _vm._s(_vm.formErrors.category[0]) + "\n      "
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _vm._v("\n      City\n      "),
           _c("input", {
             directives: [
               {
@@ -66097,7 +66174,7 @@ var render = function() {
                 expression: "formData.city"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.city },
             attrs: {
               type: "text",
@@ -66128,8 +66205,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "state" } }, [_vm._v("State")]),
-          _vm._v(" "),
+          _vm._v("\n      State\n      "),
           _c("input", {
             directives: [
               {
@@ -66139,7 +66215,7 @@ var render = function() {
                 expression: "formData.state"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.state },
             attrs: {
               type: "text",
@@ -66170,10 +66246,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "starting_package" } }, [
-            _vm._v("Starting Package Price")
-          ]),
-          _vm._v(" "),
+          _vm._v("\n      Starting Package Price\n      "),
           _c("input", {
             directives: [
               {
@@ -66183,7 +66256,7 @@ var render = function() {
                 expression: "formData.starting_package"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.starting_package },
             attrs: {
               type: "number",
@@ -66216,10 +66289,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "description" } }, [
-            _vm._v("Description")
-          ]),
-          _vm._v(" "),
+          _vm._v("\n      Description\n      "),
           _c("textarea", {
             directives: [
               {
@@ -66229,7 +66299,7 @@ var render = function() {
                 expression: "formData.description"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control form-control-sm",
             class: { "is-invalid": _vm.formErrors.description },
             attrs: { rows: "4", placeholder: "Description", required: "" },
             domProps: { value: _vm.formData.description },
@@ -66261,9 +66331,11 @@ var render = function() {
           "div",
           { staticClass: "form-group" },
           [
+            _vm._v("\n      Upload Avatar\n      "),
             _c("b-form-file", {
               class: { "is-invalid": _vm.formErrors.avatar },
               attrs: {
+                size: "sm",
                 placeholder: "Choose an avatar image...",
                 "drop-placeholder": "Drop file here..."
               },
@@ -66360,10 +66432,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "b-modal",
-    {
-      ref: "delete-" + _vm.listing.id + "-modal",
-      attrs: { id: "delete-" + _vm.listing.id, title: "Delete Listing" }
-    },
+    { attrs: { id: "delete-" + _vm.listing.id, title: "Delete Listing" } },
     [
       _c("div", { staticClass: "alert alert-danger" }, [
         _vm._v("\n    Are you sure you want to delete this listing?\n  ")
@@ -68013,15 +68082,23 @@ var render = function() {
     "div",
     { staticClass: "pt-5" },
     [
-      _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "d-flex flex-column justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12 pb-3" }, [
+          _vm._v("\n      Total Records Found: "),
+          _c("strong", [_vm._v(_vm._s(_vm.filterListings.length))])
+        ]),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-md-10 pb-3" },
+          { staticClass: "col-md-12 pb-3" },
           [
             _c("b-form-input", {
               attrs: {
                 id: "search",
-                placeholder: "Search by name, location, or keywords...."
+                debounce: 300,
+                autocomplete: "off",
+                placeholder:
+                  "Search by name, location, category or any keywords...."
               },
               model: {
                 value: _vm.search,
@@ -68035,17 +68112,37 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-10" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           !_vm.filterListings.length
             ? _c("div", { staticClass: "card text-center no-results" }, [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(
-                      "\n            The search term '" +
-                        _vm._s(_vm.search) +
-                        "' returned no results!\n          "
-                    )
-                  ]),
+                  !_vm.status
+                    ? _c("h5", { staticClass: "card-title" }, [
+                        !_vm.search
+                          ? _c("span", [
+                              _vm._v(
+                                "Enter a search term to begin finding photographers!"
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.search && _vm.filterListings.length === 0
+                          ? _c("span", [
+                              _vm._v(
+                                'Search term "' +
+                                  _vm._s(_vm.search) +
+                                  '" returned no results!'
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status
+                    ? _c("div", { staticClass: "alert alert-danger" }, [
+                        _vm._v(_vm._s(_vm.status))
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
                     _vm._v(
@@ -68058,18 +68155,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.filterListings.length
-        ? _c(
-            "div",
-            { staticClass: "listings" },
-            _vm._l(_vm.filterListings, function(item, index) {
-              return _c(
-                "div",
-                { key: index, staticClass: "row justify-content-center pb-3" },
-                [
+      _c("div", { staticClass: "d-flex flex-column justify-content-between" }, [
+        _vm.filterListings.length && !_vm.isLoading
+          ? _c(
+              "div",
+              { staticClass: "listings" },
+              _vm._l(_vm.filterListings, function(item, index) {
+                return _c("div", { key: index, staticClass: "pb-3" }, [
                   _c(
                     "div",
-                    { staticClass: "col-md-10" },
+                    { staticClass: "col-12" },
                     [
                       _c(
                         "b-card",
@@ -68100,10 +68195,10 @@ var render = function() {
                             },
                             [
                               _c(
-                                "b-col",
+                                "div",
                                 {
-                                  staticClass: "d-flex justify-content-center",
-                                  attrs: { md: "2" }
+                                  staticClass:
+                                    "col-lg-2 col-md-12 col-sm-12 text-center p-4"
                                 },
                                 [
                                   _c("b-avatar", {
@@ -68118,54 +68213,86 @@ var render = function() {
                               ),
                               _vm._v(" "),
                               _c(
-                                "b-col",
-                                { attrs: { md: "10" } },
+                                "div",
+                                {
+                                  staticClass: "col-lg-10 col-md-12 col-sm-12"
+                                },
                                 [
                                   _c(
                                     "b-card-body",
                                     [
                                       _c("b-card-title", [
-                                        _c("h4", [
-                                          _vm._v(_vm._s(item.business_name))
-                                        ]),
-                                        _vm._v(" "),
                                         _c(
-                                          "small",
+                                          "div",
                                           {
                                             staticClass:
-                                              "badge badge-secondary float-right"
+                                              "d-flex flex-lg-row flex-column text-center justify-content-between"
                                           },
                                           [
-                                            _vm._v(
-                                              "Starting Package: $" +
-                                                _vm._s(item.starting_package)
+                                            _c("h4", [
+                                              _vm._v(_vm._s(item.business_name))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "h4",
+                                              [
+                                                _c(
+                                                  "b-badge",
+                                                  {
+                                                    attrs: {
+                                                      variant: "secondary"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Starting Package: $" +
+                                                        _vm._s(
+                                                          item.starting_package
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
                                             )
                                           ]
                                         )
                                       ]),
                                       _vm._v(" "),
-                                      _c("b-card-sub-title", [
-                                        _c("i", {
-                                          staticClass: "fas fa-map-marker-alt"
-                                        }),
-                                        _vm._v(
-                                          " " +
-                                            _vm._s(
-                                              item.city + ", " + item.state
+                                      _c(
+                                        "b-card-sub-title",
+                                        {
+                                          staticClass:
+                                            "d-flex flex-lg-row flex-column text-center"
+                                        },
+                                        [
+                                          _c("span", [
+                                            _c("i", {
+                                              staticClass:
+                                                "fas fa-map-marker-alt"
+                                            }),
+                                            _vm._v(
+                                              " " +
+                                                _vm._s(
+                                                  item.city + ", " + item.state
+                                                ) +
+                                                " | " +
+                                                _vm._s(item.category)
                                             )
-                                        )
-                                      ]),
+                                          ])
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("b-card-text", [
                                         _vm._v(
-                                          "\n                  " +
+                                          "\n                    " +
                                             _vm._s(
                                               _vm._f("truncate")(
                                                 item.description,
                                                 400
                                               )
                                             ) +
-                                            "\n                "
+                                            "\n                  "
                                         )
                                       ])
                                     ],
@@ -68174,8 +68301,7 @@ var render = function() {
                                 ],
                                 1
                               )
-                            ],
-                            1
+                            ]
                           )
                         ],
                         1
@@ -68183,12 +68309,12 @@ var render = function() {
                     ],
                     1
                   )
-                ]
-              )
-            }),
-            0
-          )
-        : _vm._e(),
+                ])
+              }),
+              0
+            )
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c("view-listing-modal", {
         attrs: { listing: _vm.listing, packages: _vm.packages }

@@ -105,7 +105,7 @@ export default {
       event.preventDefault()
       this.isLoading = true
 
-      axios.put(`/packages/${this.item.id}`, this.item).then((response) => {
+      axios.put(`/api/packages/${this.item.id}`, this.item).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
         this.formData = {}

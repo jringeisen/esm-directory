@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Guest Routes
-Route::get('/landing', function () {
+Route::get('/', function () {
     return view('guest.landing');
 });
 
-Route::get('/', 'DirectoryController@index');
+Route::get('/directory', 'DirectoryController@index');
 
 //Auth Routes
 Auth::routes();
@@ -40,6 +40,5 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/listings', 'ListingController@index');
-
-    Route::apiResource('/packages', 'PackageController');
+    Route::get('/packages', 'PackageController@index');
 });

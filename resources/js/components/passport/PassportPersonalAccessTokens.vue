@@ -8,34 +8,58 @@
           variant="secondary"
           size="sm"
           @click="$root.$emit('bv::show::modal', 'modal-create-token')"
-        >Create New Token</b-button>
+        >
+          Create New Token
+        </b-button>
       </div>
     </div>
 
     <div class="card-body">
-      <p class="mb-0" v-if="tokens.length === 0">You have not created any personal access tokens.</p>
+      <p
+        class="mb-0"
+        v-if="tokens.length === 0"
+      >
+        You have not created any personal access tokens.
+      </p>
 
-      <table class="table table-borderless mb-0" v-if="tokens.length > 0">
+      <table
+        class="table table-borderless mb-0"
+        v-if="tokens.length > 0"
+      >
         <thead>
           <tr>
             <th>Name</th>
-            <th/>
+            <th />
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="token in tokens" :key="token.id">
-            <td style="vertical-align: middle;">{{ token.name }}</td>
+          <tr
+            v-for="token in tokens"
+            :key="token.id"
+          >
+            <td style="vertical-align: middle;">
+              {{ token.name }}
+            </td>
 
-            <td class="float-right" style="vertical-align: middle;">
-              <b-button variant="danger" size="sm" @click="revoke(token)">Delete</b-button>
+            <td
+              class="float-right"
+              style="vertical-align: middle;"
+            >
+              <b-button
+                variant="danger"
+                size="sm"
+                @click="revoke(token)"
+              >
+                Delete
+              </b-button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <create-token-modal/>
-    <view-access-token/>
+    <create-token-modal />
+    <view-access-token />
   </div>
 </template>
 

@@ -1,15 +1,30 @@
 <template>
-  <b-modal id="modal-create-token" @ok="store" title="Create Token">
-    <div class="alert alert-danger" v-if="form.errors.length > 0">
+  <b-modal
+    id="modal-create-token"
+    @ok="store"
+    title="Create Token"
+  >
+    <div
+      class="alert alert-danger"
+      v-if="form.errors.length > 0"
+    >
       <p class="mb-0">
         <strong>Whoops!</strong> Something went wrong!
       </p>
       <br>
       <ul>
-        <li v-for="error in form.errors" :key="error.id">{{ error }}</li>
+        <li
+          v-for="error in form.errors"
+          :key="error.id"
+        >
+          {{ error }}
+        </li>
       </ul>
     </div>
-    <form role="form" @submit.prevent="store">
+    <form
+      role="form"
+      @submit.prevent="store"
+    >
       <div class="form-group">
         <label class="col-form-label">Name</label>
         <input
@@ -20,9 +35,15 @@
           v-model="form.name"
         >
       </div>
-      <div class="form-group" v-if="scopes.length > 0">
+      <div
+        class="form-group"
+        v-if="scopes.length > 0"
+      >
         <label class="col-form-label">Scopes</label>
-        <div v-for="scope in scopes" :key="scope.id">
+        <div
+          v-for="scope in scopes"
+          :key="scope.id"
+        >
           <div class="checkbox">
             <label>
               <input

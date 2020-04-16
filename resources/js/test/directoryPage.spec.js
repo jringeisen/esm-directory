@@ -41,7 +41,9 @@ describe('DirectoryPage.vue', () => {
     expect(wrapper.find('#search')).toBeTruthy()
   })
 
-  it('Listings are displayed when present.', () => {
+  it('Listings are displayed when present.', async () => {
+    wrapper.setData({search: 'kula'})
+    await wrapper.vm.$nextTick()
     const textInput = wrapper.find('.listings')
     expect(textInput.exists()).toBe(true)
   })
@@ -55,7 +57,7 @@ describe('DirectoryPage.vue', () => {
     wrapper.setData({search: 'Test search!'})
     await wrapper.vm.$nextTick()
     const search = wrapper.find('.card-title')
-    expect(search.text()).toBe("The search term 'Test search!' returned no results!")
+    expect(search.text()).toBe('Search term "Test search!" returned no results!')
   })
 
   it('Search result is valid and returns listings', async () => {

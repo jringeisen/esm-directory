@@ -1,7 +1,6 @@
 <template>
   <b-modal
     :id="'delete-'+listing.id"
-    :ref="'delete-'+listing.id+'-modal'"
     title="Delete Listing"
   >
     <div class="alert alert-danger">
@@ -51,12 +50,12 @@ export default {
       axios.delete(`/api/listings/${this.listing.id}`).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
-        this.hideModal()
+        this.hideModal(this.listing.id)
         this.toast('success', 'Success!', 'Your listing was deleted successfully!')
       })
     },
     hideModal (id) {
-      this.$refs['delete-'+id+'-modal' ].hide()
+      this.$root.$emit('bv::hide::modal', 'delete-'+id)
     }
   }
 }
