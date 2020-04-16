@@ -41,4 +41,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/listings', 'ListingController@index');
     Route::get('/packages', 'PackageController@index');
+
+    Route::get('/admin/roles', 'RoleController@index');
 });

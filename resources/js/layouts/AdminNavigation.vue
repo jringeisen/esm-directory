@@ -18,10 +18,22 @@
       >
         <b-navbar-nav v-if="name">
           <b-nav-item
-            :class="{'active': route === 'listings'}"
-            href="/listings"
+            :class="{'active': route === 'admin/roles'}"
+            href="/admin/roles"
           >
-            Listings
+            Roles
+          </b-nav-item>
+          <b-nav-item
+            :class="{'active': route === 'permissions'}"
+            href="/permissions"
+          >
+            Permissions
+          </b-nav-item>
+          <b-nav-item
+            :class="{'active': route === 'user'}"
+            href="/user"
+          >
+            Users
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
@@ -45,24 +57,16 @@
             <template #button-content>
               {{ name }}
             </template>
-            <b-dropdown-item
-              href="/admin/roles"
-            >
+            <b-dropdown-item href="/admin">
               Admin Panel
             </b-dropdown-item>
-            <b-dropdown-item
-              href="/passport/clients"
-            >
+            <b-dropdown-item href="/passport/clients">
               Passport Clients
             </b-dropdown-item>
-            <b-dropdown-item
-              href="/passport/authorized_clients"
-            >
+            <b-dropdown-item href="/passport/authorized_clients">
               Passport Authorized
             </b-dropdown-item>
-            <b-dropdown-item
-              href="/passport/access_tokens"
-            >
+            <b-dropdown-item href="/passport/access_tokens">
               Passport Access Tokens
             </b-dropdown-item>
             <b-dropdown-divider />
@@ -89,20 +93,20 @@ export default {
     config: {
       require: false,
       type: String,
-      default: 'ESM - Directory'
+      default: "ESM - Directory"
     },
     route: {
       require: false,
       type: String,
-      default: ''
+      default: ""
     }
   },
   methods: {
-    logout () {
-      axios.post('/logout').then(() => {
-        location.reload()
-      })
+    logout() {
+      axios.post("/logout").then(() => {
+        location.reload();
+      });
     }
   }
-}
+};
 </script>

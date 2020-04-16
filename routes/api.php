@@ -28,4 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
     /** API Resource Routes */
     Route::apiResource('/listings', 'ListingController');
     Route::apiResource('/packages', 'PackageController');
+
+    /** Admin Routes */
+    Route::apiResource('/roles', 'RoleController');
 });
