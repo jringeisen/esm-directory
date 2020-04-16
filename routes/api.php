@@ -30,5 +30,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('/packages', 'PackageController');
 
     /** Admin Routes */
-    Route::apiResource('/roles', 'RoleController');
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::apiResource('/roles', 'RoleController');
+    });
 });

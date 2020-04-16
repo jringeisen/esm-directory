@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,5 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/listings', 'ListingController@index');
     Route::get('/packages', 'PackageController@index');
 
-    Route::get('/admin/roles', 'RoleController@index');
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/admin/roles', 'RoleController@index');
+    });
 });
