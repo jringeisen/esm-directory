@@ -100,7 +100,7 @@ export default {
     },
     submit () {
       this.isLoading = true
-      axios.put(`/listings/${this.listing.id}`, this.formData).then((response) => {
+      axios.put(`/api/listings/${this.listing.id}`, this.formData).then((response) => {
         this.isLoading = false
         this.hideModal()
         this.toast('success', 'Success!', 'Your listing was deleted successfully!')

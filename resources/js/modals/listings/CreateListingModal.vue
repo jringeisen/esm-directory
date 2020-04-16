@@ -1,16 +1,15 @@
 <template>
   <b-modal 
     id="create-listing" 
-    ref="create-listing-modal" 
     title="Create Listing"
   >
     <form>
       <div class="form-group">
-        <label for="name">Name</label>
+        Name
         <input
           v-model="formData.name"
           type="text"
-          class="form-control"
+          class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.name }"
           placeholder="Enter your name."
           required
@@ -24,11 +23,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="business_name">Business Name</label>
+        Business Name
         <input
           v-model="formData.business_name"
           type="text"
-          class="form-control"
+          class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.business_name }"
           placeholder="Enter your business name."
           required
@@ -42,11 +41,29 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="city">City</label>
+        Category
+        <input
+          v-model="formData.category"
+          type="text"
+          class="form-control form-control-sm"
+          :class="{ 'is-invalid': formErrors.category }"
+          placeholder="Enter a listing category"
+          required
+          @keyup="formErrors.category = ''"
+        >
+        <div
+          v-if="formErrors.category"
+          class="invalid-feedback"
+        >
+          {{ formErrors.category[0] }}
+        </div>
+      </div>
+      <div class="form-group">
+        City
         <input
           v-model="formData.city"
           type="text"
-          class="form-control"
+          class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.city }"
           placeholder="Enter your city."
           required
@@ -60,11 +77,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="state">State</label>
+        State
         <input
           v-model="formData.state"
           type="text"
-          class="form-control"
+          class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.state }"
           placeholder="Enter your state."
           required
@@ -78,11 +95,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="starting_package">Starting Package Price</label>
+        Starting Package Price
         <input
           v-model="formData.starting_package"
           type="number"
-          class="form-control"
+          class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.starting_package }"
           placeholder="Enter your starting package price."
           required
@@ -96,10 +113,10 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="description">Description</label>
+        Description
         <textarea
           v-model="formData.description"
-          class="form-control"
+          class="form-control form-control-sm"
           rows="4"
           :class="{ 'is-invalid': formErrors.description }"
           placeholder="Description"
@@ -114,7 +131,9 @@
         </div>
       </div>
       <div class="form-group">
+        Upload Avatar
         <b-form-file
+          size="sm"
           v-model="avatar"
           placeholder="Choose an avatar image..."
           drop-placeholder="Drop file here..."
@@ -173,12 +192,13 @@ export default {
       data.append('avatar', this.avatar || '');
       data.append('name', this.formData.name || '')
       data.append('business_name', this.formData.business_name || '')
+      data.append('category', this.formData.category || '')
       data.append('city', this.formData.city || '')
       data.append('state', this.formData.state || '')
       data.append('description', this.formData.description || '')
       data.append('starting_package', this.formData.starting_package || '')
 
-      axios.post('/listings', data).then((response) => {
+      axios.post('/api/listings', data).then((response) => {
         this.isLoading = false
         this.formData = {}
         this.avatar = []
@@ -191,7 +211,7 @@ export default {
       })
     },
     hideModal () {
-      this.$refs['create-listing-modal'].hide()
+      this.$root.$emit('bv::hide::modal', 'create-listing')
     }
   }
 }

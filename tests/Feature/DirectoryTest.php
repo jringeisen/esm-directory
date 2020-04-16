@@ -18,7 +18,7 @@ class DirectoryTest extends TestCase
      */
     public function testTheDirectoryPageLoads()
     {
-        $response = $this->get('/');
+        $response = $this->get('/directory');
 
         $response->assertOk()
             ->assertViewIs('guest.directory');
@@ -31,7 +31,7 @@ class DirectoryTest extends TestCase
      */
     public function testDirectoryPageAjaxReturnsNoListings()
     {
-        $response = $this->get("/", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
+        $response = $this->get("/directory", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
             ->assertOk()
             ->assertJsonCount(0);
     }
@@ -58,7 +58,7 @@ class DirectoryTest extends TestCase
             'updated_at' => $listing->updated_at
         ]);
 
-        $response = $this->get("/", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
+        $response = $this->get("/directory", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
             ->assertOk()
             ->assertJsonCount(1);
     }

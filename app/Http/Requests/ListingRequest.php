@@ -26,6 +26,7 @@ class ListingRequest extends FormRequest
         return [
             'name' => 'required',
             'business_name' => 'required',
+            'category' => 'required',
             'city' => 'required',
             'state' => 'required|max:2',
             'description' => 'required',

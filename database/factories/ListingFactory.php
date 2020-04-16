@@ -13,6 +13,7 @@ $factory->define(Listing::class, function (Faker $faker) {
         },
         'name' => $faker->name,
         'business_name' => $faker->company,
+        'category' => $faker->name,
         'city' => $faker->city,
         'state' => $faker->state,
         'description' => $faker->sentence,

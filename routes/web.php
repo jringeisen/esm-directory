@@ -16,19 +16,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Guest Routes
-Route::get('/landing', function () {
+Route::get('/', function () {
     return view('guest.landing');
 });
 
-Route::get('/', 'DirectoryController@index');
+Route::get('/directory', 'DirectoryController@index');
 
 //Auth Routes
 Auth::routes();
 
 //Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/user', 'UserController');
+    Route::get('/passport/clients', function () {
+        return view('authenticated.passport.clients_index');
+    });
 
-    Route::apiResource('/listings', 'ListingController');
-    Route::apiResource('/packages', 'PackageController');
+    Route::get('/passport/authorized_clients', function () {
+        return view('authenticated.passport.authorized_index');
+    });
+
+    Route::get('/passport/access_tokens', function () {
+        return view('authenticated.passport.access_tokens_index');
+    });
+
+    Route::get('/listings', 'ListingController@index');
+    Route::get('/packages', 'PackageController@index');
 });

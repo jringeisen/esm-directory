@@ -52,6 +52,7 @@ class ListingTest extends TestCase
         $data = [
             'name' => '',
             'business_name' => 'Business Name',
+            'category' => 'Family',
             'city' => 'City',
             'state' => 'State',
             'description' => 'Description',
@@ -59,7 +60,7 @@ class ListingTest extends TestCase
             'starting_package' => 'Starting Package'
         ];
 
-        $response = $this->postJson('/listings', $data)
+        $response = $this->postJson('/api/listings', $data)
             ->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
     }
@@ -77,6 +78,7 @@ class ListingTest extends TestCase
         $data = [
             'name' => 'Name',
             'business_name' => 'Business Name',
+            'category' => 'Family',
             'city' => 'City',
             'state' => 'State',
             'description' => 'Description',
@@ -84,7 +86,7 @@ class ListingTest extends TestCase
             'starting_package' => 'Starting Package'
         ];
 
-        $response = $this->postJson('/listings', $data)
+        $response = $this->postJson('/api/listings', $data)
             ->assertStatus(422)
             ->assertJsonValidationErrors(['state']);
     }
@@ -101,6 +103,7 @@ class ListingTest extends TestCase
         $data = [
             'name' => 'Name',
             'business_name' => 'Business Name',
+            'category' => 'Family',
             'city' => 'City',
             'state' => 'FL',
             'description' => 'Description',
@@ -108,7 +111,7 @@ class ListingTest extends TestCase
             'starting_package' => 'Starting Package'
         ];
 
-        $response = $this->postJson('/listings', $data)
+        $response = $this->postJson('/api/listings', $data)
             ->assertStatus(422)
             ->assertJsonValidationErrors(['avatar']);
     }
@@ -119,12 +122,13 @@ class ListingTest extends TestCase
      * @return void
      */
     public function testThatAnAuthenticatedUserCanCreateAListing()
-    {        
+    {
         $this->authUser();
 
         $data = [
             'name' => $this->faker->name,
             'business_name' => $this->faker->company,
+            'category' => 'Family',
             'city' => $this->faker->city,
             'state' => $this->faker->stateAbbr,
             'description' => $this->faker->sentence,
@@ -132,11 +136,12 @@ class ListingTest extends TestCase
             'starting_package' => $this->faker->randomFloat(2, 100, 1000)
         ];
 
-        $this->postJson('/listings', $data)
+        $this->postJson('/api/listings', $data)
             ->assertOk()
             ->assertJson([
                 'name' => $data['name'],
                 'business_name' => $data['business_name'],
+                'category' => $data['category'],
                 'city' => $data['city'],
                 'state' => $data['state'],
                 'description' => $data['description']
@@ -145,6 +150,7 @@ class ListingTest extends TestCase
         $this->assertDatabaseHas('listings', [
             'name' => $data['name'],
             'business_name' => $data['business_name'],
+            'category' => $data['category'],
             'city' => $data['city'],
             'state' => $data['state'],
             'description' => $data['description']
@@ -175,7 +181,7 @@ class ListingTest extends TestCase
             'business_name' => $this->faker->company,
         ];
 
-        $this->putJson('/listings/' . $listing->id, $data)
+        $this->putJson('/api/listings/' . $listing->id, $data)
             ->assertOk()
             ->assertJson([
                 'name' => $data['name'],
@@ -208,7 +214,7 @@ class ListingTest extends TestCase
             'description' => $listing->description
         ]);
 
-        $this->deleteJson('/listings/' . $listing->id)
+        $this->deleteJson('/api/listings/' . $listing->id)
             ->assertOk();
 
         $this->assertDatabaseMissing('listings', [

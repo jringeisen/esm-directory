@@ -1,5 +1,17 @@
 <template>
   <div class="card shadow">
+    <div class="card-header">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Listings</span>
+
+        <button
+          v-b-modal="'create-listing'"
+          class="btn btn-sm btn-secondary"
+        >
+          Create Listing
+        </button>
+      </div>
+    </div>
     <div class="card-body">
       <div
         v-if="!listings.length"
@@ -20,15 +32,7 @@
         </button>
       </div>
       <div v-if="listings.length">
-        <div class="d-flex justify-content-end pb-3">
-          <button
-            v-b-modal="'create-listing'"
-            class="btn btn-sm btn-secondary"
-          >
-            Create Listing
-          </button>
-        </div>
-        <table class="table table-hover">
+        <table class="table table-borderless table-hover">
           <thead>
             <tr>
               <th>Avatar</th>
@@ -150,7 +154,7 @@ export default {
   },
   methods: {
     getUser () {
-      axios.get('/user').then((response) => {
+      axios.get('/api/user').then((response) => {
         this.user = response.data
         this.listings = this.user.listings
       }).catch((error) => {

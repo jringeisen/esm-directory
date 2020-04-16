@@ -107,7 +107,7 @@ export default {
 
       var data = Object.assign({listing_id: this.listing.id}, this.formData)
 
-      axios.post('/packages', data).then((response) => {
+      axios.post('/api/packages', data).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
         this.formData = {}

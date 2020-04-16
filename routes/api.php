@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/** Unauthenticated api routes */
+Route::middleware(['api'])->group(function () {
+    /** GET Routes */
+    Route::get('/directory', 'DirectoryController@index');
+});
+
+/** Authenticated api routes */
+Route::middleware(['auth:api'])->group(function () {
+    /** GET Routes */
+    Route::get('/user', 'UserController');
+
+    /** API Resource Routes */
+    Route::apiResource('/listings', 'ListingController');
+    Route::apiResource('/packages', 'PackageController');
 });

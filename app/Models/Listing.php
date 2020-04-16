@@ -9,6 +9,7 @@ class Listing extends Model
     protected $fillable = [
         'name',
         'business_name',
+        'category',
         'city',
         'state',
         'description',
