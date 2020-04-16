@@ -21,17 +21,10 @@
           <div class="card-body">
             <h5
               class="card-title"
-              v-if="!status"
             >
               <span v-if="!search">Enter a search term to begin finding photographers!</span>
               <span v-if="search && filterListings.length === 0">Search term "{{ search }}" returned no results!</span>
             </h5>
-            <div
-              class="alert alert-danger"
-              v-if="status"
-            >
-              {{ status }}
-            </div>
             <p class="card-text">
               You can search by city, state, business name, or general keywords. If no results are returned you may need to change up your search.
             </p>
@@ -111,34 +104,27 @@ export default {
   mixins: [SetModalData],
   data () {
     return {
-      isLoading: false,
       listings: [],
       listing: {},
       packages: [],
-      search: '',
-      status: '',
+      search: ''
     }
   },
   computed: {
     filterListings () {
-      if (this.search) {
-        let data = this.listings || []
+      let data = this.listings || []
 
-        data = data.filter((row) => {
-          return Object.keys(row).some((key) => {
-            return String(row[key]).toLowerCase().indexOf(this.search.toLowerCase()) > -1
-          })
+      data = data.filter((row) => {
+        return Object.keys(row).some((key) => {
+          return String(row[key]).toLowerCase().indexOf(this.search.toLowerCase()) > -1
         })
+      })
 
-        if (data.length > 50) {
-          this.status = "Your search has returned more than 50 records. Try narrowing down your search more to narrow down your results."
-          return []
-        }
-
-        return data
-      } else {
+      if (data.length > 50) {
         return []
       }
+
+      return data
     }
   },
   created () {

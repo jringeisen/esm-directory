@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
             'name' => $user->name
         ]);
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
         return $user;
     }

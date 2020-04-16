@@ -2205,6 +2205,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3571,6 +3595,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3778,6 +3823,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3898,6 +3951,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3920,23 +3985,18 @@ __webpack_require__.r(__webpack_exports__);
     filterListings: function filterListings() {
       var _this = this;
 
-      if (this.search) {
-        var data = this.listings || [];
-        data = data.filter(function (row) {
-          return Object.keys(row).some(function (key) {
-            return String(row[key]).toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
-          });
+      var data = this.listings || [];
+      data = data.filter(function (row) {
+        return Object.keys(row).some(function (key) {
+          return String(row[key]).toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
         });
+      });
 
-        if (data.length > 50) {
-          this.status = "Your search has returned more than 50 records. Try narrowing down your search more to narrow down your results.";
-          return [];
-        }
-
-        return data;
-      } else {
+      if (data.length > 50) {
         return [];
       }
+
+      return data;
     }
   },
   created: function created() {
@@ -3966,12 +4026,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modals_listings_CreateListingModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/listings/CreateListingModal */ "./resources/js/modals/listings/CreateListingModal.vue");
-/* harmony import */ var _modals_packages_CreatePackageModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/packages/CreatePackageModal */ "./resources/js/modals/packages/CreatePackageModal.vue");
-/* harmony import */ var _modals_listings_ViewListingModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/listings/ViewListingModal */ "./resources/js/modals/listings/ViewListingModal.vue");
-/* harmony import */ var _modals_listings_EditListingModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/listings/EditListingModal */ "./resources/js/modals/listings/EditListingModal.vue");
-/* harmony import */ var _modals_listings_DeleteListingModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/listings/DeleteListingModal */ "./resources/js/modals/listings/DeleteListingModal.vue");
-/* harmony import */ var _mixins_SetModalData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/SetModalData */ "./resources/js/mixins/SetModalData.js");
+/* harmony import */ var _modals_listings_CreateListingModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/listings/CreateListingModal.vue */ "./resources/js/modals/listings/CreateListingModal.vue");
+/* harmony import */ var _modals_packages_CreatePackageModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/packages/CreatePackageModal.vue */ "./resources/js/modals/packages/CreatePackageModal.vue");
+/* harmony import */ var _modals_listings_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/listings/ViewListingModal.vue */ "./resources/js/modals/listings/ViewListingModal.vue");
+/* harmony import */ var _modals_listings_EditListingModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/listings/EditListingModal.vue */ "./resources/js/modals/listings/EditListingModal.vue");
+/* harmony import */ var _modals_listings_DeleteListingModal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/listings/DeleteListingModal.vue */ "./resources/js/modals/listings/DeleteListingModal.vue");
+/* harmony import */ var _mixins_SetModalData_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/SetModalData.js */ "./resources/js/mixins/SetModalData.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 //
@@ -4105,13 +4165,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CreateListingModal: _modals_listings_CreateListingModal__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CreatePackageModal: _modals_packages_CreatePackageModal__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ViewListingModal: _modals_listings_ViewListingModal__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EditListingModal: _modals_listings_EditListingModal__WEBPACK_IMPORTED_MODULE_3__["default"],
-    DeleteListingModal: _modals_listings_DeleteListingModal__WEBPACK_IMPORTED_MODULE_4__["default"]
+    CreateListingModal: _modals_listings_CreateListingModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CreatePackageModal: _modals_packages_CreatePackageModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ViewListingModal: _modals_listings_ViewListingModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EditListingModal: _modals_listings_EditListingModal_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DeleteListingModal: _modals_listings_DeleteListingModal_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  mixins: [_mixins_SetModalData__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  mixins: [_mixins_SetModalData_js__WEBPACK_IMPORTED_MODULE_5__["default"]],
   data: function data() {
     return {
       user: {},
@@ -65774,7 +65834,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Create New Token")]
+              [_vm._v("\n        Create New Token\n      ")]
             )
           ],
           1
@@ -65784,7 +65844,9 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _vm.tokens.length === 0
           ? _c("p", { staticClass: "mb-0" }, [
-              _vm._v("You have not created any personal access tokens.")
+              _vm._v(
+                "\n      You have not created any personal access tokens.\n    "
+              )
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -65797,7 +65859,9 @@ var render = function() {
                 _vm._l(_vm.tokens, function(token) {
                   return _c("tr", { key: token.id }, [
                     _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _vm._v(_vm._s(token.name))
+                      _vm._v(
+                        "\n            " + _vm._s(token.name) + "\n          "
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
@@ -65817,7 +65881,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete")]
+                          [_vm._v("\n              Delete\n            ")]
                         )
                       ],
                       1
@@ -67772,7 +67836,9 @@ var render = function() {
             _c(
               "ul",
               _vm._l(_vm.form.errors, function(error) {
-                return _c("li", { key: error.id }, [_vm._v(_vm._s(error))])
+                return _c("li", { key: error.id }, [
+                  _vm._v("\n        " + _vm._s(error) + "\n      ")
+                ])
               }),
               0
             )
@@ -68140,7 +68206,9 @@ var render = function() {
                   _vm._v(" "),
                   _vm.status
                     ? _c("div", { staticClass: "alert alert-danger" }, [
-                        _vm._v(_vm._s(_vm.status))
+                        _vm._v(
+                          "\n            " + _vm._s(_vm.status) + "\n          "
+                        )
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -68156,7 +68224,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex flex-column justify-content-between" }, [
-        _vm.filterListings.length && !_vm.isLoading
+        _vm.filterListings.length
           ? _c(
               "div",
               { staticClass: "listings" },
@@ -68245,10 +68313,11 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Starting Package: $" +
+                                                      "\n                          Starting Package: $" +
                                                         _vm._s(
                                                           item.starting_package
-                                                        )
+                                                        ) +
+                                                        "\n                        "
                                                     )
                                                   ]
                                                 )

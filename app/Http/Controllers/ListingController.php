@@ -36,6 +36,7 @@ class ListingController extends Controller
         $listing = $request->user()->listings()->create([
             'name' => $request->name,
             'business_name' => $request->business_name,
+            'category' => $request->category,
             'city' => $request->city,
             'state' => $request->state,
             'description' => $request->description,
