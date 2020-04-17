@@ -16,7 +16,7 @@
         id="nav-collapse"
         is-nav
       >
-        <b-navbar-nav v-if="name">
+        <b-navbar-nav v-if="user">
           <b-nav-item
             :class="{'active': route === 'listings'}"
             href="/listings"
@@ -26,41 +26,58 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item
-            v-if="!name"
+            v-if="!user"
             href="/login"
           >
             Login
           </b-nav-item>
           <b-nav-item
-            v-if="!name"
+            v-if="!user"
             href="/register"
           >
             Register
           </b-nav-item>
 
+          <b-nav-item
+            v-if="user"
+            right
+            href="#"
+          >
+            <span class="badge badge-secondary">{{ user.roles[0].name | capitalize }}</span>
+          </b-nav-item>
+
           <b-nav-item-dropdown
-            v-if="name"
+            v-if="user"
             right
           >
             <template #button-content>
-              {{ name }}
+              {{ user.name }}
             </template>
             <b-dropdown-item
+              v-if="role === 'admin'"
+              href="/admin/roles"
+            >
+              Admin Panel
+            </b-dropdown-item>
+            <b-dropdown-item
+              v-if="role === 'admin'"
               href="/passport/clients"
             >
               Passport Clients
             </b-dropdown-item>
             <b-dropdown-item
+              v-if="role === 'admin'"
               href="/passport/authorized_clients"
             >
               Passport Authorized
             </b-dropdown-item>
             <b-dropdown-item
+              v-if="role === 'admin'"
               href="/passport/access_tokens"
             >
               Passport Access Tokens
             </b-dropdown-item>
-            <b-dropdown-divider />
+            <b-dropdown-divider v-if="role === 'admin'" />
             <b-dropdown-item
               href="#"
               @click.prevent="logout"
@@ -77,9 +94,9 @@
 <script>
 export default {
   props: {
-    name: {
+    user: {
       required: true,
-      type: String
+      type: null
     },
     config: {
       require: false,
@@ -90,6 +107,14 @@ export default {
       require: false,
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    role () {
+      if (this.user.roles.length) {
+        return this.user.roles[0].name;
+      }
+      return ''
     }
   },
   methods: {

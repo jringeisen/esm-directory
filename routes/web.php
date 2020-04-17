@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,17 +28,26 @@ Auth::routes();
 //Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/passport/clients', function () {
-        return view('authenticated.passport.clients_index');
+        return view('admin.passport.clients_index');
     });
 
     Route::get('/passport/authorized_clients', function () {
-        return view('authenticated.passport.authorized_index');
+        return view('admin.passport.authorized_index');
     });
 
     Route::get('/passport/access_tokens', function () {
-        return view('authenticated.passport.access_tokens_index');
+        return view('admin.passport.access_tokens_index');
+    });
+
+    Route::get('/admin/users', function () {
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     });
 
     Route::get('/listings', 'ListingController@index');
     Route::get('/packages', 'PackageController@index');
+
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/admin/roles', 'RoleController@index');
+    });
 });
