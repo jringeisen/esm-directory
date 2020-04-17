@@ -67769,7 +67769,7 @@ var render = function() {
         { staticClass: "container" },
         [
           _c("b-navbar-brand", { attrs: { href: "/" } }, [
-            _vm._v("\n      ESM - Directory\n    ")
+            _vm._v("\n      " + _vm._s(_vm.$appName) + "\n    ")
           ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
@@ -68000,7 +68000,7 @@ var render = function() {
         { staticClass: "container" },
         [
           _c("b-navbar-brand", { attrs: { href: "/" } }, [
-            _vm._v("\n      ESM - Directory\n    ")
+            _vm._v("\n      " + _vm._s(_vm.$appName) + "\n    ")
           ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
@@ -88599,6 +88599,7 @@ Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_2___default.a);
 
 Vue.prototype.$user = window.Laravel['user'];
 Vue.prototype.$role = window.Laravel['role'];
+Vue.prototype.$appName = 'ESM - Directory';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

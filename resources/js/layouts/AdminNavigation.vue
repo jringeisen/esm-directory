@@ -7,7 +7,7 @@
   >
     <div class="container">
       <b-navbar-brand href="/">
-        ESM - Directory
+        {{ $appName }}
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse" />

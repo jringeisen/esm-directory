@@ -30,6 +30,7 @@ Vue.use(VueMoment)
  */
 Vue.prototype.$user = window.Laravel['user']
 Vue.prototype.$role = window.Laravel['role']
+Vue.prototype.$appName = 'ESM - Directory'
 
 /**
  * The following block of code may be used to automatically register your
