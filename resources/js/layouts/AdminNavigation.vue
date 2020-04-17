@@ -16,7 +16,7 @@
         id="nav-collapse"
         is-nav
       >
-        <b-navbar-nav v-if="name">
+        <b-navbar-nav v-if="user">
           <b-nav-item
             :class="{'active': route === 'admin/roles'}"
             href="/admin/roles"
@@ -35,31 +35,13 @@
           >
             Users
           </b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item
-            v-if="!name"
-            href="/login"
-          >
-            Login
-          </b-nav-item>
-          <b-nav-item
-            v-if="!name"
-            href="/register"
-          >
-            Register
-          </b-nav-item>
-
           <b-nav-item-dropdown
-            v-if="name"
-            right
+            active
+            v-if="user"
           >
             <template #button-content>
-              {{ name }}
+              Passport
             </template>
-            <b-dropdown-item href="/admin/roles">
-              Admin Panel
-            </b-dropdown-item>
             <b-dropdown-item href="/passport/clients">
               Passport Clients
             </b-dropdown-item>
@@ -68,6 +50,40 @@
             </b-dropdown-item>
             <b-dropdown-item href="/passport/access_tokens">
               Passport Access Tokens
+            </b-dropdown-item>            
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item
+            v-if="user"
+            right
+            href="#"
+          >
+            <span class="badge badge-secondary">{{ user.roles[0].name | capitalize }}</span>
+          </b-nav-item>
+
+          <b-nav-item
+            v-if="!user"
+            href="/login"
+          >
+            Login
+          </b-nav-item>
+          <b-nav-item
+            v-if="!user"
+            href="/register"
+          >
+            Register
+          </b-nav-item>
+
+          <b-nav-item-dropdown
+            v-if="user"
+            right
+          >
+            <template #button-content>
+              {{ user.name }}
+            </template>
+            <b-dropdown-item href="/admin/roles">
+              Admin Panel
             </b-dropdown-item>
             <b-dropdown-divider />
             <b-dropdown-item
@@ -86,9 +102,9 @@
 <script>
 export default {
   props: {
-    name: {
+    user: {
       required: true,
-      type: String
+      type: null
     },
     config: {
       require: false,

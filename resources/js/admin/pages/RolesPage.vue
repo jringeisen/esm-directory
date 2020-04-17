@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow">
     <div class="card-header">
       Roles
       <b-button
@@ -12,13 +12,14 @@
       </b-button>
     </div>
     <div class="card-body">
-      <table class="table table-hover table-borderless table-sm">
+      <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Guard Name</th>
             <th>Created On</th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +42,7 @@
             <td class="align-middle">
               {{ role.created_at | moment('LLL') }}
             </td>
-            <td class="float-right align-middle">
+            <td class="text-right align-middle">
               <b-dropdown
                 id="roles-dropdown"
                 no-caret
@@ -65,7 +66,7 @@
 </template>
 
 <script>
-import CreateRoleModal from '../modals/CreateRoleModal.vue'
+import CreateRoleModal from './modals/CreateRoleModal.vue'
 export default {
   components: {
     CreateRoleModal

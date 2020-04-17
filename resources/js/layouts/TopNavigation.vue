@@ -38,6 +38,14 @@
             Register
           </b-nav-item>
 
+          <b-nav-item
+            v-if="user"
+            right
+            href="#"
+          >
+            <span class="badge badge-secondary">{{ user.roles[0].name | capitalize }}</span>
+          </b-nav-item>
+
           <b-nav-item-dropdown
             v-if="user"
             right

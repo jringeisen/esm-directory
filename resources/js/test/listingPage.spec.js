@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import ListingPage from '../pages/ListingsPage.vue'
+import ListingPage from '../users/ListingsPage.vue'
 import Vue2Filters from 'vue2-filters'
 import BootstrapVue from 'bootstrap-vue'
 

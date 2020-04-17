@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow">
     <div class="card-header">
-      Users
+      Users {{ users.length }}
     </div>
     <div class="card-body p-5">
       <div class="row pb-3">
@@ -101,31 +101,38 @@ export default {
       fields: [
         {
           key: "id",
-          sortable: true
+          sortable: true,
+          tdClass: "align-middle"
         },
         {
           key: "roles",
-          sortable: false
+          sortable: false,
+          tdClass: "align-middle"
         },
         {
           key: "name",
-          sortable: true
+          sortable: true,
+          tdClass: "align-middle"
         },
         {
           key: "email",
-          sortable: true
+          sortable: true,
+          tdClass: "align-middle"
         },
         {
           key: "email_verified_at",
-          sortable: true
+          sortable: true,
+          tdClass: "align-middle"
         },
         {
           key: "created_at",
-          sortable: true
+          sortable: true,
+          tdClass: "align-middle"
         },
         {
           key: "actions",
-          sortable: false
+          sortable: false,
+          tdClass: "align-middle"
         },
         {
           key: "name",

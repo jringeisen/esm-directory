@@ -28,15 +28,15 @@ Auth::routes();
 //Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/passport/clients', function () {
-        return view('authenticated.passport.clients_index');
+        return view('admin.passport.clients_index');
     });
 
     Route::get('/passport/authorized_clients', function () {
-        return view('authenticated.passport.authorized_index');
+        return view('admin.passport.authorized_index');
     });
 
     Route::get('/passport/access_tokens', function () {
-        return view('authenticated.passport.access_tokens_index');
+        return view('admin.passport.access_tokens_index');
     });
 
     Route::get('/admin/users', function () {

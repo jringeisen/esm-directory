@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/6229d48325.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/all.min.css') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,7 +24,7 @@
 <body style="font-family:garamond;">
     <div id="app">
         <admin-navigation 
-            name="{{ Auth::user() ? Auth::user()->name : '' }}" 
+            :user='@json(auth()->user())' 
             config="{{ config('app.name', 'Laravel') }}"
             route="{{ request()->path() }}"
         ></admin-navigation>

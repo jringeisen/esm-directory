@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/6229d48325.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/all.min.css') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
