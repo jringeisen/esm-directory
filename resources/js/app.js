@@ -26,6 +26,12 @@ Vue.use(Vue2Filters)
 Vue.use(VueMoment)
 
 /**
+ * Setup prototype variables to be used in vue components.
+ */
+Vue.prototype.$user = window.Laravel['user']
+Vue.prototype.$role = window.Laravel['role']
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".

@@ -2006,8 +2006,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modals_CreateClientModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modals/CreateClientModal.vue */ "./resources/js/admin/pages/modals/CreateClientModal.vue");
-/* harmony import */ var _modals_EditClientModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modals/EditClientModal.vue */ "./resources/js/admin/pages/modals/EditClientModal.vue");
+/* harmony import */ var _modals_CreateClientModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals/CreateClientModal.vue */ "./resources/js/admin/pages/modals/CreateClientModal.vue");
+/* harmony import */ var _modals_EditClientModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modals/EditClientModal.vue */ "./resources/js/admin/pages/modals/EditClientModal.vue");
 //
 //
 //
@@ -2098,8 +2098,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CreateClientModal: _modals_CreateClientModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditClientModal: _modals_EditClientModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CreateClientModal: _modals_CreateClientModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EditClientModal: _modals_EditClientModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2162,8 +2162,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modals_CreateTokenModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modals/CreateTokenModal.vue */ "./resources/js/admin/pages/modals/CreateTokenModal.vue");
-/* harmony import */ var _modals_ViewAccessToken_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modals/ViewAccessToken.vue */ "./resources/js/admin/pages/modals/ViewAccessToken.vue");
+/* harmony import */ var _modals_CreateTokenModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals/CreateTokenModal.vue */ "./resources/js/admin/pages/modals/CreateTokenModal.vue");
+/* harmony import */ var _modals_ViewAccessToken_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modals/ViewAccessToken.vue */ "./resources/js/admin/pages/modals/ViewAccessToken.vue");
 //
 //
 //
@@ -2233,8 +2233,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CreateTokenModal: _modals_CreateTokenModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ViewAccessToken: _modals_ViewAccessToken_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CreateTokenModal: _modals_CreateTokenModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ViewAccessToken: _modals_ViewAccessToken_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
 
   /*
@@ -3410,15 +3410,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    user: {
-      required: true,
-      type: null
-    },
-    config: {
-      require: false,
-      type: String,
-      "default": "ESM - Directory"
-    },
     route: {
       require: false,
       type: String,
@@ -3520,48 +3511,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    user: {
-      required: true,
-      type: null
-    },
-    config: {
-      require: false,
-      type: String,
-      "default": 'ESM - Directory'
-    },
     route: {
       require: false,
       type: String,
       "default": ''
-    }
-  },
-  computed: {
-    role: function role() {
-      if (this.user.roles.length) {
-        return this.user.roles[0].name;
-      }
-
-      return '';
     }
   },
   methods: {
@@ -67814,7 +67769,7 @@ var render = function() {
         { staticClass: "container" },
         [
           _c("b-navbar-brand", { attrs: { href: "/" } }, [
-            _vm._v("\n      " + _vm._s(_vm.config) + "\n    ")
+            _vm._v("\n      ESM - Directory\n    ")
           ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
@@ -67823,7 +67778,7 @@ var render = function() {
             "b-collapse",
             { attrs: { id: "nav-collapse", "is-nav": "" } },
             [
-              _vm.user
+              _vm.$user
                 ? _c(
                     "b-navbar-nav",
                     [
@@ -67854,7 +67809,7 @@ var render = function() {
                         [_vm._v("\n          Users\n        ")]
                       ),
                       _vm._v(" "),
-                      _vm.user
+                      _vm.$user
                         ? _c(
                             "b-nav-item-dropdown",
                             {
@@ -67926,29 +67881,27 @@ var render = function() {
                 "b-navbar-nav",
                 { staticClass: "ml-auto" },
                 [
-                  _vm.user
+                  _vm.$user
                     ? _c("b-nav-item", { attrs: { right: "", href: "#" } }, [
                         _c("span", { staticClass: "badge badge-secondary" }, [
-                          _vm._v(
-                            _vm._s(_vm._f("capitalize")(_vm.user.roles[0].name))
-                          )
+                          _vm._v(_vm._s(_vm._f("capitalize")(_vm.$role)))
                         ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  !_vm.user
+                  !_vm.$user
                     ? _c("b-nav-item", { attrs: { href: "/login" } }, [
                         _vm._v("\n          Login\n        ")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  !_vm.user
+                  !_vm.$user
                     ? _c("b-nav-item", { attrs: { href: "/register" } }, [
                         _vm._v("\n          Register\n        ")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.user
+                  _vm.$user
                     ? _c(
                         "b-nav-item-dropdown",
                         {
@@ -67961,7 +67914,7 @@ var render = function() {
                                   return [
                                     _vm._v(
                                       "\n            " +
-                                        _vm._s(_vm.user.name) +
+                                        _vm._s(_vm.$user.name) +
                                         "\n          "
                                     )
                                   ]
@@ -67971,7 +67924,7 @@ var render = function() {
                             ],
                             null,
                             false,
-                            3843749306
+                            2212195966
                           )
                         },
                         [
@@ -68047,7 +68000,7 @@ var render = function() {
         { staticClass: "container" },
         [
           _c("b-navbar-brand", { attrs: { href: "/" } }, [
-            _vm._v("\n      " + _vm._s(_vm.config) + "\n    ")
+            _vm._v("\n      ESM - Directory\n    ")
           ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
@@ -68056,7 +68009,7 @@ var render = function() {
             "b-collapse",
             { attrs: { id: "nav-collapse", "is-nav": "" } },
             [
-              _vm.user
+              _vm.$user
                 ? _c(
                     "b-navbar-nav",
                     [
@@ -68077,29 +68030,27 @@ var render = function() {
                 "b-navbar-nav",
                 { staticClass: "ml-auto" },
                 [
-                  !_vm.user
+                  !_vm.$user
                     ? _c("b-nav-item", { attrs: { href: "/login" } }, [
                         _vm._v("\n          Login\n        ")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  !_vm.user
+                  !_vm.$user
                     ? _c("b-nav-item", { attrs: { href: "/register" } }, [
                         _vm._v("\n          Register\n        ")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.user
+                  _vm.$user
                     ? _c("b-nav-item", { attrs: { right: "", href: "#" } }, [
                         _c("span", { staticClass: "badge badge-secondary" }, [
-                          _vm._v(
-                            _vm._s(_vm._f("capitalize")(_vm.user.roles[0].name))
-                          )
+                          _vm._v(_vm._s(_vm._f("capitalize")(_vm.$role)))
                         ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.user
+                  _vm.$user
                     ? _c(
                         "b-nav-item-dropdown",
                         {
@@ -68112,7 +68063,7 @@ var render = function() {
                                   return [
                                     _vm._v(
                                       "\n            " +
-                                        _vm._s(_vm.user.name) +
+                                        _vm._s(_vm.$user.name) +
                                         "\n          "
                                     )
                                   ]
@@ -68122,12 +68073,12 @@ var render = function() {
                             ],
                             null,
                             false,
-                            3843749306
+                            2212195966
                           )
                         },
                         [
                           _vm._v(" "),
-                          _vm.role === "admin"
+                          _vm.$role === "admin"
                             ? _c(
                                 "b-dropdown-item",
                                 { attrs: { href: "/admin/roles" } },
@@ -68139,47 +68090,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.role === "admin"
-                            ? _c(
-                                "b-dropdown-item",
-                                { attrs: { href: "/passport/clients" } },
-                                [
-                                  _vm._v(
-                                    "\n            Passport Clients\n          "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.role === "admin"
-                            ? _c(
-                                "b-dropdown-item",
-                                {
-                                  attrs: {
-                                    href: "/passport/authorized_clients"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n            Passport Authorized\n          "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.role === "admin"
-                            ? _c(
-                                "b-dropdown-item",
-                                { attrs: { href: "/passport/access_tokens" } },
-                                [
-                                  _vm._v(
-                                    "\n            Passport Access Tokens\n          "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.role === "admin"
+                          _vm.$role === "admin"
                             ? _c("b-dropdown-divider")
                             : _vm._e(),
                           _vm._v(" "),
@@ -88682,6 +88593,12 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVue"]);
 Vue.use(vue2_filters__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_2___default.a);
+/**
+ * Setup prototype variables to be used in vue components.
+ */
+
+Vue.prototype.$user = window.Laravel['user'];
+Vue.prototype.$role = window.Laravel['role'];
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

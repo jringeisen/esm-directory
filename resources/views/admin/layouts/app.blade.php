@@ -20,14 +20,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = {
+            user: @json($user),
+            role: @json($role),
+        };
+    </script>
 </head>
 <body style="font-family:garamond;">
     <div id="app">
-        <admin-navigation 
-            :user='@json(auth()->user())' 
-            config="{{ config('app.name', 'Laravel') }}"
-            route="{{ request()->path() }}"
-        ></admin-navigation>
+        <admin-navigation route="{{ request()->path() }}"></admin-navigation>
 
         <main class="py-4">
             @yield('content')

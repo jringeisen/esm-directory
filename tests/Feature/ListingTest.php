@@ -33,6 +33,8 @@ class ListingTest extends TestCase
      */
     public function testAuthenticatedUserCanViewTheListingsPage()
     {
+        $this->withoutExceptionHandling();
+        
         $this->authUser();
 
         $this->get('/listings')

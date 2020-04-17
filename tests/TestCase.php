@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -14,6 +15,9 @@ abstract class TestCase extends BaseTestCase
     public function authUser()
     {
         $user = factory(User::class)->create();
+        $role = factory(Role::class)->create();
+
+        $user->assignRole($role->name);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
