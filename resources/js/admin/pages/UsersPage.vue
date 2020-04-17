@@ -1,9 +1,9 @@
 <template>
-  <div class="card">
+  <div class="card shadow">
     <div class="card-header">
       Users
     </div>
-    <div class="card-body">
+    <div class="card-body p-5">
       <div class="row pb-3">
         <b-form-input
           type="text"
@@ -21,6 +21,7 @@
           :filter="filter"
           :per-page="perPage"
           :current-page="currentPage"
+          tbody-td-class="align-middle"
           responsive
         >
           <template #cell(id)="data">
@@ -52,6 +53,23 @@
 
           <template #cell(created_at)="data">
             {{ data.item.created_at | moment('LLL') }}
+          </template>
+
+          <template #cell(actions)="data">
+            <b-dropdown
+              id="roles-dropdown"
+              no-caret
+              dropright
+              variant="white"
+              class="m-md-2"
+            >
+              <template #button-content>
+                <i class="fas fa-ellipsis-v" />
+              </template>
+              <b-dropdown-item>Edit User</b-dropdown-item>
+              <b-dropdown-item>View User</b-dropdown-item>
+              <b-dropdown-item>Delete User</b-dropdown-item>
+            </b-dropdown>
           </template>
         </b-table>
       </div>
@@ -104,6 +122,10 @@ export default {
         {
           key: "created_at",
           sortable: true
+        },
+        {
+          key: "actions",
+          sortable: false
         },
         {
           key: "name",

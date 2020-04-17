@@ -2216,6 +2216,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     users: {
@@ -2246,6 +2264,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: "created_at",
         sortable: true
+      }, {
+        key: "actions",
+        sortable: false
       }, {
         key: "name",
         label: "Person age",
@@ -66371,10 +66392,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "card shadow" }, [
     _c("div", { staticClass: "card-header" }, [_vm._v("\n    Users\n  ")]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
+    _c("div", { staticClass: "card-body p-5" }, [
       _c(
         "div",
         { staticClass: "row pb-3" },
@@ -66407,6 +66428,7 @@ var render = function() {
               filter: _vm.filter,
               "per-page": _vm.perPage,
               "current-page": _vm.currentPage,
+              "tbody-td-class": "align-middle",
               responsive: ""
             },
             scopedSlots: _vm._u([
@@ -66481,6 +66503,49 @@ var render = function() {
                       "\n          " +
                         _vm._s(_vm._f("moment")(data.item.created_at, "LLL")) +
                         "\n        "
+                    )
+                  ]
+                }
+              },
+              {
+                key: "cell(actions)",
+                fn: function(data) {
+                  return [
+                    _c(
+                      "b-dropdown",
+                      {
+                        staticClass: "m-md-2",
+                        attrs: {
+                          id: "roles-dropdown",
+                          "no-caret": "",
+                          dropright: "",
+                          variant: "white"
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "button-content",
+                              fn: function() {
+                                return [
+                                  _c("i", { staticClass: "fas fa-ellipsis-v" })
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _vm._v(" "),
+                        _c("b-dropdown-item", [_vm._v("Edit User")]),
+                        _vm._v(" "),
+                        _c("b-dropdown-item", [_vm._v("View User")]),
+                        _vm._v(" "),
+                        _c("b-dropdown-item", [_vm._v("Delete User")])
+                      ],
+                      1
                     )
                   ]
                 }
