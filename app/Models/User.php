@@ -41,7 +41,7 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'listings'
+        'listings', 'roles'
     ];
 
     public function listings()

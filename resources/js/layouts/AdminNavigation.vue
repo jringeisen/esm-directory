@@ -30,8 +30,8 @@
             Permissions
           </b-nav-item>
           <b-nav-item
-            :class="{'active': route === 'user'}"
-            href="/user"
+            :class="{'active': route === 'admin/users'}"
+            href="/admin/users"
           >
             Users
           </b-nav-item>
@@ -57,7 +57,7 @@
             <template #button-content>
               {{ name }}
             </template>
-            <b-dropdown-item href="/admin">
+            <b-dropdown-item href="/admin/roles">
               Admin Panel
             </b-dropdown-item>
             <b-dropdown-item href="/passport/clients">

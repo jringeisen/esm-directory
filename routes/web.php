@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/passport/access_tokens', function () {
         return view('authenticated.passport.access_tokens_index');
+    });
+
+    Route::get('/admin/users', function () {
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     });
 
     Route::get('/listings', 'ListingController@index');

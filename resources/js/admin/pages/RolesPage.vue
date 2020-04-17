@@ -2,7 +2,14 @@
   <div class="card">
     <div class="card-header">
       Roles
-      <b-button variant="secondary" class="float-right" size="sm" v-b-modal="'create-role'">Create Role</b-button>
+      <b-button
+        variant="secondary"
+        class="float-right"
+        size="sm"
+        v-b-modal="'create-role'"
+      >
+        Create Role
+      </b-button>
     </div>
     <div class="card-body">
       <table class="table table-hover table-borderless table-sm">
@@ -15,13 +22,33 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(role, index) in roles" :key="index">
-            <td class="align-middle" scope="row">{{ role.id }}</td>
-            <td class="align-middle">{{ role.name }}</td>
-            <td class="align-middle">{{ role.guard_name }}</td>
-            <td class="align-middle">{{ role.created_at | moment('LLL') }}</td>
+          <tr
+            v-for="(role, index) in roles"
+            :key="index"
+          >
+            <td
+              class="align-middle"
+              scope="row"
+            >
+              {{ role.id }}
+            </td>
+            <td class="align-middle">
+              {{ role.name }}
+            </td>
+            <td class="align-middle">
+              {{ role.guard_name }}
+            </td>
+            <td class="align-middle">
+              {{ role.created_at | moment('LLL') }}
+            </td>
             <td class="float-right align-middle">
-              <b-dropdown id="roles-dropdown" no-caret dropright variant="white" class="m-md-2">
+              <b-dropdown
+                id="roles-dropdown"
+                no-caret
+                dropright
+                variant="white"
+                class="m-md-2"
+              >
                 <template #button-content>
                   <i class="fas fa-ellipsis-v" />
                 </template>
@@ -40,29 +67,29 @@
 <script>
 import CreateRoleModal from '../modals/CreateRoleModal.vue'
 export default {
-    components: {
-        CreateRoleModal
-    },
-    data () {
-        return {
-            roles: []
-        }
-    },
-    mounted () {
-        this.$root.$on('getRoles', (() => {
-            this.getRoles()
-        }))
-
-        this.getRoles()
-    },
-    methods: {
-        getRoles () {
-            axios.get('/api/roles').then((response) => {
-              this.roles = response.data
-            }).catch((error) => {
-              console.log('something went wrong')
-            })
-        }
+  components: {
+    CreateRoleModal
+  },
+  data () {
+    return {
+      roles: []
     }
+  },
+  mounted () {
+    this.$root.$on('getRoles', (() => {
+      this.getRoles()
+    }))
+
+    this.getRoles()
+  },
+  methods: {
+    getRoles () {
+      axios.get('/api/roles').then((response) => {
+        this.roles = response.data
+      }).catch((error) => {
+        console.log('something went wrong')
+      })
+    }
+  }
 };
 </script>

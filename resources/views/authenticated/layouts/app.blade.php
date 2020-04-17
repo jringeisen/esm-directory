@@ -24,7 +24,7 @@
 <body style="font-family:garamond;">
     <div id="app">
         <top-navigation 
-            name="{{ Auth::user() ? Auth::user()->name : '' }}" 
+            :user='@json(auth()->user())'
             config="{{ config('app.name', 'Laravel') }}"
             route="{{ request()->path() }}"
         ></top-navigation>
