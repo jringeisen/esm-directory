@@ -12,7 +12,7 @@ module.exports = {
         include: path.resolve('resources/js'), // instrument only testing sources with Istanbul, after ts-loader runs
         exclude: [
           path.resolve(`node_modules`),
-          path.resolve(`resources/js/test`),
+          path.resolve(`test/javascript`),
         ],
         loader: 'istanbul-instrumenter-loader',
         options: {
