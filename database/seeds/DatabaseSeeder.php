@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Listing;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        factory(Listing::class, 1000)->create();
+        factory(Role::class)->create(['name' => 'admin']);
+        factory(Role::class)->create(['name' => 'photographer']);
+        factory(Role::class)->create(['name' => 'client']);
     }
 }

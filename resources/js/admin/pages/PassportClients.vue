@@ -85,8 +85,8 @@
 </template>
 
 <script>
-import CreateClientModal from "./modals/CreateClientModal.vue";
-import EditClientModal from "./modals/EditClientModal.vue";
+import CreateClientModal from "../modals/CreateClientModal.vue";
+import EditClientModal from "../modals/EditClientModal.vue";
 export default {
   components: {
     CreateClientModal,

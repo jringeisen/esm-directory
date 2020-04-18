@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 
 $factory->define(Role::class, function (Faker $faker) {
     return [
-        'name' => 'admin',
+        'name' => 'client',
         'guard_name' => 'web'
     ];
 });

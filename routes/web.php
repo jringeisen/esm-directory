@@ -23,10 +23,10 @@ Route::get('/', function () {
 Route::get('/directory', 'DirectoryController@index');
 
 //Auth Routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 //Authenticated User Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/passport/clients', function () {
         return view('admin.passport.clients_index');
     });

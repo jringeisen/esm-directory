@@ -17,7 +17,7 @@ class ListingController extends Controller
      */
     public function index()
     {
-        return view('authenticated.listings.index');
+        return view('users.listings.index');
     }
 
     /**

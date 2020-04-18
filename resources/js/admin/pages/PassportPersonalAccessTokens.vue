@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import CreateTokenModal from "./modals/CreateTokenModal.vue";
-import ViewAccessToken from "./modals/ViewAccessToken.vue";
+import CreateTokenModal from "../modals/CreateTokenModal.vue";
+import ViewAccessToken from "../modals/ViewAccessToken.vue";
 export default {
   components: {
     CreateTokenModal,

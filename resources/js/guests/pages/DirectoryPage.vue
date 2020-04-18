@@ -94,8 +94,8 @@
 </template>
 
 <script>
-import ViewListingModal from '../users/modals/listings/ViewListingModal.vue'
-import SetModalData from '../mixins/SetModalData.js'
+import ViewListingModal from '../../users/modals/listings/ViewListingModal.vue'
+import SetModalData from '../../mixins/SetModalData.js'
 import axios from 'axios'
 export default {
   components: {

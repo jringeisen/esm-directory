@@ -12,7 +12,7 @@
         "lint:fix": "npm rum lint:es-fix",
         "lint:es": "eslint --ext .js,.vue resources/js/**",
         "lint:es-fix": "eslint --fix --ext .js,.vue resources/js/**",
-        "test": "cross-env NODE_ENV=coverage mocha-webpack --webpack-config webpack.base.conf.js --require resources/js/test/setup.js resources/js/test/**/*.spec.js resources/js/**/*.vue",
+        "test": "cross-env NODE_ENV=coverage mocha-webpack --webpack-config webpack.base.conf.js --require tests/Javascript/setup.js tests/Javascript/**/*.spec.js tests/Javascript/**/*.vue",
         "cover": "cross-env NODE_ENV=coverage nyc --reporter=lcov --reporter=text npm run test"
     },
     "devDependencies": {
