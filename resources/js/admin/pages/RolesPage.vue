@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import CreateRoleModal from './modals/CreateRoleModal.vue'
+import CreateRoleModal from '../modals/CreateRoleModal.vue'
 export default {
   components: {
     CreateRoleModal

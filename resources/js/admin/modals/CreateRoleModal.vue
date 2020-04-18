@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import ToastMixin from "../../../mixins/ToastMixin.js";
+import ToastMixin from "../../mixins/ToastMixin.js";
 export default {
   mixins: [ToastMixin],
   data() {

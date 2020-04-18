@@ -121,12 +121,12 @@
 </template>
 
 <script>
-import CreateListingModal from './modals/listings/CreateListingModal.vue'
-import CreatePackageModal from './modals/packages/CreatePackageModal.vue'
-import ViewListingModal from './modals/listings/ViewListingModal.vue'
-import EditListingModal from './modals/listings/EditListingModal.vue'
-import DeleteListingModal from './modals/listings/DeleteListingModal.vue'
-import SetModalData from '../mixins/SetModalData.js'
+import CreateListingModal from '../modals/listings/CreateListingModal.vue'
+import CreatePackageModal from '../modals/packages/CreatePackageModal.vue'
+import ViewListingModal from '../modals/listings/ViewListingModal.vue'
+import EditListingModal from '../modals/listings/EditListingModal.vue'
+import DeleteListingModal from '../modals/listings/DeleteListingModal.vue'
+import SetModalData from '../../mixins/SetModalData.js'
 import axios from 'axios'
 export default {
   components: {
