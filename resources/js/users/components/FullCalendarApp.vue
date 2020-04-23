@@ -1,12 +1,15 @@
 <template>
-  <FullCalendar
-    default-view="dayGridMonth" 
-    :plugins="calendarPlugins"
-    :selectable="true"
-    :events="events"
-    @dateClick="dateClicked"
-    @eventClick="eventClicked"
-  />
+  <div>
+    <FullCalendar
+      default-view="dayGridMonth" 
+      :plugins="calendarPlugins"
+      :selectable="true"
+      :events="events"
+      @dateClick="dateClicked"
+      @eventClick="eventClicked"
+    />
+    <contact-form-modal :photography-packages="photographyPackages" />
+  </div>
 </template>
 
 <script>
@@ -14,6 +17,7 @@
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import ContactFormModal from '../components/ContactFormModal.vue'
 
 export default {
   props: {
@@ -21,10 +25,16 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    photographyPackages: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
   components: {
-    FullCalendar
+    FullCalendar,
+    ContactFormModal
   },
   data() {
     return {
@@ -36,7 +46,7 @@ export default {
       alert('You selected ' + evt.date)
     },
     eventClicked (evt) {
-      alert('You are booking an event for ' + evt.event.start + ' to ' + evt.event.end)
+      this.$root.$emit('bv::show::modal', 'request-booking')
     }
   }
 }

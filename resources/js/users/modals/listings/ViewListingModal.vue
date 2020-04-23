@@ -5,7 +5,6 @@
       title="View Listing"
       size="lg"
       :hide-footer="true"
-      no-stacking
     >
       <div class="d-flex flex-column align-items-center">
         <b-avatar
@@ -136,10 +135,10 @@
           </b-container>
         </b-tab>
         <b-tab title="Calendar">
-          <full-calendar-app :events="events" />
-        </b-tab>
-        <b-tab title="Contact">
-          <contact-form :photography-packages="packages" />
+          <full-calendar-app
+            :events="events"
+            :photography-packages="packages"
+          />
         </b-tab>
       </b-tabs>
     </b-modal>
@@ -152,13 +151,11 @@
 import EditPackageModal from '../packages/EditPackageModal.vue'
 import DeletePackageModal from '../packages/DeletePackageModal.vue'
 import FullCalendarApp from '../../components/FullCalendarApp.vue'
-import ContactForm from '../../components/ContactForm.vue'
 export default {
   components: {
     EditPackageModal,
     DeletePackageModal,
     FullCalendarApp,
-    ContactForm
   },
   props: {
     listing: {
