@@ -21,6 +21,13 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+        <script>
+            window.Laravel = {
+                user: @json($user),
+                role: @json($role),
+            };
+        </script>
+
         <style>
             .listings .card {
                 cursor: pointer;
