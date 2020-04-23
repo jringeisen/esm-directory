@@ -44,6 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.users.index', compact('users'));
     });
 
+    Route::get('/profile', function () {
+        return view('users.profile.index');
+    });
+
     Route::get('/listings', 'ListingController@index');
     Route::get('/packages', 'PackageController@index');
 

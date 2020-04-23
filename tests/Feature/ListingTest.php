@@ -39,7 +39,7 @@ class ListingTest extends TestCase
 
         $this->get('/listings')
             ->assertOk()
-            ->assertViewIs('authenticated.listings.index');
+            ->assertViewIs('users.listings.index');
     }
 
     /**

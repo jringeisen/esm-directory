@@ -59,7 +59,12 @@
             >
               Admin Panel
             </b-dropdown-item>
-            <b-dropdown-divider v-if="$role === 'admin'" />
+            <b-dropdown-item
+              href="/profile"
+            >
+              Profile
+            </b-dropdown-item>
+            <b-dropdown-divider />
             <b-dropdown-item
               href="#"
               @click.prevent="logout"

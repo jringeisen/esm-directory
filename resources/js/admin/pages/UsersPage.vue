@@ -55,7 +55,7 @@
             {{ data.item.created_at | moment('LLL') }}
           </template>
 
-          <template #cell(actions)="data">
+          <template>
             <b-dropdown
               id="roles-dropdown"
               no-caret
