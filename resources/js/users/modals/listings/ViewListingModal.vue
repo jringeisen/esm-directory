@@ -136,7 +136,10 @@
           </b-container>
         </b-tab>
         <b-tab title="Calendar">
-          <full-calendar-app />
+          <full-calendar-app :events="events" />
+        </b-tab>
+        <b-tab title="Contact">
+          <contact-form :photography-packages="packages" />
         </b-tab>
       </b-tabs>
     </b-modal>
@@ -149,11 +152,13 @@
 import EditPackageModal from '../packages/EditPackageModal.vue'
 import DeletePackageModal from '../packages/DeletePackageModal.vue'
 import FullCalendarApp from '../../components/FullCalendarApp.vue'
+import ContactForm from '../../components/ContactForm.vue'
 export default {
   components: {
     EditPackageModal,
     DeletePackageModal,
-    FullCalendarApp
+    FullCalendarApp,
+    ContactForm
   },
   props: {
     listing: {
@@ -172,7 +177,31 @@ export default {
   },
   data () {
     return {
-      investment: {}
+      investment: {},
+      events: [
+        {
+          daysOfWeek: [ '1', '2', '3', '4', '5' ],
+          title: 'Available',
+          startTime: '15:00:00',
+          endTime: '16:00:00',
+          color: '#d4edda',
+          borderColor: '#c3e6cb',
+          textColor: '#155724',
+          startRecur: '2020-04-01',
+          endRecur: '2020-04-25',
+        },
+        {
+          daysOfWeek: [ '1', '2', '3', '4', '5' ],
+          title: 'Available',
+          startTime: '8:00:00',
+          endTime: '9:00:00',
+          color: '#d4edda',
+          borderColor: '#c3e6cb',
+          textColor: '#155724',
+          startRecur: '2020-04-01',
+          endRecur: '2020-04-25',
+        }
+      ]
     }
   },
   methods: {

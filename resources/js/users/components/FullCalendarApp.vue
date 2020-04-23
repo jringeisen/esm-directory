@@ -3,7 +3,9 @@
     default-view="dayGridMonth" 
     :plugins="calendarPlugins"
     :selectable="true"
-    @dateClick="selected"
+    :events="events"
+    @dateClick="dateClicked"
+    @eventClick="eventClicked"
   />
 </template>
 
@@ -14,6 +16,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
 export default {
+  props: {
+    events: {
+      type: Array,
+      required: true,
+      default: () => []
+    }
+  },
   components: {
     FullCalendar
   },
@@ -23,8 +32,11 @@ export default {
     }
   },
   methods: {
-    selected (evt) {
+    dateClicked (evt) {
       alert('You selected ' + evt.date)
+    },
+    eventClicked (evt) {
+      alert('You are booking an event for ' + evt.event.start + ' to ' + evt.event.end)
     }
   }
 }
