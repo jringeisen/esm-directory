@@ -135,6 +135,9 @@
             </b-row>
           </b-container>
         </b-tab>
+        <b-tab title="Calendar">
+          <full-calendar-app />
+        </b-tab>
       </b-tabs>
     </b-modal>
     <edit-package-modal :item="investment" />
@@ -145,10 +148,12 @@
 <script>
 import EditPackageModal from '../packages/EditPackageModal.vue'
 import DeletePackageModal from '../packages/DeletePackageModal.vue'
+import FullCalendarApp from '../../components/FullCalendarApp.vue'
 export default {
   components: {
     EditPackageModal,
-    DeletePackageModal
+    DeletePackageModal,
+    FullCalendarApp
   },
   props: {
     listing: {
