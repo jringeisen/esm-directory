@@ -5,7 +5,6 @@
       :plugins="calendarPlugins"
       :selectable="true"
       :events="events"
-      @dateClick="dateClicked"
       @eventClick="eventClicked"
     />
     <contact-form-modal :photography-packages="photographyPackages" />
@@ -42,9 +41,6 @@ export default {
     }
   },
   methods: {
-    dateClicked (evt) {
-      alert('You selected ' + evt.date)
-    },
     eventClicked (evt) {
       this.$root.$emit('bv::show::modal', 'request-booking')
     }
@@ -53,9 +49,13 @@ export default {
 
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
+
+.fc-content {
+  cursor: pointer !important;
+}
 
 </style>

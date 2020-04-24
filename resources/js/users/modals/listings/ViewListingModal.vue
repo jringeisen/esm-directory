@@ -185,7 +185,7 @@ export default {
           borderColor: '#c3e6cb',
           textColor: '#155724',
           startRecur: '2020-04-01',
-          endRecur: '2020-04-25',
+          endRecur: '2020-04-25'
         },
         {
           daysOfWeek: [ '1', '2', '3', '4', '5' ],
