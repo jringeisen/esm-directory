@@ -14,9 +14,13 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return response()->json($request->user()->bookings()->get());
+        }
+
+        return view('users.bookings.index');
     }
 
     /**
@@ -49,7 +53,15 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        //
+        $booking->update($request->only([
+            'name',
+            'email',
+            'package',
+            'message',
+            'requested_date'
+        ]));
+
+        return response()->json($booking);
     }
 
     /**
@@ -60,6 +72,6 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        $booking->delete();
     }
 }

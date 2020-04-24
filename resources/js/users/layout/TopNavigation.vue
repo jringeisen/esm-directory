@@ -23,6 +23,12 @@
           >
             Listings
           </b-nav-item>
+          <b-nav-item
+            :class="{'active': route === 'bookings'}"
+            href="/bookings"
+          >
+            Bookings
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item

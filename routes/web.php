@@ -50,6 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/listings', 'ListingController@index');
     Route::get('/packages', 'PackageController@index');
+    Route::get('/bookings', 'BookingController@index');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/admin/roles', 'RoleController@index');
