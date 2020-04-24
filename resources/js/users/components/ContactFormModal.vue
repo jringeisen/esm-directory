@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import ToastMixin from '../../mixins/ToastMixin.js'
 export default {
   props: {
     photographyPackages: {
@@ -118,6 +119,7 @@ export default {
       default: () => {}
     }
   },
+  mixins: [ToastMixin],
   data() {
     return {
       formData: {
@@ -134,10 +136,15 @@ export default {
       this.formData.requested_date = this.$moment(this.eventDetails.start).format()
 
       axios.post('/api/bookings', this.formData).then(() => {
-        console.log('success')
+        this.formData = {}
+        this.toast('success', 'Success!', 'Your booking request was sent successfully!')
+        this.hideModal()
       }).catch((error) => {
         this.formErrors = error.response.data.errors
       })
+    },
+    hideModal () {
+      this.$root.$emit('bv::hide::modal', 'request-booking')
     }
   }
         
