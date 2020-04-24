@@ -138,6 +138,7 @@
           <full-calendar-app
             :events="events"
             :photography-packages="packages"
+            :listing="listing"
           />
         </b-tab>
       </b-tabs>

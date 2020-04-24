@@ -7,7 +7,11 @@
       :events="events"
       @eventClick="eventClicked"
     />
-    <contact-form-modal :photography-packages="photographyPackages" />
+    <contact-form-modal
+      :photography-packages="photographyPackages"
+      :event-details="eventDetails"
+      :listing="listing"
+    />
   </div>
 </template>
 
@@ -29,6 +33,11 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    listing: {
+      type: Object,
+      required: true,
+      default: () => {}
     }
   },
   components: {
@@ -37,11 +46,13 @@ export default {
   },
   data() {
     return {
-      calendarPlugins: [ dayGridPlugin, interactionPlugin ]
+      calendarPlugins: [ dayGridPlugin, interactionPlugin ],
+      eventDetails: {}
     }
   },
   methods: {
     eventClicked (evt) {
+      this.eventDetails = evt.event
       this.$root.$emit('bv::show::modal', 'request-booking')
     }
   }

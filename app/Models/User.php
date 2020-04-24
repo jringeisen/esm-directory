@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Booking;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -41,11 +42,16 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $with = [
-        'listings', 'roles'
+        'listings', 'roles', 'bookings'
     ];
 
     public function listings()
     {
         return $this->hasMany(Listing::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

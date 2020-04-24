@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['api'])->group(function () {
     /** GET Routes */
     Route::get('/directory', 'DirectoryController@index');
+
+    /** API Resource Routes */
+    Route::apiResource('/bookings', 'BookingController');
 });
 
 /** Authenticated api routes */
