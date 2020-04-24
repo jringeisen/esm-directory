@@ -33,7 +33,7 @@ class BookingController extends Controller
     {
         $user = User::find($request->user_id);
 
-        $user->bookings()->create($request->only(
+        $booking = $user->bookings()->create($request->only(
             'name',
             'email',
             'package',
@@ -41,7 +41,7 @@ class BookingController extends Controller
             'requested_date'
         ));
 
-        return response()->json($user);
+        return response()->json($booking);
     }
 
     /**
