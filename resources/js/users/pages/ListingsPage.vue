@@ -105,14 +105,13 @@
       </div>
     </div>
     <create-listing-modal />
-    <create-package-modal :listing="listing" />
+    <create-package-modal :listing="formData" />
     <view-listing-modal
-      :listing="listing"
-      :packages="packages"
+      :listing="formData"
       :user="user"
     />
-    <edit-listing-modal :listing="modalData" />
-    <delete-listing-modal :listing="listing" />
+    <edit-listing-modal :listing="formData" />
+    <delete-listing-modal :listing="formData" />
   </div>
 </template>
 
@@ -133,12 +132,13 @@ export default {
     EditListingModal,
     DeleteListingModal
   },
-  mixins: [ModalActions],
+  mixins: [
+    ModalActions
+  ],
   data () {
     return {
       user: {},
       listings: [],
-      packages: [],
       listing: {}
     }
   },

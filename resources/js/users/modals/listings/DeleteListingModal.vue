@@ -2,6 +2,7 @@
   <b-modal
     :id="$options.name"
     title="Delete Listing"
+    @shown="shown"
   >
     <div class="alert alert-danger">
       Are you sure you want to delete this listing?
@@ -30,31 +31,25 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
 import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'DeleteListingModal',
-  mixins: [ToastMixin, ModalActions],
+  mixins: [
+    ModalActions
+  ],
   props: {
     listing: {
+      type: Object,
       required: true,
-      type: Object
-    }
-  },
-  data () {
-    return {
-      isLoading: false
+      default: () => {}
     }
   },
   methods: {
+    shown () {
+      this.formData = this.listing
+    },
     submit () {
-      this.isLoading = true
-      axios.delete(`/api/listings/${this.listing.id}`).then((response) => {
-        this.$root.$emit('updateUser')
-        this.isLoading = false
-        this.closeModal(this.$options.name)
-        this.toast('success', 'Success!', 'Your listing was deleted successfully!')
-      })
+      this.deleteItem('/api/listings/')
     }
   }
 }

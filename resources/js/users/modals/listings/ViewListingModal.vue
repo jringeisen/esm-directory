@@ -5,6 +5,7 @@
       title="View Listing"
       size="lg"
       :hide-footer="true"
+      @shown="shown"
     >
       <div class="d-flex flex-column align-items-center">
         <b-avatar
@@ -58,17 +59,15 @@
               </p>
               <button
                 v-if="user"
-                v-b-modal="'edit-package-'+item.id"
                 class="btn btn-sm btn-secondary"
-                @click.prevent="setModalData(item)"
+                @click.prevent="openModal('EditPackageModal', item)"
               >
                 <i class="fa fa-edit" /> Edit
               </button>
               <button
                 v-if="user"
-                v-b-modal="'delete-package-'+item.id"
                 class="btn btn-sm btn-danger"
-                @click.prevent="setModalData(item)"
+                @click.prevent="openModal('DeletePackageModal', item)"
               >
                 <i class="fa fa-trash" /> Delete
               </button>
@@ -143,8 +142,8 @@
         </b-tab>
       </b-tabs>
     </b-modal>
-    <edit-package-modal :item="investment" />
-    <delete-package-modal :item="investment" />
+    <edit-package-modal :package="formData" />
+    <delete-package-modal :package="formData" />
   </div>
 </template>
 
@@ -152,8 +151,12 @@
 import EditPackageModal from '../packages/EditPackageModal.vue'
 import DeletePackageModal from '../packages/DeletePackageModal.vue'
 import FullCalendarApp from '../../components/FullCalendarApp.vue'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'ViewListingModal',
+  mixins: [
+    ModalActions
+  ],
   components: {
     EditPackageModal,
     DeletePackageModal,
@@ -164,10 +167,6 @@ export default {
       required: true,
       type: Object
     },
-    packages: {
-      required: true,
-      type: Array
-    },
     user: {
       required: false,
       type: Object,
@@ -176,7 +175,7 @@ export default {
   },
   data () {
     return {
-      investment: {},
+      packages: [],
       events: [
         {
           daysOfWeek: [ '1', '2', '3', '4', '5' ],
@@ -204,8 +203,8 @@ export default {
     }
   },
   methods: {
-    setModalData (item) {
-      this.investment = item
+    shown () {
+      this.packages = this.listing.packages
     }
   }
 }

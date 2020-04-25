@@ -172,23 +172,20 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
 import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'CreateListingModal',
-  mixins: [ToastMixin, ModalActions],
+  mixins: [
+    ModalActions
+  ],
   data () {
     return {
-      formData: {},
-      avatar: [],
-      formErrors: {},
-      isLoading: false
+      avatar: []
     }
   },
   methods: {
     submit (event) {
       event.preventDefault()
-      this.isLoading = true
 
       let data = new FormData();
       data.append('avatar', this.avatar || '');
@@ -200,17 +197,7 @@ export default {
       data.append('description', this.formData.description || '')
       data.append('starting_package', this.formData.starting_package || '')
 
-      axios.post('/api/listings', data).then((response) => {
-        this.isLoading = false
-        this.formData = {}
-        this.avatar = []
-        this.$root.$emit('updateUser')
-        this.closeModal(this.$options.name)
-        this.toast('success', 'Success!', 'Your listing was created successfully!')
-      }).catch((error) => {
-        this.isLoading = false
-        this.formErrors = error.response.data.errors
-      })
+      this.createItem('/api/listings/', data)
     }
   }
 }

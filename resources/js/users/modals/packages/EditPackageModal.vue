@@ -1,14 +1,13 @@
 <template>
   <b-modal
-    :id="'edit-package-'+item.id"
-    :ref="'edit-package-modal'+item.id"
+    :id="$options.name"
     title="Edit Package"
   >
     <form>
       <div class="form-group">
         <label for="name">Name</label>
         <input
-          v-model="item.name"
+          v-model="formData.name"
           type="text"
           class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.name }"
@@ -26,7 +25,7 @@
       <div class="form-group">
         <label for="amount">Amount</label>
         <input
-          v-model="item.amount"
+          v-model="formData.amount"
           type="number"
           class="form-control form-control-sm"
           :class="{ 'is-invalid': formErrors.amount }"
@@ -44,7 +43,7 @@
       <div class="form-group">
         <label for="description">Description</label>
         <textarea
-          v-model="item.description"
+          v-model="formData.description"
           class="form-control form-control-sm"
           rows="4"
           :class="{ 'is-invalid': formErrors.description }"
@@ -63,7 +62,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal"
+        @click.prevent="closeModal"
       >
         Cancel
       </button>
@@ -84,41 +83,27 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'EditPackageModal',
+  mixins: [
+    ModalActions
+  ],
   props: {
-    item: {
+    package: {
       required: true,
       type: Object
     }
   },
-  data () {
-    return {
-      formData: {},
-      formErrors: {},
-      isLoading: false,
-    }
-  },
   methods: {
+    shown () {
+      this.formData = this.package
+    },
     submit (event) {
       event.preventDefault()
-      this.isLoading = true
 
-      axios.put(`/api/packages/${this.item.id}`, this.item).then((response) => {
-        this.$root.$emit('updateUser')
-        this.isLoading = false
-        this.formData = {}
-        this.hideModal()
-        this.toast('success', 'Success!', 'Your package was updated successfully!')
-      }).catch((error) => {
-        this.isLoading = false
-        this.formErrors = error.response.data.errors
-      })
-    },
-    hideModal () {
-      this.$refs['edit-package-modal'+this.item.id].hide()
-    },
+      this.updateItem('/api/packages/')
+    }
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <b-modal
-    :id="'delete-package-'+item.id"
-    :ref="'delete-package-modal'+item.id"
+    :id="$options.name"
     title="Delete Package"
+    @shown="shown"
   >
     <div class="alert alert-danger">
       Are you sure you want to delete this package?
@@ -10,7 +10,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal(item.id)"
+        @click.prevent="closeModal"
       >
         Cancel
       </button>
@@ -31,32 +31,27 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'DeletePackageModal',
+  mixins: [
+    ModalActions
+  ],
   props: {
-    item: {
+    package: {
+      type: Object,
       required: true,
-      type: Object
-    }
-  },
-  data () {
-    return {
-      isLoading: false
+      default: () => {}
     }
   },
   methods: {
+    shown () {
+      this.formData = this.package
+    },
     submit () {
       this.isLoading = true
-      axios.delete(`/api/packages/${this.item.id}`).then((response) => {
-        this.$root.$emit('updateUser')
-        this.isLoading = false
-        this.hideModal()
-        this.toast('success', 'Success!', 'Your package was deleted successfully!')
-      })
-    },
-    hideModal (id) {
-      this.$refs['delete-package-modal'+id].hide()
+
+      this.deleteItem('/api/packages/')
     }
   }
 }

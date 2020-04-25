@@ -1,16 +1,79 @@
+import ToastMixin from './ToastMixin.js'
 export default {
+  mixins: [
+    ToastMixin
+  ],
   data () {
     return {
-      modalData: {}
+      formData: {},
+      formErrors: [],
+      isLoading: false
     }
   },
   methods: {
+    // Action to open modal
     openModal (modalName, data = {}) {
-      this.modalData = data
+      this.formData = data
       this.$root.$emit('bv::show::modal', modalName)
     },
-    closeModal (modalName) {
-      this.$root.$emit('bv::hide::modal', modalName)
+
+    // Action to close modal
+    closeModal () {
+      this.$root.$emit('bv::hide::modal', this.$options.name)
+    },
+
+    // Method to create item resource
+    createItem (url, data = {}) {
+      this.isLoading = true
+      axios.post(url, data).then(() => {
+        this.isLoading = false
+        this.$root.$emit('updateUser')
+        this.closeModal()
+        this.toast('success', 'Success!', 'Item was created successfully!')
+      }).catch((error) => {
+        this.isLoading = false
+        if (error.response.status === 422) {
+          this.formErrors = error.response.data.errors
+        } else {
+          this.toast('danger', 'Something went wrong!', 'Whoops.. Looks like something went wrong.')
+        }
+      })
+    },
+
+    // Method to update item resource
+    updateItem (url) {
+      this.isLoading = true
+      axios.put(url + this.formData.id, this.formData).then((response) => {
+        this.isLoading = false
+        this.$root.$emit('updateUser')
+        this.closeModal()
+        this.toast('success', 'Success!', 'Item was updated successfully!')
+      }).catch((error) => {
+        this.isLoading = false
+        if (error.response.status === 422) {
+          this.formErrors = error.response.data.errors
+        } else {
+          this.toast('danger', 'Something went wrong!', 'Whoops.. Looks like something went wrong.')
+        }
+      })
+    },
+
+    // Method to delete item resource
+    deleteItem (url) {
+      this.isLoading = true
+      axios.delete(url + this.formData.id).then(() => {
+        this.isLoading = false
+        this.$root.$emit('updateUser')
+        this.closeModal()
+        this.toast('success', 'Success!', 'Item was deleted successfully!')
+      }).catch((error) => {
+        this.isLoading = false
+        if (error.response.status === 422) {
+          this.formErrors = error.response.data.errors
+        } else {
+          this.toast('danger', 'Something went wrong!', 'Whoops.. Looks like something went wrong.')
+        }
+      })
     }
   }
 };

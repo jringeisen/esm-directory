@@ -96,13 +96,14 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
 import ModalActions from '../../../mixins/ModalActions.js'
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 export default {
   name: 'EditBookingModal',
-  mixins: [ToastMixin, ModalActions],
+  mixins: [
+    ModalActions
+  ],
   props: {
     booking: {
       required: true,
@@ -114,8 +115,6 @@ export default {
   },
   data () {
     return {
-      formData: {},
-      isLoading: false,
       calendarConfig: {
         altFormat: 'F j, Y h:i:S K',
         altInput: true,
@@ -128,15 +127,7 @@ export default {
       this.formData = this.booking
     },
     submit () {
-      this.isLoading = true
-      axios.put(`/api/bookings/${this.booking.id}`, this.formData).then((response) => {
-        this.isLoading = false
-        this.closeModal(this.$options.name)
-        this.toast('success', 'Success!', 'Your booking was deleted successfully!')
-      }).catch((error) => {
-        this.isLoading = false
-        this.toast('danger', 'Something went wrong!', 'Whoops.. Looks like something went wrong.')
-      })
+      this.updateItem('/api/bookings/', this.formData)
     }
   }
 }

@@ -78,11 +78,12 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
 import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'EditListingModal',
-  mixins: [ToastMixin, ModalActions],
+  mixins: [
+    ModalActions
+  ],
   props: {
     listing: {
       required: true,
@@ -92,8 +93,6 @@ export default {
   data () {
     return {
       listings: {},
-      formData: {},
-      isLoading: false
     }
   },
   methods: {
@@ -101,12 +100,7 @@ export default {
       this.formData = this.listing
     },
     submit () {
-      this.isLoading = true
-      axios.put(`/api/listings/${this.listing.id}`, this.formData).then((response) => {
-        this.isLoading = false
-        this.closeModal(this.$options.name)
-        this.toast('success', 'Success!', 'Your listing was updated successfully!')
-      })
+      this.updateItem('/api/listings/')
     }
   }
 }

@@ -84,41 +84,28 @@
 </template>
 
 <script>
-import ToastMixin from '../../../mixins/ToastMixin.js'
 import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'CreatePackageModal',
-  mixins: [ToastMixin, ModalActions],
+
+  mixins: [
+    ModalActions
+  ],
+
   props: {
     listing: {
       required: true,
       type: Object
     }
   },
-  data () {
-    return {
-      formData: {},
-      formErrors: {},
-      isLoading: false,
-    }
-  },
+  
   methods: {
     submit (event) {
       event.preventDefault()
-      this.isLoading = true
 
       var data = Object.assign({listing_id: this.listing.id}, this.formData)
 
-      axios.post('/api/packages', data).then((response) => {
-        this.$root.$emit('updateUser')
-        this.isLoading = false
-        this.formData = {}
-        this.closeModal(this.$options.name)
-        this.toast('success', 'Success!', 'Your package was created successfully!')
-      }).catch((error) => {
-        this.isLoading = false
-        this.formErrors = error.response.data.errors
-      })
+      this.createItem('/api/packages', data)
     }
   }
 }
