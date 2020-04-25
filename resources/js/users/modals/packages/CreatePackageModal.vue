@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="create-package"
+    :id="$options.name"
     ref="create-package-modal"
     title="Create Package"
   >
@@ -63,7 +63,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -85,8 +85,10 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'CreatePackageModal',
+  mixins: [ToastMixin, ModalActions],
   props: {
     listing: {
       required: true,
@@ -111,16 +113,13 @@ export default {
         this.$root.$emit('updateUser')
         this.isLoading = false
         this.formData = {}
-        this.hideModal()
+        this.closeModal(this.$options.name)
         this.toast('success', 'Success!', 'Your package was created successfully!')
       }).catch((error) => {
         this.isLoading = false
         this.formErrors = error.response.data.errors
       })
-    },
-    hideModal () {
-      this.$refs['create-package-modal'].hide()
-    },
+    }
   }
 }
 </script>

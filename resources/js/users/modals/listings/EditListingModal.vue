@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    :id="'edit-'+listing.id"
+    :id="$options.name"
     :ref="'edit-'+listing.id+'-modal'"
     title="Edit Listing"
     @shown="shown"
@@ -57,7 +57,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal(listing.id)"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -79,8 +79,10 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'EditListingModal',
+  mixins: [ToastMixin, ModalActions],
   props: {
     listing: {
       required: true,
@@ -102,12 +104,9 @@ export default {
       this.isLoading = true
       axios.put(`/api/listings/${this.listing.id}`, this.formData).then((response) => {
         this.isLoading = false
-        this.hideModal()
+        this.closeModal(this.$options.name)
         this.toast('success', 'Success!', 'Your listing was updated successfully!')
       })
-    },
-    hideModal (id) {
-      this.$refs['edit-'+id+'-modal' ].hide()
     }
   }
 }

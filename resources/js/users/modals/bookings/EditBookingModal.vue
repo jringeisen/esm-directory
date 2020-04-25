@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    :id="'edit-booking-modal'"
+    :id="$options.name"
     title="Edit Booking"
     @shown="shown"
     @ok="submit"
@@ -75,7 +75,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal(booking.id)"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -97,10 +97,12 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 export default {
-  mixins: [ToastMixin],
+  name: 'EditBookingModal',
+  mixins: [ToastMixin, ModalActions],
   props: {
     booking: {
       required: true,
@@ -129,15 +131,12 @@ export default {
       this.isLoading = true
       axios.put(`/api/bookings/${this.booking.id}`, this.formData).then((response) => {
         this.isLoading = false
-        this.hideModal()
+        this.closeModal(this.$options.name)
         this.toast('success', 'Success!', 'Your booking was deleted successfully!')
       }).catch((error) => {
         this.isLoading = false
         this.toast('danger', 'Something went wrong!', 'Whoops.. Looks like something went wrong.')
       })
-    },
-    hideModal (id) {
-      this.$root.$emit('bv::hide::modal', 'edit-booking-modal')
     }
   }
 }

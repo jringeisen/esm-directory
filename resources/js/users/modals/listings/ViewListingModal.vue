@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal
-      :id="'view-'+listing.id"
+      :id="$options.name"
       title="View Listing"
       size="lg"
       :hide-footer="true"
@@ -153,6 +153,7 @@ import EditPackageModal from '../packages/EditPackageModal.vue'
 import DeletePackageModal from '../packages/DeletePackageModal.vue'
 import FullCalendarApp from '../../components/FullCalendarApp.vue'
 export default {
+  name: 'ViewListingModal',
   components: {
     EditPackageModal,
     DeletePackageModal,

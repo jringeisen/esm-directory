@@ -5,7 +5,7 @@
         <span>Listings</span>
 
         <button
-          v-b-modal="'create-listing'"
+          @click.prevent="openModal('CreateListingModal')"
           class="btn btn-sm btn-secondary"
         >
           Create Listing
@@ -78,26 +78,22 @@
                     <i class="fas fa-ellipsis-v" />
                   </template>
                   <b-dropdown-item
-                    v-b-modal="'create-package'"
-                    @click.prevent="setModalData(item)"
+                    @click.prevent="openModal('CreatePackageModal', item)"
                   >
                     Add Package
                   </b-dropdown-item>
                   <b-dropdown-item
-                    v-b-modal="'view-'+item.id"
-                    @click.prevent="setModalData(item)"
+                    @click.prevent="openModal('ViewListingModal', item)"
                   >
                     View Listing
                   </b-dropdown-item>
                   <b-dropdown-item
-                    v-b-modal="'edit-'+item.id"
-                    @click.prevent="setModalData(item)"
+                    @click.prevent="openModal('EditListingModal', item)"
                   >
                     Edit Listing
                   </b-dropdown-item>
                   <b-dropdown-item
-                    v-b-modal="'delete-'+item.id"
-                    @click.prevent="setModalData(item)"
+                    @click.prevent="openModal('DeleteListingModal', item)"
                   >
                     Delete Listing
                   </b-dropdown-item>
@@ -115,7 +111,7 @@
       :packages="packages"
       :user="user"
     />
-    <edit-listing-modal :listing="listing" />
+    <edit-listing-modal :listing="modalData" />
     <delete-listing-modal :listing="listing" />
   </div>
 </template>
@@ -126,9 +122,10 @@ import CreatePackageModal from '../modals/packages/CreatePackageModal.vue'
 import ViewListingModal from '../modals/listings/ViewListingModal.vue'
 import EditListingModal from '../modals/listings/EditListingModal.vue'
 import DeleteListingModal from '../modals/listings/DeleteListingModal.vue'
-import SetModalData from '../../mixins/SetModalData.js'
+import ModalActions from '../../mixins/ModalActions.js'
 import axios from 'axios'
 export default {
+  name: 'ListingsPage',
   components: {
     CreateListingModal,
     CreatePackageModal,
@@ -136,7 +133,7 @@ export default {
     EditListingModal,
     DeleteListingModal
   },
-  mixins: [SetModalData],
+  mixins: [ModalActions],
   data () {
     return {
       user: {},

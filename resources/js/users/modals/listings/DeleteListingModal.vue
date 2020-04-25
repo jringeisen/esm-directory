@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    :id="'delete-'+listing.id"
+    :id="$options.name"
     title="Delete Listing"
   >
     <div class="alert alert-danger">
@@ -9,7 +9,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal(listing.id)"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -31,8 +31,10 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'DeleteListingModal',
+  mixins: [ToastMixin, ModalActions],
   props: {
     listing: {
       required: true,
@@ -50,12 +52,9 @@ export default {
       axios.delete(`/api/listings/${this.listing.id}`).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
-        this.hideModal(this.listing.id)
+        this.closeModal(this.$options.name)
         this.toast('success', 'Success!', 'Your listing was deleted successfully!')
       })
-    },
-    hideModal (id) {
-      this.$root.$emit('bv::hide::modal', 'delete-'+id)
     }
   }
 }

@@ -71,12 +71,12 @@
                     <i class="fas fa-ellipsis-v" />
                   </template>
                   <b-dropdown-item
-                    @click.prevent="openEditModal(item)"
+                    @click.prevent="openModal('EditBookingModal', item)"
                   >
                     Edit Booking
                   </b-dropdown-item>
                   <b-dropdown-item
-                    @click.prevent="openDeleteModal(item)"
+                    @click.prevent="openModal('DeleteBookingModal', item)"
                   >
                     Delete Booking
                   </b-dropdown-item>
@@ -87,8 +87,8 @@
         </table>
       </div>
     </div>
-    <edit-booking-modal :booking="booking" />
-    <delete-booking-modal :booking="booking" />
+    <edit-booking-modal :booking="modalData" />
+    <delete-booking-modal :booking="modalData" />
   </div>
 </template>
 
@@ -96,8 +96,9 @@
 import EditBookingModal from '../modals/bookings/EditBookingModal.vue'
 import DeleteBookingModal from '../modals/bookings/DeleteBookingModal.vue'
 import ToastMixin from '../../mixins/ToastMixin.js'
+import ModalActions from '../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  mixins: [ToastMixin, ModalActions],
   components: {
     EditBookingModal,
     DeleteBookingModal
@@ -119,14 +120,6 @@ export default {
       }).catch((error) => {
         this.toast('danger', 'Something went wrong!', 'It looks like something went wrong when trying to retrieve your booking requests.')
       })
-    },
-    openEditModal (data) {
-      this.booking = data
-      this.$root.$emit('bv::show::modal', 'edit-booking-modal')
-    },
-    openDeleteModal (data) {
-      this.booking = data
-      this.$root.$emit('bv::show::modal', 'delete-booking-modal')
     }
   }
 }

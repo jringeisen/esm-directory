@@ -1,6 +1,6 @@
 <template>
   <b-modal 
-    id="create-listing" 
+    :id="$options.name" 
     title="Create Listing"
   >
     <form>
@@ -151,7 +151,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -173,8 +173,10 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'CreateListingModal',
+  mixins: [ToastMixin, ModalActions],
   data () {
     return {
       formData: {},
@@ -203,15 +205,12 @@ export default {
         this.formData = {}
         this.avatar = []
         this.$root.$emit('updateUser')
-        this.hideModal()
+        this.closeModal(this.$options.name)
         this.toast('success', 'Success!', 'Your listing was created successfully!')
       }).catch((error) => {
         this.isLoading = false
         this.formErrors = error.response.data.errors
       })
-    },
-    hideModal () {
-      this.$root.$emit('bv::hide::modal', 'create-listing')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    :id="'delete-booking-modal'"
+    :id="$options.name"
     title="Delete Booking"
   >
     <div class="alert alert-danger">
@@ -9,7 +9,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal(booking.id)"
+        @click.prevent="closeModal($options.name)"
       >
         Cancel
       </button>
@@ -31,8 +31,10 @@
 
 <script>
 import ToastMixin from '../../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
-  mixins: [ToastMixin],
+  name: 'DeleteBookingModal',
+  mixins: [ToastMixin, ModalActions],
   props: {
     booking: {
       required: true,
@@ -50,12 +52,9 @@ export default {
       axios.delete(`/api/bookings/${this.booking.id}`).then((response) => {
         this.$root.$emit('updateUser')
         this.isLoading = false
-        this.hideModal(this.booking.id)
+        this.closeModal(this.booking.id)
         this.toast('success', 'Success!', 'Your booking was deleted successfully!')
       })
-    },
-    hideModal (id) {
-      this.$root.$emit('bv::hide::modal', 'delete-booking-modal')
     }
   }
 }
