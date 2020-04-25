@@ -103,7 +103,7 @@ export default {
       axios.put(`/api/listings/${this.listing.id}`, this.formData).then((response) => {
         this.isLoading = false
         this.hideModal()
-        this.toast('success', 'Success!', 'Your listing was deleted successfully!')
+        this.toast('success', 'Success!', 'Your listing was updated successfully!')
       })
     },
     hideModal (id) {

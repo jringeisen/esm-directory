@@ -35,29 +35,29 @@
           </thead>
           <tbody>
             <tr
-              v-for="(booking, index) in bookings"
+              v-for="(item, index) in bookings"
               :key="index"
             >
               <td class="align-middle">
                 <span
                   class="badge"
-                  :class="{'badge-success': booking.confirmed_on, 'badge-danger': !booking.confirmed_on}"
-                >{{ booking.confirmed_on ? 'Confirmed' : 'Not Confirmed' }}</span>
+                  :class="{'badge-success': item.confirmed_on, 'badge-danger': !item.confirmed_on}"
+                >{{ item.confirmed_on ? 'Confirmed' : 'Not Confirmed' }}</span>
               </td>
               <td class="align-middle">
-                {{ booking.name }}
+                {{ item.name }}
               </td>
               <td class="align-middle">
-                {{ booking.email }}
+                {{ item.email }}
               </td>
               <td class="align-middle">
-                {{ booking.package }}
+                {{ item.package }}
               </td>
               <td class="align-middle">
-                {{ booking.requested_date | moment('LLL') }}
+                {{ item.requested_date | moment('LLL') }}
               </td>
               <td class="align-middle">
-                {{ booking.message }}
+                {{ item.message }}
               </td>
               <td class="text-right align-middle">
                 <b-dropdown
@@ -70,10 +70,14 @@
                   <template #button-content>
                     <i class="fas fa-ellipsis-v" />
                   </template>
-                  <b-dropdown-item>
+                  <b-dropdown-item
+                    @click.prevent="openEditModal(item)"
+                  >
                     Edit Booking
                   </b-dropdown-item>
-                  <b-dropdown-item>
+                  <b-dropdown-item
+                    @click.prevent="openDeleteModal(item)"
+                  >
                     Delete Booking
                   </b-dropdown-item>
                 </b-dropdown>
@@ -83,28 +87,46 @@
         </table>
       </div>
     </div>
+    <edit-booking-modal :booking="booking" />
+    <delete-booking-modal :booking="booking" />
   </div>
 </template>
 
 <script>
+import EditBookingModal from '../modals/bookings/EditBookingModal.vue'
+import DeleteBookingModal from '../modals/bookings/DeleteBookingModal.vue'
 import ToastMixin from '../../mixins/ToastMixin.js'
 export default {
   mixins: [ToastMixin],
+  components: {
+    EditBookingModal,
+    DeleteBookingModal
+  },
   data() {
     return {
-      bookings: []
+      bookings: [],
+      booking: {}
     }
   },
   mounted () {
+    this.$root.$on('updateUser', () => this.getBookings())
     this.getBookings()
   },
   methods: {
     getBookings () {
-      axios.get('/bookings').then((response) => {
-        this.bookings = response.data
+      axios.get('/api/user').then((response) => {
+        this.bookings = response.data.bookings
       }).catch((error) => {
         this.toast('danger', 'Something went wrong!', 'It looks like something went wrong when trying to retrieve your booking requests.')
       })
+    },
+    openEditModal (data) {
+      this.booking = data
+      this.$root.$emit('bv::show::modal', 'edit-booking-modal')
+    },
+    openDeleteModal (data) {
+      this.booking = data
+      this.$root.$emit('bv::show::modal', 'delete-booking-modal')
     }
   }
 }
