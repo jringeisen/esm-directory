@@ -102,7 +102,8 @@ export default {
     submit (evt) {
       evt.preventDefault()
       
-      this.updateItem('/api/listings/')
+      // Accepts two params: URL, name for $emit event.
+      this.updateItem('/api/listings/', 'getUser')
     }
   }
 }

@@ -23,11 +23,11 @@ export default {
     },
 
     // Method to create item resource
-    createItem (url, data = {}) {
+    createItem (url, data = {}, event = '') {
       this.isLoading = true
       axios.post(url, data).then(() => {
         this.isLoading = false
-        this.$root.$emit('updateUser')
+        this.$root.$emit(event)
         this.closeModal()
         this.toast('success', 'Success!', 'Item was created successfully!')
       }).catch((error) => {
@@ -41,11 +41,11 @@ export default {
     },
 
     // Method to update item resource
-    updateItem (url) {
+    updateItem (url, event = '') {
       this.isLoading = true
       axios.put(url + this.formData.id, this.formData).then((response) => {
         this.isLoading = false
-        this.$root.$emit('updateUser')
+        this.$root.$emit(event)
         this.closeModal()
         this.toast('success', 'Success!', 'Item was updated successfully!')
       }).catch((error) => {
@@ -59,11 +59,11 @@ export default {
     },
 
     // Method to delete item resource
-    deleteItem (url) {
+    deleteItem (url, event = '') {
       this.isLoading = true
       axios.delete(url + this.formData.id).then(() => {
         this.isLoading = false
-        this.$root.$emit('updateUser')
+        this.$root.$emit(event)
         this.closeModal()
         this.toast('success', 'Success!', 'Item was deleted successfully!')
       }).catch((error) => {

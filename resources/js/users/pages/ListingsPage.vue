@@ -142,12 +142,10 @@ export default {
       listing: {}
     }
   },
-  created () {
+  mounted () {
     this.getUser()
 
-    this.$root.$on('updateUser', () => {
-      this.getUser()
-    })
+    this.$root.$on('getUser', () => this.getUser())
   },
   methods: {
     getUser () {

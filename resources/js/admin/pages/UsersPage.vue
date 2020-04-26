@@ -55,9 +55,9 @@
             {{ data.item.created_at | moment('LLL') }}
           </template>
 
-          <template>
+          <template #cell(actions)>
             <b-dropdown
-              id="roles-dropdown"
+              id="dropdown-1"
               no-caret
               dropright
               variant="white"
@@ -66,9 +66,9 @@
               <template #button-content>
                 <i class="fas fa-ellipsis-v" />
               </template>
-              <b-dropdown-item>Edit User</b-dropdown-item>
-              <b-dropdown-item>View User</b-dropdown-item>
-              <b-dropdown-item>Delete User</b-dropdown-item>
+              <b-dropdown-item>Edit</b-dropdown-item>
+              <b-dropdown-item>View</b-dropdown-item>
+              <b-dropdown-item>Delete</b-dropdown-item>
             </b-dropdown>
           </template>
         </b-table>
@@ -133,12 +133,6 @@ export default {
           key: "actions",
           sortable: false,
           tdClass: "align-middle"
-        },
-        {
-          key: "name",
-          label: "Person age",
-          sortable: true,
-          variant: "danger"
         }
       ]
     };

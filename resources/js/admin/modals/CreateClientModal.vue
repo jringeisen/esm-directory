@@ -1,57 +1,53 @@
 <template>
-  <!-- Create Client Modal -->
   <b-modal
     @ok="store"
     title="Create Client"
-    id="modal-create-client"
+    :id="$options.name"
   >
-    <!-- Form Errors -->
-    <div
-      class="alert alert-danger"
-      v-if="createForm.errors.length > 0"
-    >
-      <p class="mb-0">
-        <strong>Whoops!</strong> Something went wrong!
-      </p>
-      <br>
-      <ul>
-        <li
-          v-for="error in createForm.errors"
-          :key="error.id"
-        >
-          {{ error }}
-        </li>
-      </ul>
-    </div>
-
-    <!-- Create Client Form -->
     <form role="form">
-      <!-- Name -->
       <div class="form-group">
         <label class="col-form-label">Name</label>
         <input
           id="create-client-name"
           type="text"
           class="form-control"
-          @keyup.enter="store"
-          v-model="createForm.name"
+          :class="{'is-invalid': formErrors.name}"
+          @keyup="formErrors.name = ''"
+          v-model="formData.name"
         >
-
-        <span class="form-text text-muted">Something your users will recognize and trust.</span>
+        <div
+          v-if="formErrors.name"
+          class="invalid-feedback"
+        >
+          {{ formErrors.name[0] }}
+        </div>
+        <span
+          class="form-text text-muted"
+          v-if="!formErrors.name"
+        >Something your users will recognize and trust.</span>
       </div>
 
-      <!-- Redirect URL -->
       <div class="form-group">
         <label class="col-form-label">Redirect URL</label>
         <input
           type="text"
           class="form-control"
+          :class="{'is-invalid': formErrors.redirect}"
           name="redirect"
-          @keyup.enter="store"
-          v-model="createForm.redirect"
+          @keyup="formErrors.redirect = ''"
+          v-model="formData.redirect"
         >
+        <div
+          v-if="formErrors.redirect"
+          class="invalid-feedback"
+        >
+          {{ formErrors.redirect[0] }}
+        </div>
 
-        <span class="form-text text-muted">Your application's authorization callback URL.</span>
+        <span
+          class="form-text text-muted"
+          v-if="!formErrors.redirect"
+        >Your application's authorization callback URL.</span>
       </div>
 
       <!-- Confidential -->
@@ -61,7 +57,7 @@
           <label>
             <input
               type="checkbox"
-              v-model="createForm.confidential"
+              v-model="formData.confidential"
             >
           </label>
         </div>
@@ -75,55 +71,17 @@
 </template>
 
 <script>
+import ModalActions from '../../mixins/ModalActions.js'
 export default {
   name: 'CreateClientModal',
-  data() {
-    return {
-      createForm: {
-        errors: [],
-        name: "",
-        redirect: "",
-        confidential: true
-      }
-    };
-  },
+  mixins: [
+    ModalActions
+  ],
   methods: {
-    /**
-     * Create a new OAuth client for the user.
-     */
-    store(bv) {
-      bv.preventDefault();
+    store(evt) {
+      evt.preventDefault();
 
-      this.persistClient(
-        "post",
-        "/oauth/clients",
-        this.createForm,
-        "#modal-create-client"
-      );
-    },
-    /**
-     * Persist the client to storage using the given form.
-     */
-    persistClient(method, uri, form, modal) {
-      form.errors = [];
-
-      axios[method](uri, form)
-        .then(response => {
-          this.$root.$emit('getClients')
-
-          form.name = "";
-          form.redirect = "";
-          form.errors = [];
-
-          this.$root.$emit('bv::hide::modal', 'modal-create-client')
-        })
-        .catch(error => {
-          if (typeof error.response.data === "object") {
-            form.errors = _.flatten(_.toArray(error.response.data.errors));
-          } else {
-            form.errors = ["Something went wrong. Please try again."];
-          }
-        });
+      this.createItem('/oauth/clients', this.formData, 'getClients')
     }
   }
 };

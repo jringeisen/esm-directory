@@ -157,7 +157,8 @@ export default {
       this.formData.user_id = this.listing.user_id
       this.formData.requested_date = this.$moment(this.eventDetails.start).format()
 
-      this.createItem('/api/bookings', this.formData)
+      // Accepts three params: URL, DATA, name for $emit event.
+      this.createItem('/api/bookings', this.formData, 'getUser')
     },
   }     
 }

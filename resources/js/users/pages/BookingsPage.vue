@@ -111,7 +111,7 @@ export default {
     }
   },
   mounted () {
-    this.$root.$on('updateUser', () => this.getBookings())
+    this.$root.$on('getUser', () => this.getBookings())
     this.getBookings()
   },
   methods: {

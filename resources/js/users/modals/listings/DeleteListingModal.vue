@@ -51,7 +51,8 @@ export default {
     submit (evt) {
       evt.preventDefault()
 
-      this.deleteItem('/api/listings/')
+      // Accepts two params: URL, name for $emit event.
+      this.deleteItem('/api/listings/', 'getUser')
     }
   }
 }

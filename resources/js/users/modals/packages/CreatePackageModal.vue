@@ -105,7 +105,8 @@ export default {
 
       var data = Object.assign({listing_id: this.listing.id}, this.formData)
 
-      this.createItem('/api/packages', data)
+      // Accepts three params: URL, DATA, name for $emit event.
+      this.createItem('/api/packages', data, 'getUser')
     }
   }
 }

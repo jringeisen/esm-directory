@@ -129,7 +129,8 @@ export default {
     submit (evt) {
       evt.preventDefault()
 
-      this.updateItem('/api/bookings/', this.formData)
+      // Accepts two params: URL, name for $emit event.
+      this.updateItem('/api/bookings/', 'getUser')
     }
   }
 }

@@ -8,7 +8,7 @@
           <b-button
             variant="secondary"
             size="sm"
-            @click.prevent="$root.$emit('bv::show::modal', 'modal-create-client')"
+            @click.prevent="openModal('CreateClientModal')"
           >
             Create New Client
           </b-button>
@@ -87,7 +87,12 @@
 <script>
 import CreateClientModal from "../modals/CreateClientModal.vue";
 import EditClientModal from "../modals/EditClientModal.vue";
+import ModalActions from '../../mixins/ModalActions.js'
 export default {
+  name: 'PassportClients',
+  mixins: [
+    ModalActions
+  ],
   components: {
     CreateClientModal,
     EditClientModal

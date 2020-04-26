@@ -2,6 +2,7 @@
   <b-modal
     :id="$options.name"
     title="Delete Booking"
+    @shown="shown"
   >
     <div class="alert alert-danger">
       Are you sure you want to delete this booking?
@@ -43,10 +44,14 @@ export default {
     }
   },
   methods: {
+    shown () {
+      this.formData = this.booking
+    },
     submit (evt) {
       evt.preventDefault()
       
-      this.deleteItem('/api/bookings/', this.booking)
+      // Accepts two params: URL, name for $emit event.
+      this.deleteItem('/api/bookings/', 'getUser')
     }
   }
 }

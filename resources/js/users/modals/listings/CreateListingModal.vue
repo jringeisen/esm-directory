@@ -197,7 +197,8 @@ export default {
       data.append('description', this.formData.description || '')
       data.append('starting_package', this.formData.starting_package || '')
 
-      this.createItem('/api/listings/', data)
+      // Accepts three params: URL, DATA, name for $emit event.
+      this.createItem('/api/listings/', data, 'getUser')
     }
   }
 }
