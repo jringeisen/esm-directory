@@ -38,16 +38,13 @@ export default {
     ModalActions
   ],
   props: {
-    package: {
+    item: {
       type: Object,
       required: true,
       default: () => {}
     }
   },
   methods: {
-    shown () {
-      this.formData = this.package
-    },
     submit (evt) {
       evt.preventDefault()
 

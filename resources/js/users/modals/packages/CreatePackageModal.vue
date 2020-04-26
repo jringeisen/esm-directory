@@ -87,23 +87,20 @@
 import ModalActions from '../../../mixins/ModalActions.js'
 export default {
   name: 'CreatePackageModal',
-
   mixins: [
     ModalActions
   ],
-
   props: {
     item: {
       required: true,
       type: Object
     }
   },
-  
   methods: {
     submit (evt) {
       evt.preventDefault()
 
-      var data = Object.assign({listing_id: this.listing.id}, this.formData)
+      var data = Object.assign({listing_id: this.item.id}, this.formData)
 
       // Accepts three params: URL, DATA, name for $emit event.
       this.createItem('/api/packages', data, 'getUser')

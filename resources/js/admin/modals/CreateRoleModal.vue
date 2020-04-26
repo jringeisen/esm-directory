@@ -96,7 +96,7 @@ export default {
     submit(event) {
       event.preventDefault();
       
-      this.createItem('/api/roles', this.formData)
+      this.createItem('/api/roles', this.formData, 'getRoles')
     }
   }
 };

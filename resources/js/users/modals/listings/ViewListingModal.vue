@@ -142,8 +142,8 @@
         </b-tab>
       </b-tabs>
     </b-modal>
-    <edit-package-modal :package="formData" />
-    <delete-package-modal :package="formData" />
+    <edit-package-modal :item="formData" />
+    <delete-package-modal :item="formData" />
   </div>
 </template>
 
