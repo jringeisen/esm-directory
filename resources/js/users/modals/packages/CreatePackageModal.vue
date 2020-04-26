@@ -100,8 +100,8 @@ export default {
   },
   
   methods: {
-    submit (event) {
-      event.preventDefault()
+    submit (evt) {
+      evt.preventDefault()
 
       var data = Object.assign({listing_id: this.listing.id}, this.formData)
 

@@ -76,6 +76,7 @@
 
 <script>
 export default {
+  name: 'CreateClientModal',
   data() {
     return {
       createForm: {

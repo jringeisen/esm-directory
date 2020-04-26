@@ -48,8 +48,8 @@ export default {
     shown () {
       this.formData = this.package
     },
-    submit () {
-      this.isLoading = true
+    submit (evt) {
+      evt.preventDefault()
 
       this.deleteItem('/api/packages/')
     }

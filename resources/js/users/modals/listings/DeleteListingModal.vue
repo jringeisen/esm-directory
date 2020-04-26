@@ -48,7 +48,9 @@ export default {
     shown () {
       this.formData = this.listing
     },
-    submit () {
+    submit (evt) {
+      evt.preventDefault()
+
       this.deleteItem('/api/listings/')
     }
   }

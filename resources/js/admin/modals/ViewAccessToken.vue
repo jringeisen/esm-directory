@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: 'ViewAccessToken',
   data() {
     return {
       accessToken: null

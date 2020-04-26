@@ -2,6 +2,7 @@
   <b-modal
     :id="$options.name"
     title="Edit Package"
+    @shown="shown"
   >
     <form>
       <div class="form-group">
@@ -99,8 +100,8 @@ export default {
     shown () {
       this.formData = this.package
     },
-    submit (event) {
-      event.preventDefault()
+    submit (evt) {
+      evt.preventDefault()
 
       this.updateItem('/api/packages/')
     }

@@ -126,7 +126,9 @@ export default {
     shown () {
       this.formData = this.booking
     },
-    submit () {
+    submit (evt) {
+      evt.preventDefault()
+
       this.updateItem('/api/bookings/', this.formData)
     }
   }

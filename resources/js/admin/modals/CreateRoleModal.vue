@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="create-role"
+    :id="$options.name"
     title="Create Role"
   >
     <form>
@@ -58,7 +58,7 @@
     <div slot="modal-footer">
       <button
         class="btn btn-outline-secondary"
-        @click.prevent="hideModal"
+        @click.prevent="closeModal"
       >
         Cancel
       </button>
@@ -79,43 +79,24 @@
 </template>
 
 <script>
-import ToastMixin from "../../mixins/ToastMixin.js";
+import ModalActions from "../../mixins/ModalActions.js";
 export default {
-  mixins: [ToastMixin],
+  name: 'CreateRoleModal',
+  mixins: [
+    ModalActions
+  ],
   data() {
     return {
       formData: {
-        guard_name: ""
-      },
-      formErrors: {},
-      isLoading: false
+        guard_name: ''
+      }
     };
   },
   methods: {
     submit(event) {
       event.preventDefault();
-      this.isLoading = true;
-
-      axios
-        .post("/api/roles", this.formData)
-        .then(response => {
-          this.isLoading = false;
-          this.formData = {};
-          this.hideModal();
-          this.$root.$emit('getRoles')
-          this.toast(
-            "success",
-            "Success!",
-            "The role was created successfully!"
-          );
-        })
-        .catch(error => {
-          this.isLoading = false;
-          this.formErrors = error.response.data.errors;
-        });
-    },
-    hideModal() {
-      this.$root.$emit("bv::hide::modal", "create-role");
+      
+      this.createItem('/api/roles', this.formData)
     }
   }
 };

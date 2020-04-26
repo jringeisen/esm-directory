@@ -6,7 +6,7 @@
         variant="secondary"
         class="float-right"
         size="sm"
-        v-b-modal="'create-role'"
+        @click.prevent="openModal('CreateRoleModal')"
       >
         Create Role
       </b-button>
@@ -67,7 +67,11 @@
 
 <script>
 import CreateRoleModal from '../modals/CreateRoleModal.vue'
+import ModalActions from '../../mixins/ModalActions.js'
 export default {
+  mixins: [
+    ModalActions
+  ],
   components: {
     CreateRoleModal
   },

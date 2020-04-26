@@ -32,7 +32,7 @@
         </button>
       </div>
       <div v-if="listings.length">
-        <table class="table table-borderless table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Avatar</th>

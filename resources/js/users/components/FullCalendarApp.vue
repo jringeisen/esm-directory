@@ -7,7 +7,7 @@
       :events="events"
       @eventClick="eventClicked"
     />
-    <contact-form-modal
+    <create-booking-modal
       :photography-packages="photographyPackages"
       :event-details="eventDetails"
       :listing="listing"
@@ -20,9 +20,11 @@
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import ContactFormModal from '../components/ContactFormModal.vue'
+import CreateBookingModal from '../modals/bookings/CreateBookingModal.vue'
+import ModalActions from '../../mixins/ModalActions.js'
 
 export default {
+  name: 'FullCalendarApp',
   props: {
     events: {
       type: Array,
@@ -40,9 +42,12 @@ export default {
       default: () => {}
     }
   },
+  mixins: [
+    ModalActions
+  ],
   components: {
     FullCalendar,
-    ContactFormModal
+    CreateBookingModal
   },
   data() {
     return {
@@ -53,7 +58,7 @@ export default {
   methods: {
     eventClicked (evt) {
       this.eventDetails = evt.event
-      this.$root.$emit('bv::show::modal', 'request-booking')
+      this.openModal('CreateBookingModal')
     }
   }
 }

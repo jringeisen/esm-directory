@@ -43,7 +43,9 @@ export default {
     }
   },
   methods: {
-    submit () {
+    submit (evt) {
+      evt.preventDefault()
+      
       this.deleteItem('/api/bookings/', this.booking)
     }
   }

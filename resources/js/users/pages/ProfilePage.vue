@@ -64,6 +64,7 @@
 
 <script>
 export default {
+  name: 'ProfilePage',
   data () {
     return {
       formData: {},

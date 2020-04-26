@@ -184,8 +184,8 @@ export default {
     }
   },
   methods: {
-    submit (event) {
-      event.preventDefault()
+    submit (evt) {
+      evt.preventDefault()
 
       let data = new FormData();
       data.append('avatar', this.avatar || '');

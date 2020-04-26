@@ -58,6 +58,7 @@
 
 <script>
 export default {
+  name: 'EditClientModal',
   props: {
     client: {
       type: Object,

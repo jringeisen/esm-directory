@@ -87,8 +87,8 @@
         </table>
       </div>
     </div>
-    <edit-booking-modal :booking="modalData" />
-    <delete-booking-modal :booking="modalData" />
+    <edit-booking-modal :booking="formData" />
+    <delete-booking-modal :booking="formData" />
   </div>
 </template>
 
@@ -98,6 +98,7 @@ import DeleteBookingModal from '../modals/bookings/DeleteBookingModal.vue'
 import ToastMixin from '../../mixins/ToastMixin.js'
 import ModalActions from '../../mixins/ModalActions.js'
 export default {
+  name: 'BookingsPage',
   mixins: [ToastMixin, ModalActions],
   components: {
     EditBookingModal,

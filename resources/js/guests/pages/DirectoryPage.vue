@@ -44,10 +44,9 @@
         >
           <div class="col-12">
             <b-card
-              v-b-modal="'view-'+item.id"
               no-body
               class="overflow-hidden shadow card"
-              @click.prevent="setModalData(item)"
+              @click.prevent="openModal('ViewListingModal', item)"
             >
               <b-row
                 no-gutters
@@ -86,27 +85,26 @@
         </div>
       </div>
     </div>
-    <view-listing-modal
-      :listing="listing"
-      :packages="packages"
-    />
+    <view-listing-modal :listing="formData" />
   </div>
 </template>
 
 <script>
 import ViewListingModal from '../../users/modals/listings/ViewListingModal.vue'
-import SetModalData from '../../mixins/SetModalData.js'
+import ModalActions from '../../mixins/ModalActions.js'
 import axios from 'axios'
 export default {
+  name: 'DirectoryPage',
   components: {
     ViewListingModal
   },
-  mixins: [SetModalData],
+  mixins: [
+    ModalActions
+  ],
   data () {
     return {
       listings: [],
       listing: {},
-      packages: [],
       search: ''
     }
   },

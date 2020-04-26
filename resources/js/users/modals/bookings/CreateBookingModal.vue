@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="request-booking"
+    :id="$options.name"
     title="Request A Booking"
     @ok="submit"
   >
@@ -96,12 +96,33 @@
         </form>
       </div>
     </div>
+    <div slot="modal-footer">
+      <button
+        class="btn btn-outline-secondary"
+        @click.prevent="closeModal($options.name)"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn-secondary"
+        :disabled="isLoading"
+        @click.prevent="submit"
+      >
+        <b-spinner
+          v-if="isLoading"
+          small
+          type="grow"
+        />
+        {{ isLoading ? 'Loading...' : 'Submit' }}
+      </button>
+    </div>
   </b-modal>
 </template>
 
 <script>
-import ToastMixin from '../../mixins/ToastMixin.js'
+import ModalActions from '../../../mixins/ModalActions.js'
 export default {
+  name: 'CreateBookingModal',
   props: {
     photographyPackages: {
       type: Array,
@@ -119,34 +140,25 @@ export default {
       default: () => {}
     }
   },
-  mixins: [ToastMixin],
-  data() {
+  mixins: [
+    ModalActions
+  ],
+  data () {
     return {
       formData: {
         package: ''
-      },
-      formErrors: []
+      }
     }
   },
   methods: {
-    submit (bvt) {
-      bvt.preventDefault()
+    submit (evt) {
+      evt.preventDefault()
 
       this.formData.user_id = this.listing.user_id
       this.formData.requested_date = this.$moment(this.eventDetails.start).format()
 
-      axios.post('/api/bookings', this.formData).then(() => {
-        this.formData = {}
-        this.toast('success', 'Success!', 'Your booking request was sent successfully!')
-        this.hideModal()
-      }).catch((error) => {
-        this.formErrors = error.response.data.errors
-      })
+      this.createItem('/api/bookings', this.formData)
     },
-    hideModal () {
-      this.$root.$emit('bv::hide::modal', 'request-booking')
-    }
-  }
-        
+  }     
 }
 </script>
