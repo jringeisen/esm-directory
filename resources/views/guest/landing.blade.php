@@ -8,10 +8,11 @@
 
     <style>
         .landing-cover {
-            background-image: url(https://diu0ycwxwmb70.cloudfront.net/cover.png);
+            background-image: url('images/screenshots/main_image.jpg');
             background-size: cover;
             background-repeat: no-repeat;
-            height: 1000px;
+            background-position: center;
+            height: 830px;
             position: relative;
         }
 

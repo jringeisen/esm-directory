@@ -11,7 +11,7 @@ export default {
     }
   },
   methods: {
-    // Action to open modal
+    // Action to open modal and set formData
     openModal (modalName, data = {}) {
       this.formData = data
       this.$root.$emit('bv::show::modal', modalName)
