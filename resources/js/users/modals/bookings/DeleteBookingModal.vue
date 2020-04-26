@@ -37,16 +37,7 @@ export default {
   mixins: [
     ModalActions
   ],
-  props: {
-    booking: {
-      required: true,
-      type: Object
-    }
-  },
   methods: {
-    shown () {
-      this.formData = this.booking
-    },
     submit (evt) {
       evt.preventDefault()
       

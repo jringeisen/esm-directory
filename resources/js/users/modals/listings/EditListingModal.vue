@@ -1,7 +1,6 @@
 <template>
   <b-modal
     :id="$options.name"
-    :ref="'edit-'+listing.id+'-modal'"
     title="Edit Listing"
     @shown="shown"
     @ok="submit"
@@ -85,7 +84,7 @@ export default {
     ModalActions
   ],
   props: {
-    listing: {
+    item: {
       required: true,
       type: Object
     }
@@ -96,9 +95,6 @@ export default {
     }
   },
   methods: {
-    shown () {
-      this.formData = this.listing
-    },
     submit (evt) {
       evt.preventDefault()
       

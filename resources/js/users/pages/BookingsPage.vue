@@ -87,8 +87,8 @@
         </table>
       </div>
     </div>
-    <edit-booking-modal :booking="formData" />
-    <delete-booking-modal :booking="formData" />
+    <edit-booking-modal :item="formData" />
+    <delete-booking-modal :item="formData" />
   </div>
 </template>
 

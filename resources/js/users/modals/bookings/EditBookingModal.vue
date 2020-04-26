@@ -104,12 +104,6 @@ export default {
   mixins: [
     ModalActions
   ],
-  props: {
-    booking: {
-      required: true,
-      type: Object
-    }
-  },
   components: {
     flatPickr
   },
@@ -123,9 +117,6 @@ export default {
     }
   },
   methods: {
-    shown () {
-      this.formData = this.booking
-    },
     submit (evt) {
       evt.preventDefault()
 

@@ -93,7 +93,7 @@ export default {
   ],
 
   props: {
-    listing: {
+    item: {
       required: true,
       type: Object
     }

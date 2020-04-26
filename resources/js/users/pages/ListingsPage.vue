@@ -105,13 +105,13 @@
       </div>
     </div>
     <create-listing-modal />
-    <create-package-modal :listing="formData" />
+    <create-package-modal :item="formData" />
     <view-listing-modal
       :listing="formData"
       :user="user"
     />
-    <edit-listing-modal :listing="formData" />
-    <delete-listing-modal :listing="formData" />
+    <edit-listing-modal :item="formData" />
+    <delete-listing-modal :item="formData" />
   </div>
 </template>
 

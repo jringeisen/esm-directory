@@ -11,6 +11,11 @@ export default {
     }
   },
   methods: {
+    // Set's formData with default data
+    shown () {
+      this.formData = this.item
+    },
+
     // Action to open modal and set formData
     openModal (modalName, data = {}) {
       this.formData = data
