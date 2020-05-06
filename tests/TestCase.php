@@ -12,17 +12,14 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function authUser()
+    public function user($role)
     {
         $user = factory(User::class)->create();
-        $role = factory(Role::class)->create();
+        $assigned_role = factory(Role::class)->create(['name' => $role]);
 
-        $user->assignRole($role->name);
+        $user->assignRole($assigned_role->name);
 
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'name' => $user->name
-        ]);
+        $this->assertDatabaseHas('users', $user->getAttributes());
 
         $this->actingAs($user, 'api');
 

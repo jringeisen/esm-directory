@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleRequest;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -27,13 +28,8 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'guard_name' => 'required'
-        ]);
-
         $role = Role::create($request->only('name', 'guard_name'));
 
         return response()->json($role);
@@ -46,7 +42,7 @@ class RoleController extends Controller
      * @param  Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->only(['name', 'guard_name']));
 

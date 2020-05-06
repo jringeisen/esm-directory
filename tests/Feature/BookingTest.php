@@ -36,7 +36,7 @@ class BookingTest extends TestCase
      */
     public function testTheBookingPageLoads()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $response = $this->get('/bookings');
 
@@ -51,7 +51,7 @@ class BookingTest extends TestCase
      */
     public function testBookingsPageAjaxReturnsNoBookingRequests()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $response = $this->get("/bookings", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
             ->assertOk()
@@ -65,7 +65,7 @@ class BookingTest extends TestCase
      */
     public function testThatEmptyRequiredFieldsReturnStatusOf422()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $data = [];
 
@@ -114,7 +114,7 @@ class BookingTest extends TestCase
      */
     public function testAuthenticatedUserCanUpdateBooking()
     {
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
@@ -142,7 +142,7 @@ class BookingTest extends TestCase
      */
     public function testAuthenticatedUserCanConfirmABooking()
     {
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
@@ -169,7 +169,7 @@ class BookingTest extends TestCase
     {
         Mail::fake();
 
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id, 'confirmed_on' => now()]);
 
@@ -196,7 +196,7 @@ class BookingTest extends TestCase
      */
     public function testAuthenticatedUserCanDeleteABooking()
     {
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 

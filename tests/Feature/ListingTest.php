@@ -33,7 +33,7 @@ class ListingTest extends TestCase
      */
     public function testAuthenticatedUserCanViewTheListingsPage()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $this->get('/listings')
             ->assertOk()
@@ -47,7 +47,7 @@ class ListingTest extends TestCase
      */
     public function testThatEmptyRequiredFieldsReturnStatusOf422()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $data = [
             'name' => '',
@@ -60,7 +60,7 @@ class ListingTest extends TestCase
             'starting_package' => 'Starting Package'
         ];
 
-        $response = $this->postJson('/api/listings', $data)
+        $this->postJson('/api/listings', $data)
             ->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
     }
@@ -73,7 +73,7 @@ class ListingTest extends TestCase
      */
     public function testValidationForStateAbbreviation()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $data = [
             'name' => 'Name',
@@ -98,7 +98,7 @@ class ListingTest extends TestCase
      */
     public function testValidationForCorrectFileExtension()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $data = [
             'name' => 'Name',
@@ -123,7 +123,7 @@ class ListingTest extends TestCase
      */
     public function testThatAnAuthenticatedUserCanCreateAListing()
     {
-        $this->authUser();
+        $this->user('photographer');
 
         $data = [
             'name' => $this->faker->name,
@@ -164,7 +164,7 @@ class ListingTest extends TestCase
      */
     public function testAuthenticatedUserCanUpdateListing()
     {
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
@@ -189,7 +189,7 @@ class ListingTest extends TestCase
      */
     public function testAuthenticatedUserCanDeleteAListing()
     {
-        $user = $this->authUser();
+        $user = $this->user('photographer');
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
