@@ -118,13 +118,7 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-            'user_id' => $booking->user_id,
-            'name' => $booking->name,
-            'email' => $booking->email,
-            'package' => $booking->package
-        ]);
+        $this->assertDatabaseHas('bookings', $booking->getAttributes());
 
         $data = [
             'name' => $this->faker->name,
@@ -155,19 +149,13 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-            'user_id' => $booking->user_id,
-            'name' => $booking->name,
-            'email' => $booking->email,
-            'package' => $booking->package
-        ]);
+        $this->assertDatabaseHas('bookings', $booking->getAttributes());
 
         $data = [
             'confirmed_on' => now()->toDateTimeString()
         ];
 
-        $this->putJson('/api/bookings/' . $booking->id, $data)
+        $response = $this->putJson('/api/bookings/' . $booking->id, $data)
             ->assertOk();
 
         $this->assertDatabaseHas('bookings', [
@@ -188,14 +176,7 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id, 'confirmed_on' => now()]);
 
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-            'user_id' => $booking->user_id,
-            'name' => $booking->name,
-            'email' => $booking->email,
-            'package' => $booking->package,
-            'confirmed_on' => $booking->confirmed_on->toDateTimeString()
-        ]);
+        $this->assertDatabaseHas('bookings', $booking->getAttributes());
 
         $data = [
             'send_confirmation' => true
@@ -222,19 +203,11 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', [
-            'user_id' => $user->id,
-            'name' => $booking->name,
-            'email' => $booking->email,
-            'package' => $booking->package
-        ]);
+        $this->assertDatabaseHas('bookings', $booking->getAttributes());
 
-        $this->deleteJson('/api/bookings/' . $booking->id)
+        $response = $this->deleteJson('/api/bookings/' . $booking->id)
             ->assertOk();
 
-        $this->assertDatabaseMissing('bookings', [
-            'name' => $booking->name,
-            'email' => $booking->email
-        ]);
+        $this->assertDatabaseMissing('bookings', $booking->getAttributes());
     }
 }
