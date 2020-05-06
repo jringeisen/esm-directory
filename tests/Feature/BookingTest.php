@@ -132,10 +132,7 @@ class BookingTest extends TestCase
                 'email' => $data['email'],
             ]);
 
-        $this->assertDatabaseHas('bookings', [
-            'name' => $data['name'],
-            'email' => $data['email']
-        ]);
+        $this->assertDatabaseHas('bookings', $data);
     }
 
     /**

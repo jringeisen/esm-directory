@@ -45,18 +45,7 @@ class DirectoryTest extends TestCase
     {
         $listing = factory(Listing::class)->create();
 
-        $this->assertDatabaseHas('listings', [
-            'id' => $listing->id,
-            'name' => $listing->name,
-            'business_name' => $listing->business_name,
-            'city' => $listing->city,
-            'state' => $listing->state,
-            'description' => $listing->description,
-            'avatar' => $listing->avatar,
-            'starting_package' => $listing->starting_package,
-            'created_at' => $listing->created_at,
-            'updated_at' => $listing->updated_at
-        ]);
+        $this->assertDatabaseHas('listings', $listing->getAttributes());
 
         $response = $this->get("/directory", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
             ->assertOk()

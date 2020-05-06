@@ -168,13 +168,7 @@ class ListingTest extends TestCase
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('listings', [
-            'name' => $listing->name,
-            'business_name' => $listing->business_name,
-            'city' => $listing->city,
-            'state' => $listing->state,
-            'description' => $listing->description
-        ]);
+        $this->assertDatabaseHas('listings', $listing->getAttributes());
 
         $data = [
             'name' => $this->faker->name,
@@ -183,15 +177,9 @@ class ListingTest extends TestCase
 
         $this->putJson('/api/listings/' . $listing->id, $data)
             ->assertOk()
-            ->assertJson([
-                'name' => $data['name'],
-                'business_name' => $data['business_name'],
-            ]);
+            ->assertJson($data);
 
-        $this->assertDatabaseHas('listings', [
-            'name' => $data['name'],
-            'business_name' => $data['business_name']
-        ]);
+        $this->assertDatabaseHas('listings', $data);
     }
 
     /**
@@ -205,21 +193,11 @@ class ListingTest extends TestCase
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('listings', [
-            'user_id' => $user->id,
-            'name' => $listing->name,
-            'business_name' => $listing->business_name,
-            'city' => $listing->city,
-            'state' => $listing->state,
-            'description' => $listing->description
-        ]);
+        $this->assertDatabaseHas('listings', $listing->getAttributes());
 
         $this->deleteJson('/api/listings/' . $listing->id)
             ->assertOk();
 
-        $this->assertDatabaseMissing('listings', [
-            'name' => $listing->name,
-            'business_name' => $listing->business_name
-        ]);
+        $this->assertDatabaseMissing('listings', $listing->getAttributes());
     }
 }
