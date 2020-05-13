@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
@@ -14,6 +15,11 @@ class Booking extends Model
     protected $dates = [
         'requested_date', 'confirmed_on'
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function user()
     {

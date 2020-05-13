@@ -168,7 +168,7 @@ class ListingTest extends TestCase
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('listings', $listing->getAttributes());
+        $this->assertDatabaseHas('listings', $listing->toArray());
 
         $data = [
             'name' => $this->faker->name,
@@ -193,11 +193,11 @@ class ListingTest extends TestCase
         
         $listing = factory(Listing::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('listings', $listing->getAttributes());
+        $this->assertDatabaseHas('listings', $listing->toArray());
 
         $this->deleteJson('/api/listings/' . $listing->id)
             ->assertOk();
 
-        $this->assertDatabaseMissing('listings', $listing->getAttributes());
+        $this->assertDatabaseMissing('listings', $listing->toArray());
     }
 }

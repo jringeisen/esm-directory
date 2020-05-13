@@ -94,17 +94,9 @@ class BookingTest extends TestCase
 
         $this->postJson('/api/bookings', $data)
             ->assertOk()
-            ->assertJson([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'package' => $data['package']
-            ]);
+            ->assertJson($data);
 
-        $this->assertDatabaseHas('bookings', [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'package' => $data['package']
-        ]);
+        $this->assertDatabaseHas('bookings', $data);
     }
 
     /**
@@ -118,7 +110,7 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', $booking->getAttributes());
+        $this->assertDatabaseHas('bookings', $booking->toArray());
 
         $data = [
             'name' => $this->faker->name,
@@ -127,10 +119,7 @@ class BookingTest extends TestCase
 
         $this->putJson('/api/bookings/' . $booking->id, $data)
             ->assertOk()
-            ->assertJson([
-                'name' => $data['name'],
-                'email' => $data['email'],
-            ]);
+            ->assertJson($data);
 
         $this->assertDatabaseHas('bookings', $data);
     }
@@ -146,7 +135,7 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', $booking->getAttributes());
+        $this->assertDatabaseHas('bookings', $booking->toArray());
 
         $data = [
             'confirmed_on' => now()->toDateTimeString()
@@ -155,9 +144,7 @@ class BookingTest extends TestCase
         $response = $this->putJson('/api/bookings/' . $booking->id, $data)
             ->assertOk();
 
-        $this->assertDatabaseHas('bookings', [
-            'confirmed_on' => Carbon::parse($data['confirmed_on'])->toDateTimeString(),
-        ]);
+        $this->assertDatabaseHas('bookings', $data);
     }
 
     /**
@@ -173,7 +160,7 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id, 'confirmed_on' => now()]);
 
-        $this->assertDatabaseHas('bookings', $booking->getAttributes());
+        $this->assertDatabaseHas('bookings', $booking->toArray());
 
         $data = [
             'send_confirmation' => true
@@ -200,11 +187,11 @@ class BookingTest extends TestCase
         
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
 
-        $this->assertDatabaseHas('bookings', $booking->getAttributes());
+        $this->assertDatabaseHas('bookings', $booking->toArray());
 
         $response = $this->deleteJson('/api/bookings/' . $booking->id)
             ->assertOk();
 
-        $this->assertDatabaseMissing('bookings', $booking->getAttributes());
+        $this->assertDatabaseMissing('bookings', $booking->toArray());
     }
 }
